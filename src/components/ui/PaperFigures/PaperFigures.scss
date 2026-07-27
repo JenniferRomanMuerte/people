@@ -1,0 +1,34 @@
+.paper-figures {
+  // Los colores viven aquí, no en el TSX, para no duplicar la paleta.
+  // Se pueden sobrescribir desde donde se use el componente.
+  --figura-1: #{$color-morado-oscuro};
+  --figura-2: #{$color-naranja};
+  --figura-3: #{$color-morado-claro};
+  --figura-4: #{$color-blanco};
+
+  display: block;
+  height: auto;
+  // Sin ancho propio: lo fija quien usa el componente. Si lo llevara aquí
+  // competiría con esa regla y ganaría según el orden del CSS.
+  max-width: 100%;
+
+  // Sombra suave bajo las figuras. drop-shadow sigue la silueta recortada,
+  // a diferencia de box-shadow, que dibujaría el rectángulo del SVG.
+  filter: drop-shadow(0 0.3rem 0.4rem rgba($color-morado-oscuro, 0.22));
+
+  &__figura--1 {
+    fill: var(--figura-1);
+  }
+
+  &__figura--2 {
+    fill: var(--figura-2);
+  }
+
+  &__figura--3 {
+    fill: var(--figura-3);
+  }
+
+  &__figura--4 {
+    fill: var(--figura-4);
+  }
+}

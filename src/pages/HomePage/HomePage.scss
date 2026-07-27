@@ -132,17 +132,43 @@
   background-color: $color-fondo-alt;
   overflow: hidden;
 
-  // Círculo morado que asoma por el borde izquierdo
-  &::before {
-    @include circulo(20rem, $color-secundario);
-    left: -11rem;
-    top: 22%;
-    opacity: 0.18;
+  // Círculo que asoma por la esquina inferior derecha
+  &__circulo {
+    @include circulo(34rem, rgba($color-secundario, 0.09));
+    right: -15rem;
+    bottom: -12rem;
 
     @include desktop {
-      width: 34rem;
-      height: 34rem;
-      left: -16rem;
+      width: 58rem;
+      height: 58rem;
+      right: -22rem;
+      bottom: -20rem;
+    }
+  }
+
+  // Figuras y nota a la izquierda, titular a la derecha
+  &__encabezado {
+    display: grid;
+    gap: $espaciado-lg;
+    align-items: center;
+
+    @include desktop {
+      grid-template-columns: auto 1fr;
+      gap: $espaciado-xxl;
+    }
+  }
+
+  &__marca {
+    @include flex-columna;
+    align-items: flex-start;
+    gap: $espaciado-md;
+  }
+
+  &__figuras {
+    width: 16rem;
+
+    @include desktop {
+      width: 24rem;
     }
   }
 
@@ -154,13 +180,13 @@
   &__titulo {
     @include titular-compacto(3.4rem, 6.4rem);
     color: $color-primario;
-    max-width: 14ch;
+    // Ancho corto a propósito: parte el titular en dos líneas
+    max-width: 12ch;
   }
 
   &__texto {
     margin-top: $espaciado-xl;
     color: $color-texto-suave;
-    max-width: $ancho-texto-legible;
 
     p {
       @include texto($tamano-texto-movil, $tamano-texto-grande);
@@ -170,11 +196,6 @@
       margin-top: $espaciado-lg;
     }
   }
-}
-
-// La nota se separa del titular y no se pega al párrafo siguiente
-.home-presentacion .sticky-note {
-  margin-top: $espaciado-lg;
 }
 
 // ---------------------------------------------------------------------------

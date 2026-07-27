@@ -2,6 +2,7 @@ import Seo from '@/components/ui/Seo/Seo';
 import Button from '@/components/ui/Button/Button';
 import Image from '@/components/ui/Image/Image';
 import StickyNote from '@/components/ui/StickyNote/StickyNote';
+import PaperFigures from '@/components/ui/PaperFigures/PaperFigures';
 import './HomePage.scss';
 
 const HomePage = () => {
@@ -48,12 +49,21 @@ const HomePage = () => {
 
       {/* --- Presentación --- */}
       <section className="home-presentacion">
-        <div className="contenedor contenedor--estrecho home-presentacion__contenido">
-          <h2 className="home-presentacion__titulo">Acompañamos procesos</h2>
+        {/* Círculo decorativo, ahora al otro lado y sin nada dentro */}
+        <div className="home-presentacion__circulo" aria-hidden="true" />
 
-          <StickyNote tone="naranja" rotation={-2}>
-            no camináis solas
-          </StickyNote>
+        <div className="contenedor home-presentacion__contenido">
+          <div className="home-presentacion__encabezado">
+            {/* Columna izquierda: figuras con la nota debajo */}
+            <div className="home-presentacion__marca">
+              <PaperFigures className="home-presentacion__figuras" />
+              <StickyNote tone="naranja" rotation={-2}>
+                no camináis solas
+              </StickyNote>
+            </div>
+
+            <h2 className="home-presentacion__titulo">Acompañamos procesos</h2>
+          </div>
 
           <div className="home-presentacion__texto">
             <p>
