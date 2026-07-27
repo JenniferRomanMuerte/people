@@ -1,0 +1,83 @@
+.legal-page {
+  @include seccion;
+
+  &__titulo {
+    @include titulo($tamano-h1-movil, $tamano-h1);
+    color: $color-primario;
+    margin-bottom: $espaciado-xl;
+  }
+
+  &__contenido {
+    color: $color-texto-suave;
+    max-width: $ancho-texto-legible;
+
+    h2 {
+      @include titulo($tamano-h3-movil, $tamano-h3);
+      color: $color-primario;
+      margin-top: $espaciado-xl;
+      margin-bottom: $espaciado-md;
+    }
+
+    p {
+      @include texto;
+    }
+
+    p + p {
+      margin-top: $espaciado-md;
+    }
+
+    ul {
+      margin-top: $espaciado-md;
+      @include flex-columna;
+      gap: $espaciado-sm;
+    }
+
+    li {
+      @include texto;
+      position: relative;
+      padding-left: $espaciado-lg;
+
+      // Viñeta propia: la lista lleva list-style: none desde el reset
+      &::before {
+        content: '';
+        position: absolute;
+        left: $espaciado-sm;
+        top: 1.1em;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: $radio-redondo;
+        background-color: $color-morado-claro;
+      }
+    }
+
+    a {
+      color: $color-secundario;
+      text-decoration: underline;
+      text-underline-offset: 0.3rem;
+      overflow-wrap: anywhere;
+
+      &:hover {
+        color: $color-primario;
+      }
+    }
+  }
+
+  // Bloques de datos identificativos: etiqueta arriba, valor debajo
+  &__datos {
+    margin-top: $espaciado-md;
+    @include flex-columna;
+    gap: $espaciado-md;
+  }
+
+  &__dato {
+    dt {
+      @include texto($tamano-texto-pequeno, $tamano-texto-movil);
+      font-weight: $peso-negrita;
+      color: $color-texto;
+    }
+
+    dd {
+      @include texto;
+    }
+  }
+}

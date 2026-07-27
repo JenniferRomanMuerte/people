@@ -1,0 +1,45 @@
+@use '../abstracts' as *;
+
+// ---------------------------------------------------------------------------
+// Escala tipográfica global
+// Los tamaños replican los del sitio original (American Typewriter para los
+// títulos, Open Sans para el cuerpo), adaptados a mobile first.
+// ---------------------------------------------------------------------------
+
+h1 {
+  @include titulo($tamano-h1-movil, $tamano-h1);
+}
+
+h2 {
+  @include titulo($tamano-h2-movil, $tamano-h2);
+}
+
+h3 {
+  @include titulo($tamano-h3-movil, $tamano-h3);
+}
+
+p {
+  @include texto;
+}
+
+strong,
+b {
+  font-weight: $peso-negrita;
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+// Enlaces dentro de bloques de texto corrido
+.texto-enlace {
+  color: $color-secundario;
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+  transition: color $transicion-rapida;
+
+  &:hover {
+    color: $color-primario;
+  }
+}

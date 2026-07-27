@@ -1,0 +1,220 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: $z-cabecera;
+  background-color: $color-blanco;
+  border-bottom: 0.1rem solid $color-lila;
+
+  &__contenedor {
+    @include flex-between;
+    gap: $espaciado-md;
+    min-height: $alto-cabecera;
+
+    @include desktop {
+      min-height: $alto-cabecera-desktop;
+    }
+  }
+
+  // --- Marca ---
+
+  &__marca {
+    display: flex;
+    align-items: center;
+    gap: $espaciado-sm;
+    flex-shrink: 0;
+  }
+
+  &__logo {
+    width: 4rem;
+    height: 4rem;
+
+    @include desktop {
+      width: 5.2rem;
+      height: 5.2rem;
+    }
+  }
+
+  &__marca-texto {
+    @include flex-columna;
+  }
+
+  &__nombre {
+    font-family: $fuente-titulos;
+    font-size: 2.2rem;
+    font-weight: $peso-negrita;
+    line-height: 1.1;
+    color: $color-primario;
+
+    @include desktop {
+      font-size: 2.8rem;
+    }
+  }
+
+  &__lema {
+    font-family: $fuente-secundaria;
+    font-size: 1.1rem;
+    font-weight: $peso-ligero;
+    line-height: 1.3;
+    color: $color-texto-suave;
+
+    @include desktop {
+      font-size: 1.3rem;
+    }
+  }
+
+  // --- Botón hamburguesa ---
+
+  &__boton-menu {
+    @include flex-center;
+    width: 4.4rem;
+    height: 4.4rem;
+    flex-shrink: 0;
+
+    @include desktop {
+      display: none;
+    }
+  }
+
+  &__hamburguesa {
+    position: relative;
+    display: block;
+    width: 2.4rem;
+    height: 0.2rem;
+    background-color: $color-primario;
+    transition: background-color $transicion-rapida;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 0.2rem;
+      background-color: $color-primario;
+      transition: transform $transicion;
+    }
+
+    &::before {
+      top: -0.8rem;
+    }
+
+    &::after {
+      top: 0.8rem;
+    }
+
+    // Al abrir, las tres líneas se convierten en una equis
+    &--abierta {
+      background-color: transparent;
+
+      &::before {
+        transform: translateY(0.8rem) rotate(45deg);
+      }
+
+      &::after {
+        transform: translateY(-0.8rem) rotate(-45deg);
+      }
+    }
+
+    @include movimiento-reducido {
+      transition: none;
+
+      &::before,
+      &::after {
+        transition: none;
+      }
+    }
+  }
+
+  // --- Navegación ---
+
+  &__nav {
+    @include hasta-tablet {
+      position: fixed;
+      inset: $alto-cabecera 0 auto 0;
+      z-index: $z-menu-movil;
+      background-color: $color-blanco;
+      border-bottom: 0.1rem solid $color-lila;
+      box-shadow: $sombra-media;
+      // Oculto por defecto en móvil; se despliega al pulsar la hamburguesa
+      display: none;
+    }
+
+    &--abierto {
+      @include hasta-tablet {
+        display: block;
+      }
+    }
+  }
+
+  &__lista {
+    @include hasta-tablet {
+      @include flex-columna;
+      padding: $espaciado-md 0;
+    }
+
+    @include desktop {
+      display: flex;
+      align-items: center;
+      gap: $espaciado-lg;
+    }
+  }
+
+  &__enlace {
+    display: block;
+    font-family: $fuente-principal;
+    font-size: $tamano-texto-movil;
+    color: $color-texto;
+    transition: color $transicion-rapida;
+
+    @include hasta-tablet {
+      padding: $espaciado-md $espaciado-lg;
+      border-bottom: 0.1rem solid rgba($color-lila, 0.6);
+    }
+
+    @include desktop {
+      font-size: 1.6rem;
+      position: relative;
+      padding-block: $espaciado-sm;
+
+      // Subrayado que crece al pasar por encima
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 0.2rem;
+        background-color: $color-secundario;
+        transition: width $transicion;
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
+    }
+
+    &:hover {
+      color: $color-secundario;
+    }
+
+    &--activo {
+      color: $color-secundario;
+      font-weight: $peso-medio;
+
+      @include desktop {
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  &__velo {
+    @include hasta-tablet {
+      position: fixed;
+      inset: 0;
+      z-index: calc(#{$z-menu-movil} - 1);
+      background-color: rgba($color-morado-oscuro, 0.4);
+    }
+  }
+}

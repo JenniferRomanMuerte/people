@@ -1,0 +1,36 @@
+// ---------------------------------------------------------------------------
+// Utilidades globales mínimas
+// ---------------------------------------------------------------------------
+
+@use '../abstracts' as *;
+
+// Contenedor centrado estándar
+.contenedor {
+  @include contenedor;
+}
+
+.contenedor--estrecho {
+  @include contenedor($ancho-contenedor-estrecho);
+}
+
+// Texto visible solo para lectores de pantalla
+.solo-lectores {
+  @include solo-lectores-pantalla;
+}
+
+// Enlace para saltar directamente al contenido, primero en el orden de tabulación
+.salto-contenido {
+  position: absolute;
+  top: -100%;
+  left: $espaciado-md;
+  z-index: $z-salida-rapida;
+  padding: $espaciado-md $espaciado-lg;
+  background-color: $color-primario;
+  color: $color-texto-invertido;
+  border-radius: 0 0 $radio-md $radio-md;
+  font-size: $tamano-texto-movil;
+
+  &:focus {
+    top: 0;
+  }
+}

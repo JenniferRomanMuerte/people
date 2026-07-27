@@ -1,0 +1,29 @@
+.spinner {
+  @include flex-center;
+  gap: $espaciado-md;
+  padding: $espaciado-lg;
+
+  &__circulo {
+    width: 2.4rem;
+    height: 2.4rem;
+    border: 0.3rem solid $color-lila;
+    border-top-color: $color-secundario;
+    border-radius: $radio-redondo;
+    animation: spinner-girar 0.8s linear infinite;
+
+    @include movimiento-reducido {
+      animation-duration: 2s;
+    }
+  }
+
+  &__texto {
+    font-size: $tamano-texto-movil;
+    color: $color-texto-suave;
+  }
+}
+
+@keyframes spinner-girar {
+  to {
+    transform: rotate(360deg);
+  }
+}

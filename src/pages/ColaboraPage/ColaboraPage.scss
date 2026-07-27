@@ -1,0 +1,144 @@
+.colabora-hero {
+  @include seccion;
+  background-color: $color-fondo-alt;
+
+  &__contenido {
+    display: grid;
+    gap: $espaciado-xl;
+    align-items: center;
+
+    @include desktop {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: $espaciado-xxl;
+    }
+  }
+
+  &__titulo {
+    @include titulo($tamano-h1-movil, $tamano-h1);
+    color: $color-primario;
+  }
+
+  &__subtitulo {
+    @include texto($tamano-texto-grande-movil, $tamano-texto-grande);
+    color: $color-texto-suave;
+    margin-top: $espaciado-lg;
+  }
+
+  &__imagen {
+    @include flex-center;
+
+    img {
+      max-width: 44rem;
+      // Las ilustraciones vienen sobre blanco: así se funden con el fondo lila
+      mix-blend-mode: multiply;
+    }
+  }
+}
+
+.colabora-impacto {
+  @include seccion;
+  text-align: center;
+
+  &__titulo {
+    @include titulo($tamano-h2-movil, $tamano-h2);
+    color: $color-primario;
+  }
+
+  &__texto {
+    margin-top: $espaciado-lg;
+    color: $color-texto-suave;
+
+    p {
+      @include texto($tamano-texto-movil, $tamano-texto-grande);
+    }
+
+    p + p {
+      margin-top: $espaciado-md;
+    }
+  }
+}
+
+.colabora-formas {
+  padding-bottom: $espaciado-seccion-movil;
+
+  @include desktop {
+    padding-bottom: $espaciado-seccion;
+  }
+
+  &__rejilla {
+    @include rejilla(2, 2, $espaciado-lg);
+  }
+}
+
+.colabora-tarjeta {
+  @include flex-columna;
+  align-items: center;
+  height: 100%;
+  padding: $espaciado-xl $espaciado-lg;
+  text-align: center;
+  background-color: $color-blanco;
+  border: 0.1rem solid $color-lila;
+  border-radius: $radio-lg;
+
+  &__ilustracion {
+    @include flex-center;
+    height: 18rem;
+    margin-bottom: $espaciado-lg;
+
+    img {
+      max-height: 100%;
+      width: auto;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+    }
+  }
+
+  &__titulo {
+    @include titulo($tamano-h3-movil, $tamano-h3);
+    color: $color-primario;
+  }
+
+  &__texto {
+    @include texto;
+    color: $color-texto-suave;
+    margin-block: $espaciado-md $espaciado-xl;
+    // Empuja el botón al fondo para que todas las tarjetas lo alineen
+    flex: 1;
+  }
+}
+
+.colabora-cierre {
+  @include seccion;
+  background-color: $color-primario;
+  text-align: center;
+
+  &__titulo {
+    @include titulo($tamano-h2-movil, $tamano-h2);
+    color: $color-blanco;
+  }
+
+  &__texto {
+    margin-top: $espaciado-xl;
+
+    p {
+      @include texto($tamano-texto-movil, $tamano-texto-grande);
+      color: rgba($color-blanco, 0.92);
+    }
+
+    p + p {
+      margin-top: $espaciado-md;
+    }
+  }
+
+  // Selector doble a propósito: hace falta más peso que el `&__texto p` de arriba
+  &__texto &__remate {
+    font-family: $fuente-titulos;
+    font-size: $tamano-h3-movil;
+    color: $color-acento;
+    margin-top: $espaciado-xl;
+
+    @include desktop {
+      font-size: $tamano-h3;
+    }
+  }
+}

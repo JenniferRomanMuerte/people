@@ -1,0 +1,126 @@
+// ---------------------------------------------------------------------------
+// Variables globales
+// La paleta y la escala tipográfica están extraídas de las variables CSS
+// del sitio original en Wix, no aproximadas a ojo.
+// ---------------------------------------------------------------------------
+
+// --- Paleta ---------------------------------------------------------------
+
+$color-morado-oscuro: #47274d; // --color_15 / _45 — texto y títulos
+$color-morado: #7f468a; // --color_3 / _25 / _43 — acciones
+$color-morado-medio: #755d7a; // --color_18 / _40 / _41
+$color-morado-claro: #b887c2; // --color_23
+$color-lila: #e7d7eb; // --color_21
+$color-lila-fondo: #fcf4fb; // --color_4 / _27 / _42
+$color-crema: #fff6ea;
+$color-melocoton: #ffd3a1; // --color_44 — acento cálido
+$color-blanco: #ffffff;
+$color-gris-borde: #d1c9d3; // --color_12 / _38
+
+// --- Roles semánticos -----------------------------------------------------
+
+$color-primario: $color-morado-oscuro;
+$color-secundario: $color-morado;
+$color-acento: $color-melocoton;
+
+$color-fondo: $color-blanco;
+$color-fondo-alt: $color-lila-fondo;
+$color-fondo-oscuro: $color-morado-oscuro;
+
+$color-texto: $color-morado-oscuro;
+$color-texto-suave: $color-morado-medio;
+$color-texto-invertido: $color-blanco;
+
+$color-error: #a4262c;
+$color-error-fondo: #fdf3f4;
+$color-exito: #2c6e49;
+$color-exito-fondo: #f1f8f4;
+
+// --- Tipografía -----------------------------------------------------------
+// El original usa American Typewriter para los títulos, una fuente propietaria
+// de ITC que no puede servirse en web sin licencia. Zilla Slab es la sustituta
+// libre más cercana. Para cambiarla basta con tocar esta variable.
+
+$fuente-titulos: 'Zilla Slab', 'Bitter', Georgia, serif;
+$fuente-principal: 'Open Sans Variable', 'Open Sans', -apple-system, 'Segoe UI', sans-serif;
+$fuente-secundaria: 'Poppins', 'Open Sans Variable', sans-serif;
+
+// Escala tipográfica — el reset fija 1rem = 10px para simplificar los cálculos
+
+$tamano-hero-movil: 3.6rem;
+$tamano-hero: 7.2rem;
+
+$tamano-h1-movil: 3rem;
+$tamano-h1: 5.2rem;
+
+$tamano-h2-movil: 2.6rem;
+$tamano-h2: 4.2rem;
+
+$tamano-h3-movil: 2rem;
+$tamano-h3: 2.8rem;
+
+$tamano-texto-grande-movil: 1.7rem;
+$tamano-texto-grande: 2.2rem;
+
+$tamano-texto-movil: 1.6rem;
+$tamano-texto: 1.8rem;
+
+$tamano-texto-pequeno: 1.4rem;
+
+$peso-ligero: 300;
+$peso-extraligero: 200;
+$peso-normal: 400;
+$peso-medio: 500;
+$peso-negrita: 700;
+
+$interlineado-titulo: 1.25;
+$interlineado-texto: 1.75;
+
+// --- Espaciado ------------------------------------------------------------
+
+$espaciado-xs: 0.4rem;
+$espaciado-sm: 0.8rem;
+$espaciado-md: 1.6rem;
+$espaciado-lg: 2.4rem;
+$espaciado-xl: 4rem;
+$espaciado-xxl: 6.4rem;
+$espaciado-seccion-movil: 5.6rem;
+$espaciado-seccion: 9.6rem;
+
+// --- Layout ---------------------------------------------------------------
+
+$ancho-contenedor: 120rem;
+$ancho-contenedor-estrecho: 82rem;
+$ancho-texto-legible: 68rem;
+$alto-cabecera: 7.2rem;
+$alto-cabecera-desktop: 9.6rem;
+
+// --- Bordes y sombras -----------------------------------------------------
+
+$radio-sm: 0.4rem;
+$radio-md: 0.8rem;
+$radio-lg: 1.6rem;
+$radio-redondo: 999px;
+
+$sombra-suave: 0 0.2rem 1.2rem rgba($color-morado-oscuro, 0.08);
+$sombra-media: 0 0.6rem 2.4rem rgba($color-morado-oscuro, 0.12);
+$sombra-fuerte: 0 1.2rem 4rem rgba($color-morado-oscuro, 0.18);
+
+// --- Transiciones ---------------------------------------------------------
+
+$transicion-rapida: 0.18s ease;
+$transicion: 0.3s ease;
+
+// --- Breakpoints ----------------------------------------------------------
+
+$breakpoint-movil-grande: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+$breakpoint-grande: 1440px;
+
+// --- Capas ----------------------------------------------------------------
+
+$z-contenido: 1;
+$z-cabecera: 100;
+$z-menu-movil: 200;
+$z-salida-rapida: 300;

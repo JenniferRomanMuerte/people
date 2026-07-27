@@ -1,0 +1,31 @@
+.quienes-somos-partida {
+  @include seccion;
+  background-color: $color-fondo-alt;
+  text-align: center;
+
+  &__titulo {
+    @include titulo($tamano-h2-movil, $tamano-h2);
+    color: $color-primario;
+  }
+
+  &__texto {
+    margin-top: $espaciado-lg;
+    color: $color-texto-suave;
+
+    p {
+      @include texto($tamano-texto-movil, $tamano-texto-grande);
+    }
+
+    p + p {
+      margin-top: $espaciado-sm;
+    }
+  }
+}
+
+.quienes-somos-pilares {
+  @include seccion;
+
+  &__rejilla {
+    @include rejilla(1, 3, $espaciado-lg);
+  }
+}

@@ -1,0 +1,53 @@
+.not-found {
+  @include seccion;
+  text-align: center;
+
+  &__codigo {
+    font-family: $fuente-titulos;
+    font-size: 7.2rem;
+    line-height: 1;
+    color: $color-lila;
+
+    @include desktop {
+      font-size: 12rem;
+    }
+  }
+
+  &__titulo {
+    @include titulo($tamano-h2-movil, $tamano-h2);
+    color: $color-primario;
+    margin-top: $espaciado-md;
+  }
+
+  &__texto {
+    @include texto($tamano-texto-movil, $tamano-texto-grande);
+    color: $color-texto-suave;
+    margin-block: $espaciado-lg $espaciado-xl;
+    max-width: 52ch;
+    margin-inline: auto;
+  }
+
+  &__navegacion {
+    margin-top: $espaciado-xxl;
+    padding-top: $espaciado-xl;
+    border-top: 0.1rem solid $color-lila;
+  }
+
+  &__lista {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $espaciado-md $espaciado-lg;
+  }
+
+  &__enlace {
+    font-size: $tamano-texto-movil;
+    color: $color-secundario;
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+
+    &:hover {
+      color: $color-primario;
+    }
+  }
+}

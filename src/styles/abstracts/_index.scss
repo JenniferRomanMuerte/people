@@ -1,0 +1,6 @@
+// Punto de entrada de los abstracts.
+// Vite lo inyecta automáticamente en todos los SCSS del proyecto,
+// así que ningún archivo necesita importar variables ni mixins a mano.
+
+@forward 'variables';
+@forward 'mixins';

@@ -1,0 +1,50 @@
+.quick-exit {
+  position: fixed;
+  right: $espaciado-md;
+  bottom: $espaciado-md;
+  z-index: $z-salida-rapida;
+
+  @include flex-center;
+  gap: $espaciado-sm;
+  padding: $espaciado-md $espaciado-lg;
+
+  font-family: $fuente-principal;
+  font-size: $tamano-texto-movil;
+  font-weight: $peso-medio;
+  line-height: 1;
+  color: $color-blanco;
+  background-color: $color-primario;
+  border: 0.2rem solid $color-blanco;
+  border-radius: $radio-redondo;
+  box-shadow: $sombra-fuerte;
+  cursor: pointer;
+  transition: background-color $transicion, transform $transicion-rapida;
+
+  @include desktop {
+    right: $espaciado-lg;
+    bottom: $espaciado-lg;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background-color: $color-secundario;
+    transform: scale(1.04);
+  }
+
+  @include movimiento-reducido {
+    transition: none;
+
+    &:hover,
+    &:focus-visible {
+      transform: none;
+    }
+  }
+
+  &__icono {
+    font-size: 1.4rem;
+  }
+
+  &__texto {
+    white-space: nowrap;
+  }
+}

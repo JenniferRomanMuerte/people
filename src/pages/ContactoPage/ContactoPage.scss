@@ -1,0 +1,133 @@
+.contacto {
+  @include seccion;
+  background-color: $color-fondo-alt;
+
+  &__contenedor {
+    display: grid;
+    gap: $espaciado-xxl;
+    align-items: start;
+
+    @include desktop {
+      grid-template-columns: 1.2fr 0.8fr;
+    }
+  }
+
+  // --- Formulario ---
+
+  &__formulario {
+    padding: $espaciado-lg;
+    background-color: $color-blanco;
+    border-radius: $radio-lg;
+    box-shadow: $sombra-suave;
+
+    @include tablet {
+      padding: $espaciado-xl;
+    }
+  }
+
+  &__titulo {
+    @include titulo($tamano-h2-movil, $tamano-h2);
+    color: $color-primario;
+  }
+
+  &__intro {
+    @include texto;
+    color: $color-texto-suave;
+    margin-top: $espaciado-md;
+  }
+
+  &__campos {
+    @include flex-columna;
+    gap: $espaciado-lg;
+    margin-top: $espaciado-xl;
+  }
+
+  &__fila {
+    display: grid;
+    gap: $espaciado-lg;
+
+    @include tablet {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  // Campo trampa: fuera de la vista y del recorrido del teclado, pero
+  // presente en el DOM para que los bots lo rellenen.
+  &__trampa {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  // --- Columna de datos ---
+
+  &__datos {
+    @include flex-columna;
+  }
+
+  &__imagen {
+    border-radius: $radio-lg;
+    overflow: hidden;
+    margin-bottom: $espaciado-xl;
+
+    img {
+      @include imagen-cubierta;
+      aspect-ratio: 3 / 2;
+    }
+  }
+
+  &__datos-titulo {
+    @include titulo($tamano-h3-movil, $tamano-h3);
+    color: $color-primario;
+    margin-bottom: $espaciado-md;
+  }
+
+  &__lista {
+    @include flex-columna;
+    gap: $espaciado-md;
+  }
+
+  &__dato {
+    display: flex;
+    align-items: flex-start;
+    gap: $espaciado-sm;
+    font-size: $tamano-texto-movil;
+    line-height: 1.6;
+    color: $color-texto;
+  }
+
+  &__icono {
+    flex-shrink: 0;
+  }
+
+  &__enlace {
+    color: $color-secundario;
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+    overflow-wrap: anywhere;
+
+    &:hover {
+      color: $color-primario;
+    }
+  }
+
+  &__instagram {
+    display: inline-flex;
+    align-items: center;
+    gap: $espaciado-sm;
+    margin-top: $espaciado-lg;
+    font-size: $tamano-texto-movil;
+    color: $color-secundario;
+
+    &:hover {
+      color: $color-primario;
+    }
+  }
+
+  &__instagram-icono {
+    width: 2rem;
+    height: 2rem;
+  }
+}

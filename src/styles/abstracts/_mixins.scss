@@ -1,0 +1,223 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+// ---------------------------------------------------------------------------
+// Mixins reutilizables — enfoque mobile first
+// ---------------------------------------------------------------------------
+
+// --- Media queries --------------------------------------------------------
+
+@mixin movil-grande {
+  @media (min-width: #{$breakpoint-movil-grande}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$breakpoint-tablet}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+@mixin grande {
+  @media (min-width: #{$breakpoint-grande}) {
+    @content;
+  }
+}
+
+// Solo por debajo de tablet — útil para el menú móvil
+@mixin hasta-tablet {
+  @media (max-width: #{$breakpoint-tablet - 1px}) {
+    @content;
+  }
+}
+
+// Respeta a quien haya pedido menos animación en su sistema
+@mixin movimiento-reducido {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+// --- Flexbox --------------------------------------------------------------
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flex-columna {
+  display: flex;
+  flex-direction: column;
+}
+
+// --- Layout ---------------------------------------------------------------
+
+@mixin contenedor($ancho: $ancho-contenedor) {
+  width: 100%;
+  max-width: $ancho;
+  margin-inline: auto;
+  padding-inline: $espaciado-lg;
+
+  @include tablet {
+    padding-inline: $espaciado-xl;
+  }
+}
+
+@mixin seccion {
+  padding-block: $espaciado-seccion-movil;
+
+  @include desktop {
+    padding-block: $espaciado-seccion;
+  }
+}
+
+// Rejilla que pasa de una columna en móvil a N en escritorio
+@mixin rejilla($columnas-tablet: 2, $columnas-desktop: 3, $hueco: $espaciado-lg) {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $hueco;
+
+  @include tablet {
+    grid-template-columns: repeat($columnas-tablet, 1fr);
+  }
+
+  @include desktop {
+    grid-template-columns: repeat($columnas-desktop, 1fr);
+  }
+}
+
+// --- Tipografía -----------------------------------------------------------
+
+@mixin titulo($tamano-movil, $tamano-desktop) {
+  font-family: $fuente-titulos;
+  font-size: $tamano-movil;
+  line-height: $interlineado-titulo;
+  font-weight: $peso-normal;
+
+  @include desktop {
+    font-size: $tamano-desktop;
+  }
+}
+
+@mixin texto($tamano-movil: $tamano-texto-movil, $tamano-desktop: $tamano-texto) {
+  font-family: $fuente-principal;
+  font-size: $tamano-movil;
+  line-height: $interlineado-texto;
+
+  @include desktop {
+    font-size: $tamano-desktop;
+  }
+}
+
+@mixin texto-truncado {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Recorta el texto a un número concreto de líneas
+@mixin lineas-maximas($lineas: 3) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lineas;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// --- Botones --------------------------------------------------------------
+
+@mixin boton-base {
+  @include flex-center;
+  gap: $espaciado-sm;
+  font-family: $fuente-principal;
+  font-size: $tamano-texto-movil;
+  font-weight: $peso-medio;
+  line-height: 1;
+  padding: $espaciado-md $espaciado-xl;
+  border: 0.2rem solid transparent;
+  border-radius: $radio-redondo;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color $transicion, color $transicion, border-color $transicion;
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  @include movimiento-reducido {
+    transition: none;
+  }
+}
+
+// Botón que invierte sus colores al pasar por encima
+@mixin boton($color-texto, $color-fondo-boton) {
+  color: $color-texto;
+  background-color: $color-fondo-boton;
+  border-color: $color-texto;
+
+  &:hover:not(:disabled),
+  &:focus-visible {
+    color: $color-fondo-boton;
+    background-color: $color-texto;
+  }
+}
+
+// --- Accesibilidad --------------------------------------------------------
+
+// Foco visible y consistente en toda la web
+@mixin foco {
+  &:focus-visible {
+    outline: 0.3rem solid $color-morado;
+    outline-offset: 0.3rem;
+    border-radius: $radio-sm;
+  }
+}
+
+// Oculta visualmente sin ocultar a los lectores de pantalla
+@mixin solo-lectores-pantalla {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// --- Recursos visuales ----------------------------------------------------
+
+// Capa oscura sobre una imagen para que el texto encima siempre se lea
+@mixin capa-oscura($opacidad: 0.45) {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba($color-morado-oscuro, $opacidad);
+    pointer-events: none;
+  }
+}
+
+@mixin imagen-cubierta {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

@@ -1,0 +1,63 @@
+.textarea {
+  @include flex-columna;
+  gap: $espaciado-xs;
+  width: 100%;
+
+  &__etiqueta {
+    font-size: $tamano-texto-movil;
+    font-weight: $peso-medio;
+    color: $color-texto;
+  }
+
+  &__obligatorio {
+    color: $color-secundario;
+    margin-left: $espaciado-xs;
+  }
+
+  &__campo {
+    width: 100%;
+    padding: $espaciado-md;
+    font-size: $tamano-texto-movil;
+    font-family: $fuente-principal;
+    line-height: 1.6;
+    color: $color-texto;
+    background-color: $color-blanco;
+    border: 0.1rem solid $color-gris-borde;
+    border-radius: $radio-sm;
+    resize: vertical;
+    min-height: 12rem;
+    transition: border-color $transicion-rapida;
+
+    &::placeholder {
+      color: rgba($color-texto-suave, 0.7);
+    }
+
+    &:hover {
+      border-color: $color-morado-claro;
+    }
+
+    &:focus {
+      border-color: $color-secundario;
+    }
+
+    &--error {
+      border-color: $color-error;
+    }
+  }
+
+  &__pie {
+    @include flex-between;
+    gap: $espaciado-md;
+  }
+
+  &__error {
+    font-size: $tamano-texto-pequeno;
+    color: $color-error;
+  }
+
+  &__contador {
+    font-size: $tamano-texto-pequeno;
+    color: $color-texto-suave;
+    white-space: nowrap;
+  }
+}

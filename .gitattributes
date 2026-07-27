@@ -1,0 +1,10 @@
+# Normaliza los finales de línea para que el repositorio no cambie según el
+# sistema operativo de quien trabaje en él.
+* text=auto eol=lf
+
+# Binarios: no tocar
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary

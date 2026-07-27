@@ -1,0 +1,10 @@
+// ---------------------------------------------------------------------------
+// Hoja principal
+// Los abstracts (variables y mixins) los inyecta Vite automáticamente en
+// todos los SCSS, por eso no aparecen aquí.
+// El SCSS de cada componente vive junto a su componente y lo importa él mismo.
+// ---------------------------------------------------------------------------
+
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/utilidades';

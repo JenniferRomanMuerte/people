@@ -1,0 +1,82 @@
+.voluntariado-llamada {
+  @include seccion;
+  background-color: $color-fondo-alt;
+  text-align: center;
+
+  &__titulo {
+    @include titulo($tamano-h2-movil, $tamano-h2);
+    color: $color-primario;
+  }
+
+  &__texto {
+    margin-block: $espaciado-lg $espaciado-xl;
+    color: $color-texto-suave;
+
+    p {
+      @include texto($tamano-texto-movil, $tamano-texto-grande);
+    }
+
+    p + p {
+      margin-top: $espaciado-md;
+    }
+  }
+}
+
+.voluntariado-organizacion {
+  @include seccion;
+
+  &__titulo {
+    @include titulo($tamano-h2-movil, $tamano-h2);
+    color: $color-primario;
+    text-align: center;
+    margin-bottom: $espaciado-xl;
+  }
+
+  &__rejilla {
+    @include rejilla(2, 2, $espaciado-lg);
+
+    @include grande {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+.voluntariado-actividades {
+  @include seccion;
+  background-color: $color-crema;
+
+  &__contenido {
+    display: grid;
+    gap: $espaciado-xl;
+    align-items: center;
+
+    @include desktop {
+      grid-template-columns: 1fr 1fr;
+      gap: $espaciado-xxl;
+    }
+  }
+
+  &__titulo {
+    @include titulo($tamano-h2-movil, $tamano-h2);
+    color: $color-primario;
+    font-style: italic;
+    font-weight: $peso-negrita;
+    margin-bottom: $espaciado-lg;
+  }
+
+  &__texto {
+    p {
+      @include texto($tamano-texto-movil, $tamano-texto-grande);
+      color: $color-texto-suave;
+    }
+  }
+
+  &__imagen {
+    @include flex-center;
+
+    img {
+      max-width: 42rem;
+      mix-blend-mode: multiply;
+    }
+  }
+}

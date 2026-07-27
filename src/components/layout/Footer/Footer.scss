@@ -1,0 +1,167 @@
+.footer {
+  background-color: $color-fondo-alt;
+  border-top: 0.1rem solid $color-lila;
+
+  // --- Aviso de emergencia ---
+
+  &__emergencia {
+    background-color: $color-primario;
+    color: $color-blanco;
+  }
+
+  &__emergencia-contenido {
+    @include flex-columna;
+    align-items: flex-start;
+    gap: $espaciado-md;
+    padding-block: $espaciado-lg;
+
+    @include desktop {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: $espaciado-xl;
+    }
+  }
+
+  &__emergencia-titulo {
+    font-family: $fuente-titulos;
+    font-size: $tamano-h3-movil;
+    line-height: 1.3;
+    color: $color-blanco;
+
+    @include desktop {
+      font-size: 2.4rem;
+      flex-shrink: 0;
+    }
+  }
+
+  &__emergencia-texto {
+    font-size: $tamano-texto-pequeno;
+    line-height: 1.6;
+    color: rgba($color-blanco, 0.9);
+
+    @include desktop {
+      font-size: $tamano-texto-movil;
+    }
+  }
+
+  &__emergencia-enlace {
+    color: $color-acento;
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+    white-space: nowrap;
+  }
+
+  &__emergencia-boton {
+    @include flex-center;
+    flex-shrink: 0;
+    padding: $espaciado-md $espaciado-lg;
+    font-size: $tamano-texto-movil;
+    font-weight: $peso-medio;
+    line-height: 1;
+    color: $color-primario;
+    background-color: $color-acento;
+    border-radius: $radio-redondo;
+    white-space: nowrap;
+    transition: background-color $transicion;
+
+    &:hover,
+    &:focus-visible {
+      background-color: $color-blanco;
+    }
+  }
+
+  // --- Bloque principal ---
+
+  &__principal {
+    display: grid;
+    gap: $espaciado-xl;
+    padding-block: $espaciado-xl;
+
+    @include tablet {
+      grid-template-columns: auto 1fr auto;
+      gap: $espaciado-xxl;
+      align-items: start;
+    }
+  }
+
+  &__marca {
+    max-width: 14rem;
+  }
+
+  &__titulo {
+    font-family: $fuente-principal;
+    font-size: $tamano-texto-pequeno;
+    font-weight: $peso-negrita;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $color-texto-suave;
+    margin-bottom: $espaciado-md;
+  }
+
+  &__datos {
+    @include flex-columna;
+    gap: $espaciado-sm;
+  }
+
+  &__dato {
+    display: flex;
+    align-items: flex-start;
+    gap: $espaciado-sm;
+    font-size: $tamano-texto-movil;
+    line-height: 1.6;
+    color: $color-texto;
+  }
+
+  &__icono {
+    flex-shrink: 0;
+  }
+
+  &__enlace {
+    color: $color-texto;
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+    text-decoration-color: rgba($color-secundario, 0.4);
+    transition: color $transicion-rapida;
+    overflow-wrap: anywhere;
+
+    &:hover {
+      color: $color-secundario;
+    }
+  }
+
+  &__instagram {
+    display: inline-flex;
+    align-items: center;
+    gap: $espaciado-sm;
+    margin-top: $espaciado-lg;
+    font-size: $tamano-texto-movil;
+    color: $color-secundario;
+    transition: color $transicion-rapida;
+
+    &:hover {
+      color: $color-primario;
+    }
+  }
+
+  &__instagram-icono {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  &__lista-legal {
+    @include flex-columna;
+    gap: $espaciado-sm;
+    font-size: $tamano-texto-movil;
+  }
+
+  // --- Créditos ---
+
+  &__creditos {
+    border-top: 0.1rem solid $color-lila;
+    padding-block: $espaciado-lg;
+    font-size: $tamano-texto-pequeno;
+    color: $color-texto-suave;
+    text-align: center;
+  }
+}

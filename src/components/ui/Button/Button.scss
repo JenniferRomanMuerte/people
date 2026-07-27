@@ -1,0 +1,52 @@
+.button {
+  @include boton-base;
+  display: inline-flex;
+  width: auto;
+  text-decoration: none;
+
+  @include desktop {
+    font-size: $tamano-texto;
+    padding: $espaciado-md $espaciado-xxl;
+  }
+
+  &--primario {
+    @include boton($color-blanco, $color-secundario);
+    border-color: $color-secundario;
+
+    &:hover:not(:disabled),
+    &:focus-visible {
+      background-color: $color-primario;
+      border-color: $color-primario;
+      color: $color-blanco;
+    }
+  }
+
+  &--secundario {
+    @include boton($color-primario, transparent);
+    border-color: $color-primario;
+
+    &:hover:not(:disabled),
+    &:focus-visible {
+      background-color: $color-primario;
+      color: $color-blanco;
+    }
+  }
+
+  // Para usar sobre fondos oscuros o fotografías
+  &--claro {
+    color: $color-primario;
+    background-color: $color-blanco;
+    border-color: $color-blanco;
+
+    &:hover:not(:disabled),
+    &:focus-visible {
+      background-color: transparent;
+      color: $color-blanco;
+    }
+  }
+
+  &--ancho-completo {
+    display: flex;
+    width: 100%;
+  }
+}

@@ -1,0 +1,164 @@
+// --- Portada ---
+
+.home-hero {
+  position: relative;
+  display: grid;
+  min-height: calc(100vh - #{$alto-cabecera});
+  max-height: 78rem;
+  overflow: hidden;
+
+  &__fondo,
+  &__contenido {
+    grid-area: 1 / 1;
+  }
+
+  &__fondo {
+    position: relative;
+
+    // Capa oscura: sin ella el texto blanco no se lee sobre la fotografía
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba($color-morado-oscuro, 0.35) 0%,
+        rgba($color-morado-oscuro, 0.65) 100%
+      );
+    }
+  }
+
+  &__imagen {
+    @include imagen-cubierta;
+  }
+
+  &__contenido {
+    @include flex-columna;
+    @include flex-center;
+    position: relative;
+    z-index: $z-contenido;
+    text-align: center;
+    gap: $espaciado-md;
+    padding-block: $espaciado-xxl;
+  }
+
+  &__titulo {
+    @include titulo($tamano-hero-movil, $tamano-hero);
+    color: $color-blanco;
+    letter-spacing: 0.08em;
+  }
+
+  &__lema {
+    @include texto($tamano-texto-grande-movil, $tamano-texto-grande);
+    color: $color-blanco;
+    margin-bottom: $espaciado-md;
+  }
+}
+
+// --- Presentación ---
+
+.home-presentacion {
+  @include seccion;
+  background-color: $color-fondo-alt;
+  text-align: center;
+
+  &__titulo {
+    @include titulo($tamano-h2-movil, $tamano-h2);
+    color: $color-primario;
+  }
+
+  &__texto {
+    margin-top: $espaciado-xl;
+    color: $color-texto-suave;
+
+    p {
+      @include texto($tamano-texto-movil, $tamano-texto-grande);
+    }
+
+    p + p {
+      margin-top: $espaciado-lg;
+    }
+  }
+}
+
+// --- Cita ---
+
+.home-cita {
+  @include seccion;
+  background-color: $color-primario;
+  text-align: center;
+
+  &__texto {
+    @include titulo($tamano-h3-movil, $tamano-h2);
+    color: $color-blanco;
+    font-style: italic;
+  }
+
+  &__autora {
+    margin-top: $espaciado-lg;
+    font-family: $fuente-secundaria;
+    font-size: $tamano-texto-movil;
+    color: $color-acento;
+    font-style: normal;
+
+    cite {
+      font-style: normal;
+    }
+  }
+}
+
+// --- Bloques alternos de imagen y texto ---
+
+.home-bloques {
+  @include seccion;
+}
+
+.home-bloque {
+  display: grid;
+  gap: $espaciado-xl;
+  align-items: center;
+
+  @include desktop {
+    grid-template-columns: 1fr 1fr;
+    gap: $espaciado-xxl;
+  }
+
+  & + & {
+    margin-top: $espaciado-seccion-movil;
+
+    @include desktop {
+      margin-top: $espaciado-seccion;
+    }
+  }
+
+  &__imagen {
+    border-radius: $radio-lg;
+    overflow: hidden;
+    box-shadow: $sombra-suave;
+
+    img {
+      @include imagen-cubierta;
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  &__texto {
+    @include flex-columna;
+    align-items: flex-start;
+    gap: $espaciado-md;
+  }
+
+  &__titulo {
+    @include titulo($tamano-h2-movil, $tamano-h2);
+    color: $color-primario;
+  }
+
+  // En escritorio la segunda pareja invierte el orden para alternar el ritmo
+  &--invertido {
+    @include desktop {
+      .home-bloque__imagen {
+        order: 2;
+      }
+    }
+  }
+}

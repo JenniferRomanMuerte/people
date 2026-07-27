@@ -1,0 +1,76 @@
+.page-hero {
+  position: relative;
+  display: grid;
+  min-height: 42rem;
+  overflow: hidden;
+
+  @include desktop {
+    min-height: 56rem;
+  }
+
+  &__fondo,
+  &__contenido {
+    // Se apilan en la misma celda de la rejilla
+    grid-area: 1 / 1;
+  }
+
+  &__fondo {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
+  }
+
+  &__imagen {
+    @include imagen-cubierta;
+  }
+
+  &__contenido {
+    @include flex-center;
+    position: relative;
+    z-index: $z-contenido;
+    text-align: center;
+    padding-block: $espaciado-xxl;
+  }
+
+  &__titulo {
+    @include titulo($tamano-h1-movil, $tamano-h1);
+    color: $color-blanco;
+    max-width: 18ch;
+    margin-inline: auto;
+  }
+
+  &__subtitulo {
+    @include texto($tamano-texto-grande-movil, $tamano-texto-grande);
+    color: $color-blanco;
+    margin-top: $espaciado-md;
+    max-width: 46ch;
+    margin-inline: auto;
+  }
+
+  &__texto {
+    margin-top: $espaciado-lg;
+    max-width: 60ch;
+    margin-inline: auto;
+
+    p {
+      color: $color-blanco;
+    }
+
+    p + p {
+      margin-top: $espaciado-md;
+    }
+  }
+
+  // Capa oscura sobre la fotografía: sin ella el texto blanco no siempre se lee
+  &--oscuro &__fondo::after {
+    background: linear-gradient(
+      180deg,
+      rgba($color-morado-oscuro, 0.55) 0%,
+      rgba($color-morado-oscuro, 0.7) 100%
+    );
+  }
+}

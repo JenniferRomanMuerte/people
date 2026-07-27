@@ -1,0 +1,37 @@
+.carta {
+  &__seccion {
+    @include seccion;
+
+    // Alterna el fondo para separar visualmente los bloques de la carta
+    &--destacada {
+      background-color: $color-fondo-alt;
+    }
+  }
+
+  &__titulo {
+    @include titulo($tamano-h2-movil, $tamano-h2);
+    color: $color-primario;
+    text-align: center;
+  }
+
+  &__texto {
+    margin-top: $espaciado-xl;
+    color: $color-texto-suave;
+
+    p {
+      @include texto($tamano-texto-movil, $tamano-texto-grande);
+    }
+
+    p + p {
+      margin-top: $espaciado-lg;
+    }
+  }
+
+  &__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $espaciado-md;
+    margin-top: $espaciado-xl;
+  }
+}

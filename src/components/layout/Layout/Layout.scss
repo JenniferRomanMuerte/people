@@ -1,0 +1,9 @@
+.layout {
+  @include flex-columna;
+  min-height: 100vh;
+
+  // El contenido crece para que el pie quede abajo aunque la página sea corta
+  &__contenido {
+    flex: 1;
+  }
+}

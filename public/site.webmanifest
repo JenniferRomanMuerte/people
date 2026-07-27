@@ -1,0 +1,14 @@
+{
+  "name": "People, acompañando a la mujer maltratada",
+  "short_name": "People",
+  "description": "Acompañamiento afectivo, personalizado y coordinado a mujeres que sufren o han sufrido violencia de género.",
+  "lang": "es",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#47274D",
+  "icons": [
+    { "src": "/icono-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icono-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

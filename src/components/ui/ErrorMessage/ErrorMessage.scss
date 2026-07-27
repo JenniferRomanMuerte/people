@@ -1,0 +1,24 @@
+.error-message {
+  display: flex;
+  align-items: flex-start;
+  gap: $espaciado-sm;
+  padding: $espaciado-md;
+  background-color: $color-error-fondo;
+  border-left: 0.4rem solid $color-error;
+  border-radius: $radio-sm;
+  color: $color-error;
+  font-size: $tamano-texto-movil;
+  line-height: 1.5;
+
+  &__icono {
+    @include flex-center;
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: $radio-redondo;
+    background-color: $color-error;
+    color: $color-blanco;
+    font-weight: $peso-negrita;
+    font-size: $tamano-texto-pequeno;
+  }
+}
