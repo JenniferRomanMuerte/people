@@ -4,7 +4,7 @@
 
 .home-hero {
   position: relative;
-  background-color: $color-acento;
+  background-color: $color-primario;
   overflow: hidden;
   padding-block: $espaciado-xxl;
 
@@ -32,8 +32,9 @@
 
   &__titulo {
     @include titular-compacto(4.8rem, 6.8rem);
-    color: $color-primario;
-    letter-spacing: -0.03em;
+    color: $color-blanco;
+    // Positivo para separar las letras; el mixin las junta por defecto
+    letter-spacing: 0.03em;
     // Ancho corto a propósito: fuerza el quiebre en tres líneas
     max-width: 9ch;
   }
@@ -41,7 +42,7 @@
   // Titular, lema y botón van juntos, como un solo bloque
   &__lema {
     @include manuscrita(2.4rem, 3.2rem);
-    color: $color-primario;
+    color: $color-blanco;
     margin-block: $espaciado-sm $espaciado-lg;
   }
 
@@ -50,17 +51,17 @@
     display: inline-block;
   }
 
-  // El botón del hero va en crema, no en blanco, para asentarse sobre el naranja
+  // Botón naranja sobre el morado, y blanco al pasar por encima
   .button--claro {
-    background-color: $color-crema;
-    border-color: $color-crema;
+    background-color: $color-acento;
+    border-color: $color-acento;
     color: $color-primario;
 
     &:hover,
     &:focus-visible {
-      background-color: $color-primario;
-      border-color: $color-primario;
-      color: $color-crema;
+      background-color: $color-blanco;
+      border-color: $color-blanco;
+      color: $color-primario;
     }
   }
 
@@ -82,9 +83,9 @@
     }
   }
 
-  // Círculo morado detrás de la foto, asomando por la esquina superior derecha
+  // Círculo naranja detrás de la foto, asomando por la esquina superior derecha
   &__media::before {
-    @include circulo(18rem, $color-primario);
+    @include circulo(18rem, $color-acento);
     top: -6.4rem;
     right: -6.4rem;
 
@@ -204,23 +205,37 @@
 
 .home-cita {
   @include seccion;
-  background-color: $color-fondo;
+  background-color: $color-primario;
   text-align: center;
 
   &__bloque {
     display: inline-block;
-    transform: rotate(-1deg);
-
-    @include movimiento-reducido {
-      transform: none;
-    }
   }
 
   &__texto {
-    @include manuscrita(3.2rem, 5.6rem);
-    color: $color-primario;
-    max-width: 20ch;
+    @include manuscrita(3.2rem, 6.4rem);
+    color: $color-blanco;
+    // Cabe la frase más larga en una sola línea
+    max-width: 46ch;
     margin-inline: auto;
+  }
+
+  // Cada frase ocupa su propia línea
+  &__linea {
+    display: block;
+
+    // Las comillas abren en la primera frase y cierran en la última
+    &:first-child::before {
+      content: '\201C';
+      color: $color-acento;
+      // Separa la comilla de la primera palabra
+      margin-right: $espaciado-sm;
+    }
+
+    &:last-child::after {
+      content: '\201D';
+      color: $color-acento;
+    }
   }
 
   &__autora {
@@ -230,7 +245,7 @@
     font-weight: $peso-negrita;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    color: $color-secundario;
+    color: $color-acento;
 
     cite {
       font-style: normal;
@@ -286,28 +301,9 @@
 
 .home-cierre {
   @include seccion;
-  position: relative;
-  background-color: $color-fondo-oscuro;
-  overflow: hidden;
-
-  // Círculo de acento superpuesto, la firma que cierra la página
-  &::before {
-    @include circulo(26rem, $color-acento);
-    left: -13rem;
-    bottom: -13rem;
-    opacity: 0.9;
-
-    @include desktop {
-      width: 40rem;
-      height: 40rem;
-      left: -18rem;
-      bottom: -18rem;
-    }
-  }
+  background-color: $color-fondo-alt;
 
   &__contenido {
-    position: relative;
-    z-index: $z-contenido;
     display: grid;
     gap: $espaciado-xl;
     align-items: center;
@@ -320,14 +316,14 @@
 
   &__titulo {
     @include titular-compacto($tamano-h2-movil, 5.6rem);
-    color: $color-blanco;
+    color: $color-primario;
     margin-bottom: $espaciado-lg;
   }
 
   &__texto {
     p {
       @include texto($tamano-texto-movil, $tamano-texto-grande);
-      color: rgba($color-blanco, 0.85);
+      color: $color-texto-suave;
     }
   }
 

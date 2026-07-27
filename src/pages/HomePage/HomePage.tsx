@@ -84,11 +84,16 @@ const HomePage = () => {
 
       {/* --- Cita --- */}
       <section className="home-cita">
-        <div className="contenedor contenedor--estrecho">
+        <div className="contenedor">
           <blockquote className="home-cita__bloque">
+            {/* Una frase por línea. Las comillas las pone el CSS. */}
             <p className="home-cita__texto">
-              No quiero que otra persona decida quién soy. Yo quiero decidir por mí misma.
+              <span className="home-cita__linea">
+                No quiero que otra persona decida quién soy.
+              </span>
+              <span className="home-cita__linea">Yo quiero decidir por mí misma.</span>
             </p>
+
             <footer className="home-cita__autora">
               <cite>Emma Watson</cite>
             </footer>

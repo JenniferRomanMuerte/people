@@ -7,6 +7,8 @@ import { routes } from './routes';
 import '@fontsource/zilla-slab/400.css';
 import '@fontsource/zilla-slab/500.css';
 import '@fontsource/zilla-slab/700.css';
+// Cursiva real, para las citas destacadas
+import '@fontsource/zilla-slab/400-italic.css';
 import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/700.css';
 import '@fontsource/caveat/700.css';
