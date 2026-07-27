@@ -3,13 +3,10 @@ import LegalPage from '@/components/ui/LegalPage/LegalPage';
 import { SITE_INFO } from '@/data/siteInfo';
 
 /**
- * Texto reproducido literalmente del sitio original.
- *
- * PENDIENTE DE REVISIÓN: el apartado 5 menciona únicamente Gmail como
- * destinatario. La web en código envía el formulario a través de un proveedor
- * de correo transaccional (Resend), que es un encargado del tratamiento
- * adicional y debería figurar aquí. No se modifica por cuenta propia porque es
- * un documento legal: lo tiene que validar la persona responsable.
+ * Texto reproducido literalmente del sitio original, con una única adición:
+ * el apartado 5 incorpora a Resend como encargado del tratamiento, ya que es
+ * quien envía materialmente los correos del formulario. Párrafo facilitado y
+ * aprobado por la persona responsable de la asociación.
  */
 const PoliticaPrivacidadPage = () => {
   return (
@@ -87,6 +84,19 @@ const PoliticaPrivacidadPage = () => {
           El tratamiento se realiza a través del servicio de correo electrónico Gmail, propiedad de
           Google LLC, que puede implicar transferencias internacionales de datos conforme a las
           garantías adecuadas previstas en la normativa vigente.
+        </p>
+        <p>
+          Además, para la gestión del formulario de contacto, esta web utiliza los servicios de
+          Resend (Resend, Inc.) como encargado del tratamiento para el envío de los correos
+          electrónicos generados a través del formulario. Resend únicamente procesa el contenido del
+          mensaje y los datos de contacto facilitados voluntariamente por la usuaria (nombre, email
+          y mensaje), con la única finalidad de hacer llegar la comunicación a{' '}
+          <a href={`mailto:${SITE_INFO.email}`}>{SITE_INFO.email}</a>. Puedes consultar la política
+          de privacidad de Resend en{' '}
+          <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">
+            https://resend.com/legal/privacy-policy
+          </a>
+          .
         </p>
 
         <h2>6. Derechos de las personas usuarias</h2>
