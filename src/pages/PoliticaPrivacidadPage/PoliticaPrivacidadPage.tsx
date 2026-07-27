@@ -89,8 +89,9 @@ const PoliticaPrivacidadPage = () => {
           Además, para la gestión del formulario de contacto, esta web utiliza los servicios de
           Resend (Resend, Inc.) como encargado del tratamiento para el envío de los correos
           electrónicos generados a través del formulario. Resend únicamente procesa el contenido del
-          mensaje y los datos de contacto facilitados voluntariamente por la usuaria (nombre, email
-          y mensaje), con la única finalidad de hacer llegar la comunicación a{' '}
+          mensaje y los datos de contacto facilitados voluntariamente por la usuaria (nombre,
+          apellido, email, teléfono y mensaje), con la única finalidad de hacer llegar la
+          comunicación a{' '}
           <a href={`mailto:${SITE_INFO.email}`}>{SITE_INFO.email}</a>. Puedes consultar la política
           de privacidad de Resend en{' '}
           <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">

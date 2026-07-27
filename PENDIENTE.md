@@ -24,12 +24,8 @@ la persona responsable antes de publicar.**
 
 **Política de privacidad — resuelto.** El apartado 5 ("Destinatarios") ya
 incorpora a Resend como encargado del tratamiento, junto a Gmail. El párrafo lo
-facilitó y aprobó la persona responsable de la asociación.
-
-Queda una observación menor, por si interesa afinarla más adelante: el párrafo
-enumera como datos facilitados «nombre, email y mensaje», mientras que el
-formulario ofrece además dos campos opcionales, apellido y teléfono. No se toca
-sin indicación expresa.
+facilitó y aprobó la persona responsable de la asociación, y enumera los cinco
+campos que recoge el formulario: nombre, apellido, email, teléfono y mensaje.
 
 ---
 
