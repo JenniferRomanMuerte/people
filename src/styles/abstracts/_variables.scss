@@ -1,31 +1,34 @@
 // ---------------------------------------------------------------------------
 // Variables globales
-// La paleta y la escala tipográfica están extraídas de las variables CSS
-// del sitio original en Wix, no aproximadas a ojo.
+//
+// La paleta ya no es la heredada de Wix: responde a la nueva dirección visual
+// (morados de la marca, naranja como acento, crema de fondo y morado noche
+// para las franjas oscuras).
 // ---------------------------------------------------------------------------
 
 // --- Paleta ---------------------------------------------------------------
 
-$color-morado-oscuro: #47274d; // --color_15 / _45 — texto y títulos
-$color-morado: #7f468a; // --color_3 / _25 / _43 — acciones
-$color-morado-medio: #755d7a; // --color_18 / _40 / _41
-$color-morado-claro: #b887c2; // --color_23
-$color-lila: #e7d7eb; // --color_21
-$color-lila-fondo: #fcf4fb; // --color_4 / _27 / _42
-$color-crema: #fff6ea;
-$color-melocoton: #ffd3a1; // --color_44 — acento cálido
+$color-morado-oscuro: #47274d; // texto, títulos, bloques fuertes
+$color-morado: #7f468a; // acciones secundarias
+$color-morado-medio: #755d7a; // texto suave
+$color-morado-claro: #b887c2; // acentos puntuales (bordes discontinuos, círculos)
+$color-naranja: #ff9e45; // acento principal — sustituye a $color-melocoton
+$color-naranja-claro: #ffe2c6;
+$color-crema: #fdf7ed; // fondo alternativo — sustituye a $color-lila-fondo
+$color-morado-noche: #241226; // fondo oscuro — nuevo, para franjas de contacto/016
 $color-blanco: #ffffff;
-$color-gris-borde: #d1c9d3; // --color_12 / _38
+$color-gris-borde: #d1c9d3;
 
 // --- Roles semánticos -----------------------------------------------------
 
 $color-primario: $color-morado-oscuro;
 $color-secundario: $color-morado;
-$color-acento: $color-melocoton;
+$color-acento: $color-naranja;
+$color-acento-suave: $color-naranja-claro;
 
 $color-fondo: $color-blanco;
-$color-fondo-alt: $color-lila-fondo;
-$color-fondo-oscuro: $color-morado-oscuro;
+$color-fondo-alt: $color-crema;
+$color-fondo-oscuro: $color-morado-noche;
 
 $color-texto: $color-morado-oscuro;
 $color-texto-suave: $color-morado-medio;
@@ -37,13 +40,12 @@ $color-exito: #2c6e49;
 $color-exito-fondo: #f1f8f4;
 
 // --- Tipografía -----------------------------------------------------------
-// El original usa American Typewriter para los títulos, una fuente propietaria
-// de ITC que no puede servirse en web sin licencia. Zilla Slab es la sustituta
-// libre más cercana. Para cambiarla basta con tocar esta variable.
+
 
 $fuente-titulos: 'Zilla Slab', 'Bitter', Georgia, serif;
+$fuente-manuscrita: 'Caveat', cursive; // nueva — solo para citas y acentos puntuales
 $fuente-principal: 'Open Sans Variable', 'Open Sans', -apple-system, 'Segoe UI', sans-serif;
-$fuente-secundaria: 'Poppins', 'Open Sans Variable', sans-serif;
+$fuente-secundaria: 'Space Grotesk', 'Open Sans Variable', sans-serif;
 
 // Escala tipográfica — el reset fija 1rem = 10px para simplificar los cálculos
 
@@ -75,6 +77,8 @@ $peso-negrita: 700;
 
 $interlineado-titulo: 1.25;
 $interlineado-texto: 1.75;
+// Titulares grandes en mayúsculas: las líneas casi se tocan
+$interlineado-compacto: 0.92;
 
 // --- Espaciado ------------------------------------------------------------
 

@@ -123,6 +123,34 @@
   }
 }
 
+// Titular grande en mayúsculas, con las líneas casi tocándose.
+// Es la voz principal de la nueva dirección visual.
+@mixin titular-compacto($tamano-movil, $tamano-desktop) {
+  font-family: $fuente-titulos;
+  font-size: $tamano-movil;
+  font-weight: $peso-negrita;
+  line-height: $interlineado-compacto;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+
+  @include desktop {
+    font-size: $tamano-desktop;
+  }
+}
+
+// Texto manuscrito, para citas y notas
+@mixin manuscrita($tamano-movil, $tamano-desktop) {
+  font-family: $fuente-manuscrita;
+  font-size: $tamano-movil;
+  font-weight: $peso-negrita;
+  line-height: 1.2;
+
+  @include desktop {
+    font-size: $tamano-desktop;
+  }
+}
+
 @mixin texto-truncado {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -142,16 +170,20 @@
 @mixin boton-base {
   @include flex-center;
   gap: $espaciado-sm;
-  font-family: $fuente-principal;
+  font-family: $fuente-titulos;
   font-size: $tamano-texto-movil;
-  font-weight: $peso-medio;
+  font-weight: $peso-negrita;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   line-height: 1;
   padding: $espaciado-md $espaciado-xl;
   border: 0.2rem solid transparent;
-  border-radius: $radio-redondo;
+  // Radio pequeño, casi recto: la nueva dirección visual evita las cápsulas
+  border-radius: $radio-sm;
   cursor: pointer;
   text-align: center;
-  transition: background-color $transicion, color $transicion, border-color $transicion;
+  transition: background-color $transicion, color $transicion, border-color $transicion,
+    transform $transicion-rapida;
 
   &:disabled {
     opacity: 0.55;
@@ -198,6 +230,44 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+// --- Firma visual ---------------------------------------------------------
+
+// Círculo sólido que asoma por el borde del bloque.
+// Es el elemento que se repite en toda la web: se coloca dentro de un
+// contenedor con `overflow: hidden` y position relative, y se le indica
+// la posición con `top/right/bottom/left` desde donde se use.
+@mixin circulo($tamano, $color) {
+  content: '';
+  position: absolute;
+  width: $tamano;
+  height: $tamano;
+  border-radius: $radio-redondo;
+  background-color: $color;
+  // Es decorativo: nunca debe interceptar clics
+  pointer-events: none;
+}
+
+// Nota tipo pegatina: rectángulo de color, esquinas poco redondeadas,
+// texto manuscrito y una rotación ligera para que no parezca alineada.
+@mixin nota($fondo, $texto, $rotacion) {
+  display: inline-block;
+  max-width: 34rem;
+  padding: $espaciado-md $espaciado-lg;
+  background-color: $fondo;
+  color: $texto;
+  border-radius: $radio-sm;
+  transform: rotate($rotacion);
+  box-shadow: $sombra-media;
+  @include manuscrita(2.2rem, 2.8rem);
+}
+
+// Tarjeta con borde discontinuo y una rotación mínima
+@mixin tarjeta-discontinua($color-borde, $rotacion: 0deg) {
+  border: 0.2rem dashed $color-borde;
+  border-radius: $radio-md;
+  transform: rotate($rotacion);
 }
 
 // --- Recursos visuales ----------------------------------------------------

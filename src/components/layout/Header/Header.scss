@@ -2,9 +2,9 @@
   position: sticky;
   top: 0;
   z-index: $z-cabecera;
-  background-color: $color-blanco;
-  border-bottom: 0.1rem solid $color-lila;
-
+  background-color: $color-acento-suave;
+  border-bottom: 0.3rem solid $color-morado-oscuro;
+  padding-block: 1rem;
   &__contenedor {
     @include flex-between;
     gap: $espaciado-md;
@@ -25,12 +25,12 @@
   }
 
   &__logo {
-    width: 4rem;
-    height: 4rem;
+    width: 5.2rem;
+    height: 5.2rem;
 
     @include desktop {
-      width: 5.2rem;
-      height: 5.2rem;
+      width: 7.2rem;
+      height: 7.2rem;
     }
   }
 
@@ -40,25 +40,26 @@
 
   &__nombre {
     font-family: $fuente-titulos;
-    font-size: 2.2rem;
+    font-size: 2.8rem;
     font-weight: $peso-negrita;
     line-height: 1.1;
-    color: $color-primario;
+    color: $color-secundario;
+
 
     @include desktop {
-      font-size: 2.8rem;
+      font-size: 3.6rem;
     }
   }
 
   &__lema {
     font-family: $fuente-secundaria;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     font-weight: $peso-ligero;
     line-height: 1.3;
     color: $color-texto-suave;
 
     @include desktop {
-      font-size: 1.3rem;
+      font-size: 1.6rem;
     }
   }
 
@@ -132,8 +133,9 @@
       position: fixed;
       inset: $alto-cabecera 0 auto 0;
       z-index: $z-menu-movil;
-      background-color: $color-blanco;
-      border-bottom: 0.1rem solid $color-lila;
+      // Mismo crema que la barra: si fuera blanco parecería un desajuste
+      background-color: $color-fondo-alt;
+      border-bottom: 0.3rem solid $color-morado-oscuro;
       box-shadow: $sombra-media;
       // Oculto por defecto en móvil; se despliega al pulsar la hamburguesa
       display: none;
@@ -161,14 +163,15 @@
 
   &__enlace {
     display: block;
-    font-family: $fuente-principal;
+    font-family: $fuente-titulos;
     font-size: $tamano-texto-movil;
-    color: $color-texto;
+    font-weight: $peso-medio;
+    color: $color-morado;
     transition: color $transicion-rapida;
 
     @include hasta-tablet {
       padding: $espaciado-md $espaciado-lg;
-      border-bottom: 0.1rem solid rgba($color-lila, 0.6);
+      border-bottom: 0.1rem solid rgba($color-gris-borde, 0.6);
     }
 
     @include desktop {
@@ -197,13 +200,14 @@
       color: $color-secundario;
     }
 
+    // La página actual se distingue por color y peso, ya no por el subrayado
     &--activo {
-      color: $color-secundario;
-      font-weight: $peso-medio;
+      color: $color-naranja;
+      font-weight: $peso-negrita;
 
       @include desktop {
         &::after {
-          width: 100%;
+          display: none;
         }
       }
     }

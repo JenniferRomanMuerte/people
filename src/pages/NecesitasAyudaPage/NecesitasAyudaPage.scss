@@ -1,17 +1,38 @@
 .carta {
   &__seccion {
     @include seccion;
+    position: relative;
+    overflow: hidden;
 
     // Alterna el fondo para separar visualmente los bloques de la carta
     &--destacada {
       background-color: $color-fondo-alt;
+
+      // Círculo morado asomando por la derecha
+      &::before {
+        @include circulo(20rem, $color-secundario);
+        right: -11rem;
+        top: 12%;
+        opacity: 0.16;
+
+        @include desktop {
+          width: 32rem;
+          height: 32rem;
+          right: -15rem;
+        }
+      }
     }
   }
 
+  &__contenido {
+    position: relative;
+    z-index: $z-contenido;
+  }
+
   &__titulo {
-    @include titulo($tamano-h2-movil, $tamano-h2);
+    @include titular-compacto(3rem, 5.2rem);
     color: $color-primario;
-    text-align: center;
+    max-width: 16ch;
   }
 
   &__texto {
@@ -27,11 +48,56 @@
     }
   }
 
-  &__acciones {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: $espaciado-md;
+  // La nota respira por ambos lados, entre los dos bloques de texto
+  .sticky-note {
+    margin-block: $espaciado-xl;
+  }
+
+  // --- Bloque de cierre ---
+
+  &__cierre {
+    @include seccion;
+    position: relative;
+    background-color: $color-fondo-oscuro;
+    overflow: hidden;
+
+    // Círculo de acento superpuesto, la firma que cierra la página
+    &::before {
+      @include circulo(26rem, $color-acento);
+      right: -13rem;
+      bottom: -14rem;
+      opacity: 0.9;
+
+      @include desktop {
+        width: 40rem;
+        height: 40rem;
+        right: -18rem;
+        bottom: -20rem;
+      }
+    }
+  }
+
+  &__cierre-contenido {
+    position: relative;
+    z-index: $z-contenido;
+  }
+
+  &__cierre-titulo {
+    @include titular-compacto(3.6rem, 7.2rem);
+    color: $color-blanco;
+  }
+
+  &__cierre-texto {
     margin-top: $espaciado-xl;
+    max-width: 46ch;
+
+    p {
+      @include texto($tamano-texto-movil, $tamano-texto-grande);
+      color: rgba($color-blanco, 0.85);
+    }
+
+    p + p {
+      margin-top: $espaciado-md;
+    }
   }
 }

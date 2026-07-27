@@ -8,17 +8,19 @@
   gap: $espaciado-sm;
   padding: $espaciado-md $espaciado-lg;
 
-  font-family: $fuente-principal;
+  font-family: $fuente-titulos;
   font-size: $tamano-texto-movil;
-  font-weight: $peso-medio;
+  font-weight: $peso-negrita;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   line-height: 1;
-  color: $color-blanco;
-  background-color: $color-primario;
-  border: 0.2rem solid $color-blanco;
-  border-radius: $radio-redondo;
+  color: $color-acento;
+  background-color: $color-fondo-oscuro;
+  border: 0.2rem solid $color-acento;
+  border-radius: $radio-sm;
   box-shadow: $sombra-fuerte;
   cursor: pointer;
-  transition: background-color $transicion, transform $transicion-rapida;
+  transition: background-color $transicion, color $transicion, transform $transicion-rapida;
 
   @include desktop {
     right: $espaciado-lg;
@@ -27,7 +29,8 @@
 
   &:hover,
   &:focus-visible {
-    background-color: $color-secundario;
+    background-color: $color-acento;
+    color: $color-fondo-oscuro;
     transform: scale(1.04);
   }
 

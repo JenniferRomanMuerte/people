@@ -1,11 +1,11 @@
 .footer {
   background-color: $color-fondo-alt;
-  border-top: 0.1rem solid $color-lila;
+  border-top: 0.1rem solid $color-gris-borde;
 
   // --- Aviso de emergencia ---
 
   &__emergencia {
-    background-color: $color-primario;
+    background-color: $color-fondo-oscuro;
     color: $color-blanco;
   }
 
@@ -24,13 +24,10 @@
   }
 
   &__emergencia-titulo {
-    font-family: $fuente-titulos;
-    font-size: $tamano-h3-movil;
-    line-height: 1.3;
-    color: $color-blanco;
+    @include titular-compacto(2rem, 2.6rem);
+    color: $color-acento;
 
     @include desktop {
-      font-size: 2.4rem;
       flex-shrink: 0;
     }
   }
@@ -56,12 +53,15 @@
     @include flex-center;
     flex-shrink: 0;
     padding: $espaciado-md $espaciado-lg;
+    font-family: $fuente-titulos;
     font-size: $tamano-texto-movil;
-    font-weight: $peso-medio;
+    font-weight: $peso-negrita;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
     line-height: 1;
-    color: $color-primario;
+    color: $color-fondo-oscuro;
     background-color: $color-acento;
-    border-radius: $radio-redondo;
+    border-radius: $radio-sm;
     white-space: nowrap;
     transition: background-color $transicion;
 
@@ -158,7 +158,7 @@
   // --- Créditos ---
 
   &__creditos {
-    border-top: 0.1rem solid $color-lila;
+    border-top: 0.1rem solid $color-gris-borde;
     padding-block: $espaciado-lg;
     font-size: $tamano-texto-pequeno;
     color: $color-texto-suave;

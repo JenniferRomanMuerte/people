@@ -6,7 +6,7 @@
     font-family: $fuente-titulos;
     font-size: 7.2rem;
     line-height: 1;
-    color: $color-lila;
+    color: $color-gris-borde;
 
     @include desktop {
       font-size: 12rem;
@@ -30,7 +30,7 @@
   &__navegacion {
     margin-top: $espaciado-xxl;
     padding-top: $espaciado-xl;
-    border-top: 0.1rem solid $color-lila;
+    border-top: 0.1rem solid $color-gris-borde;
   }
 
   &__lista {

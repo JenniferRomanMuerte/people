@@ -15,7 +15,7 @@ const Header = () => {
           <Image
             name="logo-simbolo"
             alt=""
-            sizes="56px"
+            sizes="72px"
             priority
             className="header__logo"
           />

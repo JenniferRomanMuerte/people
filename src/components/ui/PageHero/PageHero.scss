@@ -69,8 +69,52 @@
   &--oscuro &__fondo::after {
     background: linear-gradient(
       180deg,
-      rgba($color-morado-oscuro, 0.55) 0%,
-      rgba($color-morado-oscuro, 0.7) 100%
+      rgba($color-morado-noche, 0.5) 0%,
+      rgba($color-morado-noche, 0.75) 100%
     );
+  }
+
+  // --- Dirección visual actual ---
+  // Titular compacto alineado a la izquierda y círculo de acento asomando.
+
+  &--nuevo {
+    .page-hero__contenido {
+      text-align: left;
+      justify-content: flex-start;
+    }
+
+    .page-hero__titulo {
+      @include titular-compacto(3.6rem, 7.2rem);
+      color: $color-blanco;
+      max-width: 16ch;
+      margin-inline: 0;
+    }
+
+    .page-hero__subtitulo {
+      color: $color-acento;
+      margin-inline: 0;
+    }
+
+    .page-hero__texto {
+      margin-inline: 0;
+    }
+
+    &::after {
+      @include circulo(24rem, $color-acento);
+      right: -12rem;
+      top: -10rem;
+      z-index: $z-contenido;
+
+      @include desktop {
+        width: 38rem;
+        height: 38rem;
+        right: -16rem;
+        top: -16rem;
+      }
+    }
+
+    .page-hero__contenido {
+      z-index: calc(#{$z-contenido} + 1);
+    }
   }
 }

@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import './Button.scss';
 
-type Variante = 'primario' | 'secundario' | 'claro';
+type Variante = 'primario' | 'secundario' | 'claro' | 'acento';
 
 interface Props {
   children: ReactNode;

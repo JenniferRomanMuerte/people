@@ -1,5 +1,6 @@
 import Seo from '@/components/ui/Seo/Seo';
 import PageHero from '@/components/ui/PageHero/PageHero';
+import StickyNote from '@/components/ui/StickyNote/StickyNote';
 import './NecesitasAyudaPage.scss';
 
 const NecesitasAyudaPage = () => {
@@ -15,6 +16,7 @@ const NecesitasAyudaPage = () => {
         title="¿Necesitas ayuda? Estamos para ti"
         image="necesitas-ayuda-hero"
         imageAlt="Dos mujeres cogidas de la mano sobre una mesa de madera"
+        variant="nuevo"
       >
         <p>No tienes que atravesar este proceso sola.</p>
         <p>Esta es una carta de bienvenida de parte de las mujeres voluntarias de People.</p>
@@ -53,7 +55,7 @@ const NecesitasAyudaPage = () => {
 
         {/* --- Sabemos que no es fácil --- */}
         <section className="carta__seccion carta__seccion--destacada">
-          <div className="contenedor contenedor--estrecho">
+          <div className="contenedor contenedor--estrecho carta__contenido">
             <h2 className="carta__titulo">Sabemos que no es fácil</h2>
             <div className="carta__texto">
               <p>Como voluntarias, sabemos que estás pasando por momentos complicados.</p>
@@ -62,7 +64,13 @@ const NecesitasAyudaPage = () => {
                 obstáculos y miedos.
               </p>
               <p>Sabemos que requiere valentía, determinación y fuerza.</p>
-              <p>Pero también sabemos que se puede salir.</p>
+            </div>
+
+            <StickyNote tone="naranja" rotation={5}>
+              Pero también sabemos que se puede salir.
+            </StickyNote>
+
+            <div className="carta__texto">
               <p>
                 Desde nuestra organización queremos darte la seguridad de que haremos todo lo posible
                 para que no estés sola durante este proceso.
@@ -71,11 +79,11 @@ const NecesitasAyudaPage = () => {
           </div>
         </section>
 
-        {/* --- No estás sola --- */}
-        <section className="carta__seccion">
-          <div className="contenedor contenedor--estrecho">
-            <h2 className="carta__titulo">No estás sola</h2>
-            <div className="carta__texto">
+        {/* --- Bloque de cierre --- */}
+        <section className="carta__cierre">
+          <div className="contenedor contenedor--estrecho carta__cierre-contenido">
+            <h2 className="carta__cierre-titulo">No estás sola</h2>
+            <div className="carta__cierre-texto">
               <p>Nos gustaría formar parte de tu futuro.</p>
               <p>Si sientes que este puede ser tu espacio, estamos aquí para escucharte.</p>
               <p>Tus datos estarán siempre protegidos y el primer paso lo marcas tú.</p>

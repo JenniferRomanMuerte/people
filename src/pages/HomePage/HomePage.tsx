@@ -1,7 +1,7 @@
 import Seo from '@/components/ui/Seo/Seo';
 import Button from '@/components/ui/Button/Button';
 import Image from '@/components/ui/Image/Image';
-import { SITE_INFO } from '@/data/siteInfo';
+import StickyNote from '@/components/ui/StickyNote/StickyNote';
 import './HomePage.scss';
 
 const HomePage = () => {
@@ -15,33 +15,45 @@ const HomePage = () => {
 
       {/* --- Portada --- */}
       <section className="home-hero">
-        <div className="home-hero__fondo">
-          <Image
-            name="inicio-hero"
-            alt="Dos mujeres sentadas juntas mirando el cielo al atardecer"
-            sizes="100vw"
-            priority
-            className="home-hero__imagen"
-          />
-        </div>
+        <div className="contenedor home-hero__contenido">
+          <div className="home-hero__texto">
+            <h1 className="home-hero__titulo">No caminas sola</h1>
+            <p className="home-hero__lema">— acompañamos, sin dirigir</p>
+            <Button to="/contacto" variant="claro">
+              Contactar{' '}
+              <span className="home-hero__flecha" aria-hidden="true">
+                →
+              </span>
+            </Button>
+          </div>
 
-        <div className="home-hero__contenido contenedor">
-          <h1 className="home-hero__titulo">{SITE_INFO.name.toUpperCase()}</h1>
-          <p className="home-hero__lema">{SITE_INFO.tagline}</p>
-          <Button to="/contacto" variant="claro">
-            Contactar
-          </Button>
+          <div className="home-hero__media">
+            <div className="home-hero__nota">
+              <StickyNote tone="crema" rotation={-2}>
+                estamos aquí
+              </StickyNote>
+            </div>
+
+            <div className="home-hero__imagen">
+              <Image
+                name="inicio-dia-a-dia"
+                alt="Dos mujeres abrazadas de espaldas contemplando los tejados de Madrid"
+                sizes="(min-width: 1024px) 46vw, 90vw"
+                priority
+              />
+            </div>
+          </div>
         </div>
       </section>
 
       {/* --- Presentación --- */}
       <section className="home-presentacion">
-        <div className="contenedor contenedor--estrecho">
-          <h2 className="home-presentacion__titulo">
-            Acompañamos procesos,
-            <br />
+        <div className="contenedor contenedor--estrecho home-presentacion__contenido">
+          <h2 className="home-presentacion__titulo">Acompañamos procesos</h2>
+
+          <StickyNote tone="naranja" rotation={-2}>
             no camináis solas
-          </h2>
+          </StickyNote>
 
           <div className="home-presentacion__texto">
             <p>
@@ -65,9 +77,7 @@ const HomePage = () => {
         <div className="contenedor contenedor--estrecho">
           <blockquote className="home-cita__bloque">
             <p className="home-cita__texto">
-              No quiero que otra persona decida quién soy.
-              <br />
-              Yo quiero decidir por mí misma.
+              No quiero que otra persona decida quién soy. Yo quiero decidir por mí misma.
             </p>
             <footer className="home-cita__autora">
               <cite>Emma Watson</cite>
@@ -76,42 +86,44 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* --- Bloques de contenido --- */}
-      <section className="home-bloques">
-        <div className="contenedor">
-          <article className="home-bloque">
-            <div className="home-bloque__imagen">
-              <Image
-                name="inicio-dia-a-dia"
-                alt="Dos mujeres abrazadas de espaldas contemplando los tejados de Madrid"
-                sizes="(min-width: 1024px) 50vw, 100vw"
-              />
-            </div>
-            <div className="home-bloque__texto">
-              <h2 className="home-bloque__titulo">Nuestro día a día</h2>
-              <p>
-                Acompañamos a mujeres en su proceso, creando espacios seguros de escucha, apoyo y
-                confianza.
-              </p>
-            </div>
-          </article>
+      {/* --- Nuestro día a día --- */}
+      <section className="home-bloque">
+        <div className="contenedor home-bloque__contenido">
+          <div className="home-bloque__imagen">
+            <Image
+              name="inicio-dia-a-dia"
+              alt="Dos mujeres abrazadas de espaldas contemplando los tejados de Madrid"
+              sizes="(min-width: 1024px) 50vw, 100vw"
+            />
+          </div>
+          <div className="home-bloque__texto">
+            <h2 className="home-bloque__titulo">Nuestro día a día</h2>
+            <p>
+              Acompañamos a mujeres en su proceso, creando espacios seguros de escucha, apoyo y
+              confianza.
+            </p>
+          </div>
+        </div>
+      </section>
 
-          <article className="home-bloque home-bloque--invertido">
-            <div className="home-bloque__imagen">
-              <Image
-                name="inicio-juntas"
-                alt="Varias manos unidas en círculo sosteniendo un pequeño brote verde"
-                sizes="(min-width: 1024px) 50vw, 100vw"
-              />
-            </div>
-            <div className="home-bloque__texto">
-              <h2 className="home-bloque__titulo">Juntas contra la violencia machista</h2>
-              <p>
-                Creemos en el apoyo mutuo, la conciencia colectiva y el trabajo conjunto para
-                erradicar la violencia machista.
-              </p>
-            </div>
-          </article>
+      {/* --- Bloque de cierre --- */}
+      <section className="home-cierre">
+        <div className="contenedor home-cierre__contenido">
+          <div className="home-cierre__texto">
+            <h2 className="home-cierre__titulo">Juntas contra la violencia machista</h2>
+            <p>
+              Creemos en el apoyo mutuo, la conciencia colectiva y el trabajo conjunto para
+              erradicar la violencia machista.
+            </p>
+          </div>
+
+          <div className="home-cierre__imagen">
+            <Image
+              name="inicio-juntas"
+              alt="Varias manos unidas en círculo sosteniendo un pequeño brote verde"
+              sizes="(min-width: 1024px) 45vw, 100vw"
+            />
+          </div>
         </div>
       </section>
     </>

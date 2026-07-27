@@ -1,0 +1,18 @@
+.sticky-note {
+  // La rotación llega desde el componente para poder variarla en cada uso
+  @include nota($color-acento, $color-fondo-oscuro, var(--rotacion, 3deg));
+
+  &--crema {
+    background-color: $color-crema;
+    color: $color-primario;
+  }
+
+  &--morado {
+    background-color: $color-secundario;
+    color: $color-blanco;
+  }
+
+  @include movimiento-reducido {
+    transform: none;
+  }
+}

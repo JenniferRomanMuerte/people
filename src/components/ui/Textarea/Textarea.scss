@@ -4,13 +4,16 @@
   width: 100%;
 
   &__etiqueta {
-    font-size: $tamano-texto-movil;
-    font-weight: $peso-medio;
-    color: $color-texto;
+    font-family: $fuente-titulos;
+    font-size: $tamano-texto-pequeno;
+    font-weight: $peso-negrita;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $color-primario;
   }
 
   &__obligatorio {
-    color: $color-secundario;
+    color: $color-acento;
     margin-left: $espaciado-xs;
   }
 
@@ -22,7 +25,7 @@
     line-height: 1.6;
     color: $color-texto;
     background-color: $color-blanco;
-    border: 0.1rem solid $color-gris-borde;
+    border: 0.2rem solid $color-gris-borde;
     border-radius: $radio-sm;
     resize: vertical;
     min-height: 12rem;
@@ -37,7 +40,7 @@
     }
 
     &:focus {
-      border-color: $color-secundario;
+      border-color: $color-acento;
     }
 
     &--error {

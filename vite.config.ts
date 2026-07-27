@@ -26,6 +26,15 @@ export default defineConfig({
     },
   },
 
+  server: {
+    port: 5173,
+    // Falla en vez de saltar a otro puerto: así la URL siempre es la misma
+    strictPort: true,
+    // Expone el servidor en la red local para poder abrir la web desde el móvil
+    // y comprobar el diseño responsive en un dispositivo real
+    host: true,
+  },
+
   build: {
     // Las imágenes pequeñas se incrustan como base64; las grandes se sirven como archivo
     assetsInlineLimit: 4096,

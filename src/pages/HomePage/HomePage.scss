@@ -1,75 +1,166 @@
-// --- Portada ---
+// ---------------------------------------------------------------------------
+// Portada
+// ---------------------------------------------------------------------------
 
 .home-hero {
   position: relative;
-  display: grid;
-  min-height: calc(100vh - #{$alto-cabecera});
-  max-height: 78rem;
+  background-color: $color-acento;
   overflow: hidden;
+  padding-block: $espaciado-xxl;
 
-  &__fondo,
-  &__contenido {
-    grid-area: 1 / 1;
+  @include desktop {
+    padding-block: $espaciado-seccion;
   }
 
-  &__fondo {
+  &__contenido {
     position: relative;
+    z-index: calc(#{$z-contenido} + 1);
+    display: grid;
+    gap: $espaciado-lg;
+    align-items: center;
 
-    // Capa oscura: sin ella el texto blanco no se lee sobre la fotografía
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        180deg,
-        rgba($color-morado-oscuro, 0.35) 0%,
-        rgba($color-morado-oscuro, 0.65) 100%
-      );
+    @include desktop {
+      // Cada columna mide lo suyo: el texto lo que ocupa, la foto su ancho fijo.
+      grid-template-columns: max-content minmax(0, 46rem);
+      // Las dos columnas arrancan a la izquierda y el gap manda de verdad.
+      // Lo que sobra queda a la derecha, que además es donde el círculo morado
+      // necesita sitio para asomar sin que lo recorte el overflow.
+      justify-content: start;
+      gap: 22rem;
+    }
+  }
+
+  &__titulo {
+    @include titular-compacto(4.8rem, 6.8rem);
+    color: $color-primario;
+    letter-spacing: -0.03em;
+    // Ancho corto a propósito: fuerza el quiebre en tres líneas
+    max-width: 9ch;
+  }
+
+  // Titular, lema y botón van juntos, como un solo bloque
+  &__lema {
+    @include manuscrita(2.4rem, 3.2rem);
+    color: $color-primario;
+    margin-block: $espaciado-sm $espaciado-lg;
+  }
+
+  &__flecha {
+    // Acompaña al texto del botón sin separarse de él al reducir la pantalla
+    display: inline-block;
+  }
+
+  // El botón del hero va en crema, no en blanco, para asentarse sobre el naranja
+  .button--claro {
+    background-color: $color-crema;
+    border-color: $color-crema;
+    color: $color-primario;
+
+    &:hover,
+    &:focus-visible {
+      background-color: $color-primario;
+      border-color: $color-primario;
+      color: $color-crema;
+    }
+  }
+
+  // --- Columna de la imagen ---
+
+  &__media {
+    position: relative;
+    // Se limita el ancho para que la foto no domine sobre el titular
+    max-width: 42rem;
+    margin-inline: auto;
+
+    @include desktop {
+      // En escritorio el ancho lo fija la columna del grid, no este tope
+      max-width: none;
+      margin-inline: 0;
+      // Sube el bloque derecho entero (foto, círculo y nota) sin descolocar
+      // la rejilla: al ser relative solo se desplaza en pantalla.
+      top: -2rem;
+    }
+  }
+
+  // Círculo morado detrás de la foto, asomando por la esquina superior derecha
+  &__media::before {
+    @include circulo(18rem, $color-primario);
+    top: -6.4rem;
+    right: -6.4rem;
+
+    @include desktop {
+      width: 28rem;
+      height: 28rem;
+      top: -9.6rem;
+      right: -9.6rem;
     }
   }
 
   &__imagen {
-    @include imagen-cubierta;
-  }
-
-  &__contenido {
-    @include flex-columna;
-    @include flex-center;
     position: relative;
-    z-index: $z-contenido;
-    text-align: center;
-    gap: $espaciado-md;
-    padding-block: $espaciado-xxl;
+    border-radius: $radio-md;
+    overflow: hidden;
+    box-shadow: $sombra-media;
+
+    img {
+      @include imagen-cubierta;
+      aspect-ratio: 4 / 3;
+    }
   }
 
-  &__titulo {
-    @include titulo($tamano-hero-movil, $tamano-hero);
-    color: $color-blanco;
-    letter-spacing: 0.08em;
-  }
+  // La nota se apoya sobre el círculo, por encima de la foto
+  &__nota {
+    position: absolute;
+    top: -3.2rem;
+    right: -1.2rem;
+    z-index: calc(#{$z-contenido} + 2);
 
-  &__lema {
-    @include texto($tamano-texto-grande-movil, $tamano-texto-grande);
-    color: $color-blanco;
-    margin-bottom: $espaciado-md;
+    @include desktop {
+      top: -5.6rem;
+      right: -3.2rem;
+    }
   }
 }
 
-// --- Presentación ---
+// ---------------------------------------------------------------------------
+// Presentación
+// ---------------------------------------------------------------------------
 
 .home-presentacion {
   @include seccion;
+  position: relative;
   background-color: $color-fondo-alt;
-  text-align: center;
+  overflow: hidden;
+
+  // Círculo morado que asoma por el borde izquierdo
+  &::before {
+    @include circulo(20rem, $color-secundario);
+    left: -11rem;
+    top: 22%;
+    opacity: 0.18;
+
+    @include desktop {
+      width: 34rem;
+      height: 34rem;
+      left: -16rem;
+    }
+  }
+
+  &__contenido {
+    position: relative;
+    z-index: $z-contenido;
+  }
 
   &__titulo {
-    @include titulo($tamano-h2-movil, $tamano-h2);
+    @include titular-compacto(3.4rem, 6.4rem);
     color: $color-primario;
+    max-width: 14ch;
   }
 
   &__texto {
     margin-top: $espaciado-xl;
     color: $color-texto-suave;
+    max-width: $ancho-texto-legible;
 
     p {
       @include texto($tamano-texto-movil, $tamano-texto-grande);
@@ -81,25 +172,44 @@
   }
 }
 
-// --- Cita ---
+// La nota se separa del titular y no se pega al párrafo siguiente
+.home-presentacion .sticky-note {
+  margin-top: $espaciado-lg;
+}
+
+// ---------------------------------------------------------------------------
+// Cita
+// ---------------------------------------------------------------------------
 
 .home-cita {
   @include seccion;
-  background-color: $color-primario;
+  background-color: $color-fondo;
   text-align: center;
 
+  &__bloque {
+    display: inline-block;
+    transform: rotate(-1deg);
+
+    @include movimiento-reducido {
+      transform: none;
+    }
+  }
+
   &__texto {
-    @include titulo($tamano-h3-movil, $tamano-h2);
-    color: $color-blanco;
-    font-style: italic;
+    @include manuscrita(3.2rem, 5.6rem);
+    color: $color-primario;
+    max-width: 20ch;
+    margin-inline: auto;
   }
 
   &__autora {
     margin-top: $espaciado-lg;
-    font-family: $fuente-secundaria;
-    font-size: $tamano-texto-movil;
-    color: $color-acento;
-    font-style: normal;
+    font-family: $fuente-titulos;
+    font-size: $tamano-texto-pequeno;
+    font-weight: $peso-negrita;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: $color-secundario;
 
     cite {
       font-style: normal;
@@ -107,34 +217,27 @@
   }
 }
 
-// --- Bloques alternos de imagen y texto ---
-
-.home-bloques {
-  @include seccion;
-}
+// ---------------------------------------------------------------------------
+// Bloque de imagen y texto
+// ---------------------------------------------------------------------------
 
 .home-bloque {
-  display: grid;
-  gap: $espaciado-xl;
-  align-items: center;
+  @include seccion;
 
-  @include desktop {
-    grid-template-columns: 1fr 1fr;
-    gap: $espaciado-xxl;
-  }
-
-  & + & {
-    margin-top: $espaciado-seccion-movil;
+  &__contenido {
+    display: grid;
+    gap: $espaciado-xl;
+    align-items: center;
 
     @include desktop {
-      margin-top: $espaciado-seccion;
+      grid-template-columns: 1fr 1fr;
+      gap: $espaciado-xxl;
     }
   }
 
   &__imagen {
-    border-radius: $radio-lg;
+    border-radius: $radio-md;
     overflow: hidden;
-    box-shadow: $sombra-suave;
 
     img {
       @include imagen-cubierta;
@@ -142,23 +245,78 @@
     }
   }
 
+  &__titulo {
+    @include titular-compacto($tamano-h2-movil, 4.8rem);
+    color: $color-primario;
+    margin-bottom: $espaciado-md;
+  }
+
   &__texto {
-    @include flex-columna;
-    align-items: flex-start;
-    gap: $espaciado-md;
+    p {
+      @include texto($tamano-texto-movil, $tamano-texto-grande);
+      color: $color-texto-suave;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Bloque de cierre
+// ---------------------------------------------------------------------------
+
+.home-cierre {
+  @include seccion;
+  position: relative;
+  background-color: $color-fondo-oscuro;
+  overflow: hidden;
+
+  // Círculo de acento superpuesto, la firma que cierra la página
+  &::before {
+    @include circulo(26rem, $color-acento);
+    left: -13rem;
+    bottom: -13rem;
+    opacity: 0.9;
+
+    @include desktop {
+      width: 40rem;
+      height: 40rem;
+      left: -18rem;
+      bottom: -18rem;
+    }
+  }
+
+  &__contenido {
+    position: relative;
+    z-index: $z-contenido;
+    display: grid;
+    gap: $espaciado-xl;
+    align-items: center;
+
+    @include desktop {
+      grid-template-columns: 1fr 0.9fr;
+      gap: $espaciado-xxl;
+    }
   }
 
   &__titulo {
-    @include titulo($tamano-h2-movil, $tamano-h2);
-    color: $color-primario;
+    @include titular-compacto($tamano-h2-movil, 5.6rem);
+    color: $color-blanco;
+    margin-bottom: $espaciado-lg;
   }
 
-  // En escritorio la segunda pareja invierte el orden para alternar el ritmo
-  &--invertido {
-    @include desktop {
-      .home-bloque__imagen {
-        order: 2;
-      }
+  &__texto {
+    p {
+      @include texto($tamano-texto-movil, $tamano-texto-grande);
+      color: rgba($color-blanco, 0.85);
+    }
+  }
+
+  &__imagen {
+    border-radius: $radio-md;
+    overflow: hidden;
+
+    img {
+      @include imagen-cubierta;
+      aspect-ratio: 4 / 3;
     }
   }
 }
