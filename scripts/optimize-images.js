@@ -47,9 +47,9 @@ const IMAGENES = [
   // --- Quiénes somos ---
   { origen: 'QuienesSomosHero.webp', nombre: 'quienes-somos-hero', tipo: 'hero' },
   { origen: '8e56e1_e43c0ae193304d21932118dc2e0d9b51~mv2.webp', nombre: 'fondo-papel', tipo: 'hero' },
-  { origen: '8e56e1_1776adcd9eeb4e5f932a6d424af05a46~mv2.webp', nombre: 'dimension-afectiva', tipo: 'ilustracion' },
-  { origen: '8e56e1_98002548103a488bb74c6ffcd8198be6~mv2.webp', nombre: 'plan-personalizado', tipo: 'ilustracion' },
-  { origen: '8e56e1_13fa67b03176450aa81b9569d86f78e0~mv2.webp', nombre: 'acompanamiento-coordinado', tipo: 'ilustracion' },
+  { origen: '8e56e1_1776adcd9eeb4e5f932a6d424af05a46~mv2.webp', nombre: 'dimension-afectiva', tipo: 'ilustracion', recortar: true },
+  { origen: '8e56e1_98002548103a488bb74c6ffcd8198be6~mv2.webp', nombre: 'plan-personalizado', tipo: 'ilustracion', recortar: true },
+  { origen: '8e56e1_13fa67b03176450aa81b9569d86f78e0~mv2.webp', nombre: 'acompanamiento-coordinado', tipo: 'ilustracion', recortar: true },
 
   // --- Voluntariado ---
   { origen: '8e56e1_071ddd1fdeef4d819c5351d744b635ba~mv2.webp', nombre: 'voluntariado-hero', tipo: 'hero' },
@@ -78,9 +78,17 @@ const FAVICONS = [
 
 const formatearPeso = (bytes) => `${(bytes / 1024).toFixed(0)} KB`;
 
-const generarImagen = async ({ origen, nombre, tipo }) => {
+const generarImagen = async ({ origen, nombre, tipo, recortar = false }) => {
   const rutaOrigen = path.join(ORIGEN, origen);
-  const original = sharp(rutaOrigen);
+
+  // `recortar` elimina el marco liso que rodea al dibujo. Varias ilustraciones
+  // vienen con mucho blanco alrededor: sin quitarlo, el dibujo se ve pequeño
+  // por más que se agrande su hueco en la página.
+  const base = recortar ? sharp(rutaOrigen).trim({ threshold: 12 }) : sharp(rutaOrigen);
+
+  // Se materializa el recorte para poder medir el resultado real
+  const bufferBase = recortar ? await base.toBuffer() : rutaOrigen;
+  const original = sharp(bufferBase);
   const meta = await original.metadata();
 
   const anchosPosibles = ANCHOS[tipo];
@@ -92,7 +100,7 @@ const generarImagen = async ({ origen, nombre, tipo }) => {
 
   for (const ancho of anchos) {
     const archivo = `${nombre}-${ancho}.webp`;
-    const info = await sharp(rutaOrigen)
+    const info = await sharp(bufferBase)
       .resize({ width: ancho, withoutEnlargement: true })
       .webp({ quality: 82, effort: 5 })
       .toFile(path.join(DESTINO, archivo));

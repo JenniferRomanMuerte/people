@@ -140,8 +140,8 @@ export const IMAGENES = {
   },
   'dimension-afectiva': {
     ancho: 800,
-    alto: 450,
-    ratio: 1.7778,
+    alto: 1065,
+    ratio: 0.7509,
     variantes: [
     { url: dimensionAfectiva400, ancho: 400 },
     { url: dimensionAfectiva800, ancho: 800 }
@@ -149,8 +149,8 @@ export const IMAGENES = {
   },
   'plan-personalizado': {
     ancho: 800,
-    alto: 450,
-    ratio: 1.7778,
+    alto: 1020,
+    ratio: 0.7841,
     variantes: [
     { url: planPersonalizado400, ancho: 400 },
     { url: planPersonalizado800, ancho: 800 }
@@ -158,8 +158,8 @@ export const IMAGENES = {
   },
   'acompanamiento-coordinado': {
     ancho: 800,
-    alto: 450,
-    ratio: 1.7778,
+    alto: 753,
+    ratio: 1.062,
     variantes: [
     { url: acompanamientoCoordinado400, ancho: 400 },
     { url: acompanamientoCoordinado800, ancho: 800 }

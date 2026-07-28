@@ -202,8 +202,35 @@
 
 .quienes-somos-pilares {
   @include seccion;
+  background-color: $color-fondo-alt;
 
+  // Una tarjeta debajo de otra, sin llegar a todo el ancho del contenedor
   &__rejilla {
-    @include rejilla(1, 3, $espaciado-lg);
+    @include flex-columna;
+    gap: $espaciado-xl;
+    max-width: 88rem;
+    margin-inline: auto;
+  }
+
+  .feature-card {
+    border-width: 0.2rem;
+    border-style: dashed;
+  }
+
+  // Título manuscrito y grande, sobre el texto
+  .feature-card__titulo {
+    @include manuscrita(2.6rem, 3.2rem);
+    color: $color-primario;
+    margin-bottom: $espaciado-sm;
+  }
+
+  // Bordes alternos, sin inclinación
+  .feature-card:nth-child(odd) {
+    border-color: $color-morado-claro;
+  }
+
+  .feature-card:nth-child(even) {
+    --ilustracion-fondo: #{rgba($color-acento, 0.18)};
+    border-color: $color-acento;
   }
 }

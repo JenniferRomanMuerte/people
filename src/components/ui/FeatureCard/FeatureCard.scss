@@ -1,56 +1,80 @@
 .feature-card {
+  // Fondo de la cajita de la ilustración. Se sobrescribe desde la página
+  // cuando las tarjetas alternan color.
+  --ilustracion-fondo: #{rgba($color-morado-claro, 0.22)};
+
   @include flex-columna;
   height: 100%;
   padding: $espaciado-lg;
   background-color: $color-blanco;
   border: 0.1rem solid $color-gris-borde;
   border-radius: $radio-lg;
-  transition: box-shadow $transicion, transform $transicion;
 
   @include desktop {
     padding: $espaciado-xl;
   }
 
-  &:hover {
-    box-shadow: $sombra-media;
-    transform: translateY(-0.4rem);
-  }
+  // --- Fila de ilustración y contenido ---
 
-  @include movimiento-reducido {
-    transition: none;
+  &__cuerpo {
+    // Apilados en móvil para que no se aprieten
+    @include flex-columna;
+    gap: $espaciado-lg;
 
-    &:hover {
-      transform: none;
+    @include tablet {
+      flex-direction: row;
+      align-items: center;
+      gap: $espaciado-xl;
     }
   }
 
   &__ilustracion {
-    @include flex-center;
-    height: 16rem;
-    margin-bottom: $espaciado-lg;
+    // Ancho fijo: no se estira aunque el texto de al lado sea largo
+    flex-shrink: 0;
+    width: 12rem;
+    padding: $espaciado-sm;
+    background-color: var(--ilustracion-fondo);
+    border-radius: $radio-md;
 
+    @include desktop {
+      width: 15rem;
+    }
+
+    // Sin alto fijo: la caja se ajusta a la proporción de la ilustración y
+    // esta ocupa todo el ancho disponible en vez de quedar centrada y pequeña
     img {
-      max-height: 100%;
-      width: auto;
-      object-fit: contain;
+      width: 100%;
+      height: auto;
+      // Las ilustraciones vienen sobre blanco: así se funden con el fondo
+      mix-blend-mode: multiply;
     }
   }
 
+  // Columna de la derecha: título y texto
+  &__contenido {
+    flex: 1;
+  }
+
   &__titulo {
-    @include titulo($tamano-h3-movil, $tamano-h3);
+    @include titulo(1.8rem, 2rem);
+    font-weight: $peso-negrita;
     color: $color-primario;
+    margin-bottom: $espaciado-sm;
   }
 
   &__subtitulo {
-    @include texto($tamano-texto-movil, $tamano-texto);
+    @include texto($tamano-texto-pequeno, $tamano-texto-movil);
     color: $color-secundario;
     font-weight: $peso-medio;
     margin-top: $espaciado-xs;
   }
 
   &__texto {
-    margin-top: $espaciado-md;
     color: $color-texto-suave;
+
+    p {
+      @include texto($tamano-texto-movil, $tamano-texto);
+    }
 
     p + p {
       margin-top: $espaciado-md;

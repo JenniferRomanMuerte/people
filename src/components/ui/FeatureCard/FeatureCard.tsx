@@ -15,19 +15,25 @@ interface Props {
 const FeatureCard = ({ title, subtitle, paragraphs, image, imageAlt = '' }: Props) => {
   return (
     <article className="feature-card">
-      {image && (
-        <div className="feature-card__ilustracion">
-          <Image name={image} alt={imageAlt} sizes="(min-width: 1024px) 30vw, 90vw" />
+      {/* Ilustración a la izquierda; título y texto a la derecha.
+          En pantallas estrechas se apilan. */}
+      <div className="feature-card__cuerpo">
+        {image && (
+          <div className="feature-card__ilustracion">
+            <Image name={image} alt={imageAlt} sizes="160px" />
+          </div>
+        )}
+
+        <div className="feature-card__contenido">
+          <h3 className="feature-card__titulo">{title}</h3>
+          {subtitle && <p className="feature-card__subtitulo">{subtitle}</p>}
+
+          <div className="feature-card__texto">
+            {paragraphs.map((parrafo) => (
+              <p key={parrafo}>{parrafo}</p>
+            ))}
+          </div>
         </div>
-      )}
-
-      <h3 className="feature-card__titulo">{title}</h3>
-      {subtitle && <p className="feature-card__subtitulo">{subtitle}</p>}
-
-      <div className="feature-card__texto">
-        {paragraphs.map((parrafo) => (
-          <p key={parrafo}>{parrafo}</p>
-        ))}
       </div>
     </article>
   );
