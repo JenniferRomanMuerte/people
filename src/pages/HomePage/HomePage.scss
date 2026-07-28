@@ -169,16 +169,16 @@
   background-color: $color-fondo-alt;
   overflow: hidden;
 
-  // Círculo que asoma por la esquina inferior derecha
+  // Círculo que asoma por la esquina inferior derecha del contenido
   &__circulo {
     @include circulo(34rem, rgba($color-secundario, 0.09));
-    right: -15rem;
+    right: desde-contenedor(15rem);
     bottom: -12rem;
 
     @include desktop {
       width: 58rem;
       height: 58rem;
-      right: -22rem;
+      right: desde-contenedor(22rem);
       bottom: -20rem;
     }
   }
@@ -429,7 +429,7 @@
   // el inferior, que son los que dan a entender que es una mancha.
   .photo-feature__blob {
     background-color: rgba($color-morado-oscuro, 0.92);
-    right: -6rem;
+    right: desde-contenedor(6rem);
     // En móvil arrancaba pegado al borde superior y comía el aire de la
     // sección: parecía que faltaba padding cuando el problema era este.
     top: 6rem;
@@ -440,7 +440,7 @@
     aspect-ratio: 1.9;
 
     @include desktop {
-      right: -7rem;
+      right: desde-contenedor(7rem);
       // Acompaña al padding-top del texto: los dos bajan a la vez
       top: 10rem;
       width: 72rem;
@@ -509,12 +509,12 @@
   .photo-feature__blob {
     right: auto;
     bottom: auto;
-    left: -9rem;
+    left: desde-contenedor(9rem);
     top: -8rem;
     background-color: rgba($color-morado-oscuro, 0.12);
 
     @include desktop {
-      left: -12rem;
+      left: desde-contenedor(12rem);
       top: -11rem;
     }
   }

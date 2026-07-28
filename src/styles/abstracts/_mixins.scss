@@ -234,6 +234,19 @@
 
 // --- Firma visual ---------------------------------------------------------
 
+// Ancla un adorno respecto al borde del CONTENEDOR, no al de la ventana.
+//
+// El contenido se centra con un ancho máximo, así que en pantallas grandes
+// quedan márgenes laterales enormes. Un adorno con `right: -12rem` se pega al
+// borde de la pantalla y se aleja del contenido, perdiendo el efecto de asomar
+// por el bloque que sí tiene en tamaños normales.
+//
+// `$sobresale` es cuánto se sale por fuera del contenedor. Por debajo del
+// ancho máximo el `max()` vale cero y se comporta igual que antes.
+@function desde-contenedor($sobresale) {
+  @return calc(max(0px, (100vw - #{$ancho-contenedor}) / 2) - #{$sobresale});
+}
+
 // Círculo sólido que asoma por el borde del bloque.
 // Es el elemento que se repite en toda la web: se coloca dentro de un
 // contenedor con `overflow: hidden` y position relative, y se le indica

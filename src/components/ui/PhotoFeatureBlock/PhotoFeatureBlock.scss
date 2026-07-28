@@ -12,7 +12,7 @@
   // un clip-path en píxeles se descuadraría al cambiar el ancho.
   &__blob {
     position: absolute;
-    right: -9rem;
+    right: desde-contenedor(9rem);
     bottom: -11rem;
     width: 30rem;
     height: 26rem;
@@ -21,7 +21,7 @@
     pointer-events: none;
 
     @include desktop {
-      right: -12rem;
+      right: desde-contenedor(12rem);
       bottom: -14rem;
       width: 44rem;
       height: 38rem;
