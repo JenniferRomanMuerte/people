@@ -28,3 +28,8 @@ yarn-error.log*
 # Caché
 .cache
 *.tsbuildinfo
+
+# Originales de vídeo sin comprimir.
+# No entran en el repositorio: GitHub rechaza archivos de más de 100 MB.
+# Los que sirve la web viven en public/videos/ y sí se versionan.
+assets-source/videos/

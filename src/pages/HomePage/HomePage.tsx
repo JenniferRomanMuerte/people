@@ -4,6 +4,7 @@ import Image from '@/components/ui/Image/Image';
 import StickyNote from '@/components/ui/StickyNote/StickyNote';
 import PaperFigures from '@/components/ui/PaperFigures/PaperFigures';
 import TornEdge from '@/components/ui/TornEdge/TornEdge';
+import PhotoFeatureBlock from '@/components/ui/PhotoFeatureBlock/PhotoFeatureBlock';
 import './HomePage.scss';
 
 const HomePage = () => {
@@ -106,45 +107,31 @@ const HomePage = () => {
       </section>
 
       {/* --- Nuestro día a día --- */}
-      <section className="home-bloque">
-        <div className="contenedor home-bloque__contenido">
-          <div className="home-bloque__imagen">
-            <Image
-              name="inicio-dia-a-dia"
-              alt="Dos mujeres abrazadas de espaldas contemplando los tejados de Madrid"
-              sizes="(min-width: 1024px) 50vw, 100vw"
-            />
-          </div>
-          <div className="home-bloque__texto">
-            <h2 className="home-bloque__titulo">Nuestro día a día</h2>
-            <p>
-              Acompañamos a mujeres en su proceso, creando espacios seguros de escucha, apoyo y
-              confianza.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* El vídeo está sin comprimir (114 MB) y por eso queda fuera del
+          repositorio. Hasta que se comprima, esta sección solo funciona en
+          local: en el sitio publicado se verá la imagen de espera. */}
+      <PhotoFeatureBlock
+        className="home-dia-a-dia"
+        videoSrc="/videos/NuestroDia.mp4"
+        videoPoster="/videos/NuestroDia-poster.webp"
+        title="Nuestro día a día"
+        image="inicio-dia-a-dia"
+        imageAlt="Dos mujeres abrazadas de espaldas contemplando los tejados de Madrid"
+        paragraphs={[
+          'Acompañamos a mujeres en su proceso, creando espacios seguros de escucha, apoyo y confianza.',
+        ]}
+      />
 
-      {/* --- Bloque de cierre --- */}
-      <section className="home-cierre">
-        <div className="contenedor home-cierre__contenido">
-          <div className="home-cierre__texto">
-            <h2 className="home-cierre__titulo">Juntas contra la violencia machista</h2>
-            <p>
-              Creemos en el apoyo mutuo, la conciencia colectiva y el trabajo conjunto para
-              erradicar la violencia machista.
-            </p>
-          </div>
-
-          <div className="home-cierre__imagen">
-            <Image
-              name="inicio-juntas"
-              alt="Varias manos unidas en círculo sosteniendo un pequeño brote verde"
-              sizes="(min-width: 1024px) 45vw, 100vw"
-            />
-          </div>
-        </div>
-      </section>
+      {/* --- Juntas contra la violencia machista --- */}
+      <PhotoFeatureBlock
+        title="Juntas contra la violencia machista"
+        image="inicio-juntas"
+        imageAlt="Varias manos unidas en círculo sosteniendo un pequeño brote verde"
+        paragraphs={[
+          'Creemos en el apoyo mutuo, la conciencia colectiva y el trabajo conjunto para erradicar la violencia machista.',
+        ]}
+        reversed
+      />
     </>
   );
 };

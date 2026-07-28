@@ -1,0 +1,137 @@
+.photo-feature {
+  @include seccion;
+  position: relative;
+  background-color: $color-fondo-alt;
+  // Recorta el blob contra el borde de la sección
+  overflow: hidden;
+
+  // --- Capa de fondo ---
+
+  // Blob orgánico asomando por la esquina inferior derecha. Va con los ocho
+  // valores de border-radius, que son porcentajes y escalan con el elemento;
+  // un clip-path en píxeles se descuadraría al cambiar el ancho.
+  &__blob {
+    position: absolute;
+    right: -9rem;
+    bottom: -11rem;
+    width: 30rem;
+    height: 26rem;
+    background-color: rgba($color-morado-oscuro, 0.42);
+    border-radius: 58% 42% 39% 61% / 47% 55% 45% 53%;
+    pointer-events: none;
+
+    @include desktop {
+      right: -12rem;
+      bottom: -14rem;
+      width: 44rem;
+      height: 38rem;
+    }
+  }
+
+  // --- Rejilla ---
+
+  &__contenido {
+    position: relative;
+    z-index: $z-contenido;
+    display: grid;
+    gap: $espaciado-xxl;
+    align-items: center;
+
+    @include desktop {
+      // La foto se lleva más columna que el texto: es la pieza con más peso
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: $espaciado-seccion;
+    }
+  }
+
+  // --- Foto ---
+
+  &__media {
+    position: relative;
+  }
+
+  // Rectángulo de color, algo mayor que la foto y girado al revés que ella,
+  // de modo que asoma por el lado superior izquierdo
+  &__respaldo {
+    position: absolute;
+    inset: -2.4rem 1.6rem 1.6rem -2.4rem;
+    background-color: $color-acento;
+    border-radius: 0.8rem;
+    transform: rotate(-3deg);
+
+    @include desktop {
+      inset: -3.2rem 2.4rem 2.4rem -3.2rem;
+    }
+  }
+
+  &__imagen {
+    position: relative;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    transform: rotate(2deg);
+    box-shadow: $sombra-fuerte;
+
+    img,
+    video {
+      @include imagen-cubierta;
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  // --- Texto ---
+
+  &__texto {
+    // No se estira a todo el ancho disponible aunque sobre sitio
+    max-width: 42rem;
+  }
+
+  &__titulo {
+    font-family: $fuente-titulos;
+    // Zilla Slab llega hasta 700; pedir 900 haría que el navegador engordara
+    // el trazo por su cuenta y saldría emborronado
+    font-weight: $peso-negrita;
+    font-size: 2.2rem;
+    line-height: 1.15;
+    color: $color-primario;
+    // Ancho corto a propósito: parte el título en dos líneas
+    max-width: 14ch;
+    margin-bottom: $espaciado-lg;
+
+    @include desktop {
+      font-size: 2.6rem;
+    }
+  }
+
+  &__texto p {
+    @include texto($tamano-texto-movil, $tamano-texto);
+    color: $color-texto-suave;
+  }
+
+  &__texto p + p {
+    margin-top: $espaciado-md;
+  }
+
+  // --- Variante con la foto a la derecha ---
+
+  &--invertido {
+    .photo-feature__media {
+      @include desktop {
+        order: 2;
+      }
+    }
+
+    // El rectángulo asoma por el lado contrario, para que no quede simétrico
+    .photo-feature__respaldo {
+      inset: -2.4rem -2.4rem 1.6rem 1.6rem;
+      transform: rotate(3deg);
+
+      @include desktop {
+        inset: -3.2rem -3.2rem 2.4rem 2.4rem;
+      }
+    }
+
+    .photo-feature__imagen {
+      transform: rotate(-2deg);
+    }
+  }
+}

@@ -310,86 +310,117 @@
 }
 
 // ---------------------------------------------------------------------------
-// Bloque de imagen y texto
+// Nuestro día a día
+// Ajustes propios sobre PhotoFeatureBlock, para que no salga igual que
+// "Juntas contra la violencia machista".
 // ---------------------------------------------------------------------------
 
-.home-bloque {
-  @include seccion;
+// Selector doble a propósito. `.photo-feature` fija su padding dentro de un
+// @include desktop, y con un solo nombre de clase ambas reglas empatan en
+// especificidad: gana la que aparezca después en el CSS final, que no se
+// controla desde aquí. Con `.photo-feature.home-dia-a-dia` la sobrescritura
+// siempre pesa más.
+.photo-feature.home-dia-a-dia {
+  // Sin aire por abajo: enlaza directamente con la sección siguiente.
+  // Arriba sí respira, y algo más que el resto de secciones.
+  padding-top: $espaciado-xxl;
+  padding-bottom: 0;
 
-  &__contenido {
-    display: grid;
-    gap: $espaciado-xl;
-    align-items: center;
+  @include desktop {
+    padding-top: 14rem;
+    padding-bottom: 0;
+  }
+
+  // Formato panorámico, que es como está grabado el vídeo
+  .photo-feature__imagen video,
+  .photo-feature__imagen img {
+    aspect-ratio: 16 / 9;
+  }
+
+  // El texto arranca arriba en lugar de centrarse con la foto
+  .photo-feature__contenido {
+    align-items: start;
 
     @include desktop {
-      grid-template-columns: 1fr 1fr;
-      gap: $espaciado-xxl;
+      // Las dos columnas a partes iguales: aquí el multimedia no domina
+      grid-template-columns: 1.2fr 0.8fr;
     }
   }
 
-  &__imagen {
-    border-radius: $radio-md;
-    overflow: hidden;
-
-    img {
-      @include imagen-cubierta;
-      aspect-ratio: 4 / 3;
+  // Multimedia más contenido que en el bloque genérico
+  .photo-feature__media {
+    @include desktop {
+      max-width: 68rem;
     }
   }
 
-  &__titulo {
-    @include titular-compacto($tamano-h2-movil, 4.8rem);
-    color: $color-primario;
-    margin-bottom: $espaciado-md;
+  // El multimedia va recto; el rectángulo naranja de detrás mantiene su giro
+  .photo-feature__imagen {
+    transform: none;
   }
 
-  &__texto {
-    p {
-      @include texto($tamano-texto-movil, $tamano-texto-grande);
-      color: $color-texto-suave;
-    }
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Bloque de cierre
-// ---------------------------------------------------------------------------
-
-.home-cierre {
-  @include seccion;
-  background-color: $color-fondo-alt;
-
-  &__contenido {
-    display: grid;
-    gap: $espaciado-xl;
-    align-items: center;
+  // El texto va centrado sobre el blob y algo desplazado a la derecha,
+  // para quedar alineado con el centro de la mancha y no con su columna
+  // El texto baja respecto al vídeo. Si se cambia este valor hay que mover
+  // el `top` del blob la misma cantidad, o el texto se saldrá de la mancha.
+  .photo-feature__texto {
+    text-align: start;
+    margin-inline: auto;
+    padding-top: 1rem;
 
     @include desktop {
-      grid-template-columns: 1fr 0.9fr;
-      gap: $espaciado-xxl;
+      position: relative;
+      left: 4rem;
+      padding-top: 8rem;
     }
   }
 
-  &__titulo {
-    @include titular-compacto($tamano-h2-movil, 5.6rem);
-    color: $color-primario;
-    margin-bottom: $espaciado-lg;
-  }
+  // Va sobre el blob, así que en blanco
+  .photo-feature__titulo {
+    font-size: 3rem;
+    max-width: 16ch;
+    margin-inline: auto;
+    color: $color-blanco;
 
-  &__texto {
-    p {
-      @include texto($tamano-texto-movil, $tamano-texto-grande);
-      color: $color-texto-suave;
+    @include desktop {
+      font-size: 4.4rem;
     }
   }
 
-  &__imagen {
-    border-radius: $radio-md;
-    overflow: hidden;
+  .photo-feature__texto p {
+    color: rgba($color-blanco, 0.92);
+  }
 
-    img {
-      @include imagen-cubierta;
-      aspect-ratio: 4 / 3;
+  // Blob ancho y opaco: hace de fondo de la columna de texto.
+  //
+  // La proporción va fijada con aspect-ratio y no con top + bottom. Atado a
+  // los dos bordes, su alto dependía de lo que midiera la sección: al crecer
+  // el vídeo o el padding se estiraba, los porcentajes del border-radius se
+  // repartían sobre otra proporción y la silueta se deformaba. Así la forma
+  // es siempre la misma y solo cambia de tamaño.
+  //
+  // Se ancla arriba para quedar detrás de todo el texto: si el título asomara
+  // por encima, saldría en blanco sobre crema y no se leería. Lo que sobresale
+  // por abajo lo recorta el overflow de la sección.
+  // Cuanto más grande es, más silueta queda fuera del área visible y menos
+  // se aprecia la forma: acaba leyéndose como un rectángulo con una esquina
+  // curva. Se dimensiona para que quepan dentro al menos el lado izquierdo y
+  // el inferior, que son los que dan a entender que es una mancha.
+  .photo-feature__blob {
+    background-color: rgba($color-morado-oscuro, 0.92);
+    right: -6rem;
+    top: 2rem;
+    bottom: auto;
+    width: 46rem;
+    height: auto;
+    // Más de 1 = más ancho que alto. Subirlo lo achata más.
+    aspect-ratio: 1.9;
+
+    @include desktop {
+      right: -7rem;
+      // Acompaña al padding-top del texto: los dos bajan a la vez
+      top: 10rem;
+      width: 72rem;
     }
   }
 }

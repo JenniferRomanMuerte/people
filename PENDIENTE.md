@@ -66,40 +66,63 @@ usuarias como algo que elimina el rastro.
 
 ---
 
-## 4. Sustituciones técnicas
+## 4. Vídeos
 
-**Tipografía de los títulos.** El original usa American Typewriter, propiedad de
-ITC, que no puede servirse en web sin licencia. Se ha sustituido por **Zilla
-Slab**. El cuerpo de texto sigue en **Open Sans**, que sí es la original, y los
-textos pequeños en **Poppins**, también la original.
+El vídeo de «Nuestro día a día» llegó en 1080p y 114 MB. Se comprimió a 720p,
+**7,1 MB**, con el índice al principio del archivo para que empiece a
+reproducirse sin esperar a la descarga completa. En la página se ve a unos
+440px de ancho, así que 720p va sobrado.
 
-Para cambiar la sustituta basta con tocar una línea en
-`src/styles/abstracts/_variables.scss`:
+- Servido: `public/videos/NuestroDia.mp4` — este sí va al repositorio
+- Original: `assets-source/videos/` — fuera del repositorio, GitHub rechaza
+  archivos de más de 100 MB
 
-```scss
-$fuente-titulos: 'Zilla Slab', 'Bitter', Georgia, serif;
+Para comprimir otro vídeo, con `ffmpeg-static` ya instalado:
+
+```bash
+FF=$(node -e "process.stdout.write(require('ffmpeg-static'))")
+"$FF" -i entrada.mp4 -vf "scale=1280:-2" -c:v libx264 -crf 30 -preset slow \
+  -c:a aac -b:a 96k -movflags +faststart salida.mp4
 ```
 
-**Paleta y tamaños.** No están aproximados a ojo: se extrajeron de las variables
-CSS que Wix genera en el HTML.
+`crf` controla la calidad: subirlo comprime más, bajarlo mejora la imagen.
+
+El reproductor lleva controles y no arranca solo. Un vídeo que se reproduce
+sin permiso molesta, y más si contiene testimonios: cada persona decide cuándo
+verlo. Se puede cambiar a ambiental (mudo, en bucle, automático) si interesa.
+
+## 5. Sustituciones técnicas
+
+**Tipografías.** El original usaba American Typewriter, propiedad de ITC, que no
+puede servirse en web sin licencia. Se sustituye por **Zilla Slab**. El cuerpo de
+texto va en **Open Sans**, la original. El rediseño añade **Space Grotesk** para
+interfaz y **Caveat** para citas y notas manuscritas.
+
+Todas van **autoalojadas** con `@fontsource`, no desde el CDN de Google. Cargarlas
+desde Google enviaría la IP de cada visitante a un tercero y contradiría la
+política de cookies, que declara que la web no hace peticiones externas.
+
+Para cambiar cualquiera basta con tocar `src/styles/abstracts/_variables.scss`.
+
+**Paleta.** La del rediseño, sobre los morados de marca extraídos del original:
 
 | Color | Uso |
 |---|---|
-| `#47274D` | Texto y títulos |
-| `#7F468A` | Acciones y acentos |
-| `#755D7A` | Texto secundario |
-| `#B887C2` | Morado claro |
-| `#E7D7EB` | Bordes y separadores |
-| `#FCF4FB` | Fondo alterno |
-| `#FFF6EA` | Crema |
-| `#FFD3A1` | Acento cálido |
+| `#47274D` | Morado oscuro — texto, títulos y bloques fuertes |
+| `#7F468A` | Morado — acciones secundarias |
+| `#755D7A` | Morado medio — texto suave |
+| `#B887C2` | Morado claro — acentos puntuales |
+| `#FF9E45` | Naranja — acento principal |
+| `#FDF7ED` | Crema — fondo alterno |
+| `#241226` | Morado noche — franjas oscuras |
+| `#D1C9D3` | Gris — bordes y separadores |
 
 **Icono de Instagram.** Era una imagen PNG; ahora es un SVG en línea. Pesa menos,
 se ve nítido en cualquier pantalla y hereda el color del texto.
 
 ---
 
-## 5. Sin confirmar
+## 6. Sin confirmar
 
 - **Dos direcciones distintas.** El pie dice *C/ Nicolás Usera, 27 · Espacio
   Oculto (Madrid)* y los textos legales dan como domicilio social *Calle Menorca
@@ -114,7 +137,7 @@ se ve nítido en cualquier pantalla y hereda el color del texto.
 
 ---
 
-## 6. Recomendaciones no aplicadas
+## 7. Recomendaciones no aplicadas
 
 Se anotan sin implementar, para no añadir contenido que no estaba en el original.
 
@@ -129,7 +152,7 @@ Se anotan sin implementar, para no añadir contenido que no estaba en el origina
 
 ---
 
-## 7. Verificado
+## 8. Verificado
 
 - 42 tests en verde (validación, formulario y endpoint)
 - Las 9 rutas responden con su propio HTML prerenderizado
