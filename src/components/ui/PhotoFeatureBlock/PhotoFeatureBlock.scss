@@ -114,6 +114,15 @@
   // --- Variante con la foto a la derecha ---
 
   &--invertido {
+    // Al reordenar, la foto pasa a ocupar la segunda columna. Si las
+    // proporciones no se invierten también, acaba en la columna estrecha y
+    // sale más pequeña que en el bloque normal sin que se vea el motivo.
+    .photo-feature__contenido {
+      @include desktop {
+        grid-template-columns: 0.7fr 1.3fr;
+      }
+    }
+
     .photo-feature__media {
       @include desktop {
         order: 2;

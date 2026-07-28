@@ -31,37 +31,25 @@ const Footer = () => {
 
       <div className="contenedor footer__principal">
         <div className="footer__marca">
-          <Image name="logo-people" alt={`${SITE_INFO.name}, ${SITE_INFO.tagline}`} sizes="160px" />
+          <Image name="logo-simbolo" alt="" sizes="72px" className="footer__logo" />
+          <p className="footer__nombre">{SITE_INFO.name}</p>
+          <p className="footer__lema">{SITE_INFO.tagline}</p>
         </div>
 
         <div className="footer__contacto">
           <h2 className="footer__titulo">Contacto</h2>
           <ul className="footer__datos">
-            <li className="footer__dato">
-              <span className="footer__icono" aria-hidden="true">
-                📧
-              </span>
+            <li>
               <a className="footer__enlace" href={`mailto:${SITE_INFO.email}`}>
                 {SITE_INFO.email}
               </a>
             </li>
-            <li className="footer__dato">
-              <span className="footer__icono" aria-hidden="true">
-                🤝
-              </span>
-              <span>
-                Voluntariado:{' '}
-                <a className="footer__enlace" href={`mailto:${SITE_INFO.volunteerEmail}`}>
-                  {SITE_INFO.volunteerEmail}
-                </a>
-              </span>
+            <li>
+              <a className="footer__enlace" href={`mailto:${SITE_INFO.volunteerEmail}`}>
+                {SITE_INFO.volunteerEmail}
+              </a>
             </li>
-            <li className="footer__dato">
-              <span className="footer__icono" aria-hidden="true">
-                📍
-              </span>
-              <span>{SITE_INFO.address}</span>
-            </li>
+            <li>{SITE_INFO.address}</li>
           </ul>
 
           <a
@@ -76,11 +64,11 @@ const Footer = () => {
         </div>
 
         <nav className="footer__legal" aria-label="Enlaces legales">
-          <h2 className="footer__titulo">Información legal</h2>
+          <h2 className="footer__titulo">Legal</h2>
           <ul className="footer__lista-legal">
             {LEGAL_NAV.map(({ label, path }) => (
               <li key={path}>
-                <Link className="footer__enlace" to={path}>
+                <Link className="footer__enlace-legal" to={path}>
                   {label}
                 </Link>
               </li>

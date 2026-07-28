@@ -9,7 +9,8 @@
   padding-block: $espaciado-xxl;
 
   @include desktop {
-    padding-block: $espaciado-seccion;
+    padding-top: $espaciado-seccion;
+    padding-bottom: 0;
   }
 
   &__contenido {
@@ -421,6 +422,57 @@
       // Acompaña al padding-top del texto: los dos bajan a la vez
       top: 10rem;
       width: 72rem;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Juntas contra la violencia machista
+// Mismo componente que la sección anterior, pero con la foto con más peso y
+// el titular al tamaño de "Nuestro día a día".
+// ---------------------------------------------------------------------------
+
+.photo-feature.home-juntas {
+  // El blob asoma hacia la sección de arriba en vez de cortarse contra el
+  // borde. No vale con quitar el overflow: el blob sale por la izquierda con
+  // un margen negativo y provocaría scroll horizontal en toda la página.
+  // `clip` en horizontal lo sigue recortando, y a diferencia de `hidden`
+  // permite que el otro eje siga siendo visible.
+  overflow-x: clip;
+  overflow-y: visible;
+
+  .photo-feature__contenido {
+    @include desktop {
+      // Este bloque va invertido: la foto ocupa la SEGUNDA columna, así que
+      // el valor grande va en segundo lugar
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: $espaciado-xxl;
+    }
+  }
+
+  // Mismo tamaño que el titular de "Nuestro día a día"
+  .photo-feature__titulo {
+    font-size: 3rem;
+    max-width: 16ch;
+
+    @include desktop {
+      font-size: 4.4rem;
+    }
+  }
+
+  // El blob se va a la esquina superior izquierda, lejos de la foto, y queda
+  // muy tenue: aquí no hace de fondo del texto, solo acompaña.
+  // Hay que anular right y bottom, que es como lo ancla el componente.
+  .photo-feature__blob {
+    right: auto;
+    bottom: auto;
+    left: -9rem;
+    top: -8rem;
+    background-color: rgba($color-morado-oscuro, 0.12);
+
+    @include desktop {
+      left: -12rem;
+      top: -11rem;
     }
   }
 }

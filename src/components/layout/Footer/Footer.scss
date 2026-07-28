@@ -76,54 +76,87 @@
   &__principal {
     display: grid;
     gap: $espaciado-xl;
-    padding-block: $espaciado-xl;
+    padding-block: $espaciado-xxl;
 
     @include tablet {
-      grid-template-columns: auto 1fr auto;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: $espaciado-xxl;
       align-items: start;
     }
   }
 
+  // --- Marca ---
+
+  // Logo, nombre y lema centrados entre sí, como un bloque.
+  // El max-width recorta el ancho del bloque para que quede arrimado a la
+  // izquierda de su columna: sin él ocuparía toda la columna y el contenido
+  // centrado se iría al medio del pie.
   &__marca {
-    max-width: 14rem;
+    text-align: center;
+    max-width: 24rem;
   }
 
+  &__logo {
+    // Un elemento de ancho fijo no lo centra text-align: necesita margen auto
+    margin-inline: auto;
+    width: 10.4rem;
+    height: 10.4rem;
+    margin-bottom: $espaciado-lg;
+    
+  }
+
+  &__nombre {
+    font-family: $fuente-titulos;
+    font-size: 2.8rem;
+    font-weight: $peso-negrita;
+    line-height: 1.1;
+    color: $color-primario;
+  }
+
+  &__lema {
+    font-size: $tamano-texto-movil;
+    line-height: 1.6;
+    color: $color-texto-suave;
+    margin-top: $espaciado-xs;
+  }
+
+  // --- Columnas de enlaces ---
+
   &__titulo {
-    font-family: $fuente-principal;
+    font-family: $fuente-titulos;
     font-size: $tamano-texto-pequeno;
     font-weight: $peso-negrita;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: $color-texto-suave;
-    margin-bottom: $espaciado-md;
+    letter-spacing: 0.1em;
+    color: $color-acento;
+    margin-bottom: $espaciado-lg;
   }
 
   &__datos {
     @include flex-columna;
-    gap: $espaciado-sm;
-  }
-
-  &__dato {
-    display: flex;
-    align-items: flex-start;
-    gap: $espaciado-sm;
+    gap: $espaciado-md;
     font-size: $tamano-texto-movil;
-    line-height: 1.6;
+    line-height: 1.5;
     color: $color-texto;
   }
 
-  &__icono {
-    flex-shrink: 0;
-  }
-
+  // Los correos no se subrayan: el propio texto ya dice que son direcciones
   &__enlace {
     color: $color-texto;
-    text-decoration: underline;
-    text-underline-offset: 0.3rem;
-    text-decoration-color: rgba($color-secundario, 0.4);
     transition: color $transicion-rapida;
     overflow-wrap: anywhere;
+
+    &:hover {
+      color: $color-secundario;
+    }
+  }
+
+  // Los legales sí, porque de otro modo no se distinguirían de un texto suelto
+  &__enlace-legal {
+    color: $color-texto;
+    text-decoration: underline;
+    text-underline-offset: 0.4rem;
+    transition: color $transicion-rapida;
 
     &:hover {
       color: $color-secundario;
@@ -149,19 +182,34 @@
     height: 2rem;
   }
 
+  // Desplazada un poco hacia la derecha dentro de su columna.
+  // Con `justify-self: end` se iba al extremo del pie, demasiado lejos.
+  &__legal {
+    @include tablet {
+      padding-left: $espaciado-xl;
+    }
+  }
+
   &__lista-legal {
     @include flex-columna;
-    gap: $espaciado-sm;
+    gap: $espaciado-md;
     font-size: $tamano-texto-movil;
   }
 
   // --- Créditos ---
 
   &__creditos {
-    border-top: 0.1rem solid $color-gris-borde;
+    background-color: $color-fondo-oscuro;
     padding-block: $espaciado-lg;
-    font-size: $tamano-texto-pequeno;
-    color: $color-texto-suave;
     text-align: center;
+
+    p {
+      font-family: $fuente-titulos;
+      font-size: $tamano-texto-pequeno;
+      font-weight: $peso-negrita;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: $color-morado-claro;
+    }
   }
 }

@@ -124,6 +124,7 @@ const HomePage = () => {
 
       {/* --- Juntas contra la violencia machista --- */}
       <PhotoFeatureBlock
+        className="home-juntas"
         title="Juntas contra la violencia machista"
         image="inicio-juntas"
         imageAlt="Varias manos unidas en círculo sosteniendo un pequeño brote verde"
