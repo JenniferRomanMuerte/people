@@ -21,12 +21,20 @@
 
     @include desktop {
       // Cada columna mide lo suyo: el texto lo que ocupa, la foto su ancho fijo.
-      grid-template-columns: max-content minmax(0, 46rem);
+      grid-template-columns: max-content minmax(0, 50rem);
       // Las dos columnas arrancan a la izquierda y el gap manda de verdad.
       // Lo que sobra queda a la derecha, que además es donde el círculo morado
       // necesita sitio para asomar sin que lo recorte el overflow.
       justify-content: start;
-      gap: 22rem;
+      gap: 16rem;
+    }
+  }
+
+  // Sube el bloque de texto (titular, lema y botón) sin descolocar la rejilla
+  &__texto {
+    @include desktop {
+      position: relative;
+      top: -3rem;
     }
   }
 
@@ -99,13 +107,38 @@
 
   &__imagen {
     position: relative;
-    border-radius: $radio-md;
     overflow: hidden;
-    box-shadow: $sombra-media;
+    // Sube solo la foto. El círculo y la pegatina cuelgan de __media, así que
+    // se quedan donde están; si esto fuera en __media subirían los tres.
+    top: -3rem;
+
+    // Silueta orgánica tipo blob.
+    //
+    // No se usa `clip-path: path()` porque ese trazado va en píxeles fijos: la
+    // forma no acompañaría al contenedor y se descuadraría en cuanto cambia el
+    // ancho. Con los ocho valores de border-radius se consigue la misma silueta
+    // curva e irregular, pero definida en porcentajes, así que escala sola.
+    border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
 
     img {
       @include imagen-cubierta;
       aspect-ratio: 4 / 3;
+    }
+
+    // Tinte en diagonal sobre la foto: morado en una esquina, naranja en la
+    // opuesta. Va en multiply, que asienta la imagen sobre el fondo; overlay
+    // quemaba los blancos del cielo de la fotografía.
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba($color-morado-oscuro, 0.35) 0%,
+        rgba($color-naranja, 0.25) 100%
+      );
+      mix-blend-mode: multiply;
+      pointer-events: none;
     }
   }
 
@@ -205,8 +238,31 @@
 
 .home-cita {
   @include seccion;
+  position: relative;
   background-color: $color-primario;
   text-align: center;
+  // Más ajustada que el resto de secciones: es una franja de acento, no un
+  // bloque de contenido
+  padding-block: $espaciado-lg;
+
+  @include desktop {
+    padding-block: $espaciado-xl;
+  }
+
+  // Corte rasgado del borde inferior.
+  // Cuelga por debajo de la sección y se pinta sobre el fondo de la siguiente,
+  // así que el bloque de color parece terminar roto en lugar de en línea recta.
+  &__rasgado {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    z-index: $z-contenido;
+    // Tiene que ser el mismo color que el fondo de arriba. Si se cambia el
+    // `background-color` de esta sección, hay que cambiar también este.
+    --torn-color: #{$color-primario};
+    --torn-height: 2.2rem;
+  }
 
   &__bloque {
     display: inline-block;

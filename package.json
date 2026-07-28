@@ -6,6 +6,7 @@
   "description": "Web de People, acompañando a la mujer maltratada",
   "scripts": {
     "dev": "vite",
+    "dev:host": "vite --host",
     "build": "tsc -b && vite-react-ssg build && node scripts/generate-sitemap.js",
     "preview": "vite preview",
     "test": "vitest run",

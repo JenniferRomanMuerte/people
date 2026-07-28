@@ -30,9 +30,12 @@ export default defineConfig({
     port: 5173,
     // Falla en vez de saltar a otro puerto: así la URL siempre es la misma
     strictPort: true,
-    // Expone el servidor en la red local para poder abrir la web desde el móvil
-    // y comprobar el diseño responsive en un dispositivo real
-    host: true,
+    // Solo escucha en local a propósito. Con `host: true` Vite se abre en
+    // 0.0.0.0 y, si hay WSL en marcha, Windows levanta un wslrelay sobre ese
+    // puerto que se cuela en localhost:5173: el navegador deja de hablar con
+    // Vite, la recarga en caliente se rompe y no se arregla recargando.
+    // Para probar desde el móvil está `npm run dev:host`.
+    host: 'localhost',
   },
 
   build: {

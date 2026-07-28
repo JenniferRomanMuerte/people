@@ -3,6 +3,7 @@ import Button from '@/components/ui/Button/Button';
 import Image from '@/components/ui/Image/Image';
 import StickyNote from '@/components/ui/StickyNote/StickyNote';
 import PaperFigures from '@/components/ui/PaperFigures/PaperFigures';
+import TornEdge from '@/components/ui/TornEdge/TornEdge';
 import './HomePage.scss';
 
 const HomePage = () => {
@@ -99,6 +100,9 @@ const HomePage = () => {
             </footer>
           </blockquote>
         </div>
+
+        {/* Corte rasgado hacia la sección siguiente */}
+        <TornEdge className="home-cita__rasgado" layers={3} />
       </section>
 
       {/* --- Nuestro día a día --- */}
