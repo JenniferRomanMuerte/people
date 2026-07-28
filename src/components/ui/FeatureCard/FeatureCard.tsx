@@ -14,7 +14,9 @@ interface Props {
 
 const FeatureCard = ({ title, subtitle, paragraphs, image, imageAlt = '' }: Props) => {
   return (
-    <article className="feature-card">
+    // Sin ilustración el reparto en rejilla no aporta nada, así que la tarjeta
+    // se marca para que su contenido fluya en bloque
+    <article className={`feature-card${image ? '' : ' feature-card--sin-ilustracion'}`}>
       {/* Ilustración a la izquierda; título y texto a la derecha.
           En pantallas estrechas se apilan. */}
       <div className="feature-card__cuerpo">

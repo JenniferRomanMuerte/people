@@ -16,21 +16,36 @@
 
   // --- Fila de ilustración y contenido ---
 
+  // La rejilla coloca las tres piezas por nombre. En móvil la ilustración y el
+  // título comparten primera fila y el texto pasa debajo a todo el ancho; a
+  // partir de tablet la ilustración ocupa las dos filas de la izquierda.
   &__cuerpo {
-    // Apilados en móvil para que no se aprieten
-    @include flex-columna;
-    gap: $espaciado-lg;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      'ilustracion titulo'
+      'texto texto';
+    column-gap: $espaciado-lg;
+    row-gap: $espaciado-md;
+    align-items: center;
 
     @include tablet {
-      flex-direction: row;
-      align-items: center;
-      gap: $espaciado-xl;
+      grid-template-areas:
+        'ilustracion titulo'
+        'ilustracion texto';
+      column-gap: $espaciado-xl;
     }
   }
 
+  // Deja que el título y el texto sean piezas directas de la rejilla, para
+  // poder colocarlos por separado sin que el contenedor los agrupe
+  &__contenido {
+    display: contents;
+  }
+
   &__ilustracion {
+    grid-area: ilustracion;
     // Ancho fijo: no se estira aunque el texto de al lado sea largo
-    flex-shrink: 0;
     width: 12rem;
     padding: $espaciado-sm;
     background-color: var(--ilustracion-fondo);
@@ -50,16 +65,13 @@
     }
   }
 
-  // Columna de la derecha: título y texto
-  &__contenido {
-    flex: 1;
-  }
-
   &__titulo {
+    grid-area: titulo;
     @include titulo(1.8rem, 2rem);
     font-weight: $peso-negrita;
     color: $color-primario;
-    margin-bottom: $espaciado-sm;
+    // Centrado con la ilustración, no pegado al texto de abajo
+    align-self: center;
   }
 
   &__subtitulo {
@@ -69,7 +81,26 @@
     margin-top: $espaciado-xs;
   }
 
+  // Sin ilustración no hay nada que repartir: el contenido fluye en bloque
+  &--sin-ilustracion &__cuerpo {
+    display: block;
+  }
+
+  &--sin-ilustracion &__contenido {
+    display: block;
+  }
+
+  &--sin-ilustracion &__titulo {
+    margin-bottom: $espaciado-xs;
+  }
+
+  &--sin-ilustracion &__texto {
+    margin-top: $espaciado-md;
+  }
+
   &__texto {
+    grid-area: texto;
+    align-self: start;
     color: $color-texto-suave;
 
     p {
