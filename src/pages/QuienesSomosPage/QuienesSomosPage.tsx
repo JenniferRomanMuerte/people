@@ -1,6 +1,7 @@
 import Seo from '@/components/ui/Seo/Seo';
-import PageHero from '@/components/ui/PageHero/PageHero';
+import Image from '@/components/ui/Image/Image';
 import FeatureCard from '@/components/ui/FeatureCard/FeatureCard';
+import DottedPath from '@/components/ui/DottedPath/DottedPath';
 import './QuienesSomosPage.scss';
 
 const QuienesSomosPage = () => {
@@ -12,18 +13,44 @@ const QuienesSomosPage = () => {
         path="/quienes-somos"
       />
 
-      <PageHero
-        title="¿Quiénes somos?"
-        subtitle="Acompañamos procesos, respetando tiempos y decisiones."
-        image="quienes-somos-hero"
-        imageAlt="Dos mujeres conversando con una taza de café sentadas a una mesa"
-      >
-        <p>
-          En People desarrollamos un modelo de acompañamiento voluntario centrado en las necesidades
-          reales de cada mujer.
-        </p>
-        <p>Partimos de su situación concreta y construimos, junto a ella, un camino posible.</p>
-      </PageHero>
+      {/* --- Portada partida en dos --- */}
+      <header className="quienes-hero">
+        <div className="quienes-hero__texto">
+          <h1 className="quienes-hero__titulo">¿Quiénes somos?</h1>
+          <p className="quienes-hero__lema">
+            Acompañamos procesos, respetando tiempos y decisiones.
+          </p>
+        </div>
+
+        <div className="quienes-hero__media">
+          <div className="quienes-hero__imagen">
+            <Image
+              name="quienes-somos-hero"
+              alt="Dos mujeres tomando café sentadas a una mesa de madera, vistas desde arriba"
+              sizes="(min-width: 1024px) 55vw, 92vw"
+              priority
+            />
+          </div>
+        </div>
+      </header>
+
+      {/* --- Introducción --- */}
+      <section className="quienes-intro">
+        <span className="quienes-intro__blob" aria-hidden="true" />
+
+        <div className="contenedor quienes-intro__contenido">
+          <p>
+            En People desarrollamos un modelo de acompañamiento voluntario centrado en las
+            necesidades reales de cada mujer.
+          </p>
+          <p>
+            Partimos de su situación concreta y construimos, junto a ella, un{' '}
+            <strong>camino posible</strong>.
+          </p>
+
+          <DottedPath className="quienes-intro__camino" />
+        </div>
+      </section>
 
       {/* --- Punto de partida --- */}
       <section className="quienes-somos-partida">

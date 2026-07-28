@@ -1,3 +1,156 @@
+// ---------------------------------------------------------------------------
+// Portada partida en dos: texto sobre crema, foto sobre morado
+// ---------------------------------------------------------------------------
+
+.quienes-hero {
+  display: grid;
+
+  @include desktop {
+    grid-template-columns: 45% 55%;
+    min-height: 40rem;
+  }
+
+  &__texto {
+    @include flex-columna;
+    justify-content: center;
+    background-color: $color-acento;
+    padding: $espaciado-xxl $espaciado-lg;
+
+    @include desktop {
+      // El texto arranca donde arrancaría el contenedor del resto de la
+      // página, para que no quede descolgado respecto a las secciones de abajo
+      padding-block: $espaciado-xxl;
+      padding-right: $espaciado-xl;
+      padding-left: max(
+        #{$espaciado-xl},
+        calc((100vw - #{$ancho-contenedor}) / 2 + #{$espaciado-xl})
+      );
+    }
+  }
+
+  &__titulo {
+    @include titular-compacto(4rem, 6.4rem);
+    color: $color-primario;
+    // Ancho corto a propósito: parte el titular en dos líneas
+    max-width: 11ch;
+  }
+
+  &__lema {
+    @include manuscrita(2.2rem, 3rem);
+    // Morado oscuro: el claro sobre el naranja se quedaba en 1,4:1 de
+    // contraste y la frase no se leía
+    color: $color-primario;
+    margin-top: $espaciado-lg;
+    max-width: 24ch;
+  }
+
+  &__media {
+    @include flex-center;
+    background-color: $color-primario;
+    padding: $espaciado-lg;
+
+    @include desktop {
+      // El morado invade el naranja con un corte en diagonal: recto arriba y
+      // metido hacia la izquierda abajo, lo que deja un trapecio entre ambos.
+      // El margen negativo lo desplaza y el clip-path dibuja el corte.
+      margin-left: -8rem;
+      clip-path: polygon(8rem 0, 100% 0, 100% 100%, 0 100%);
+      padding: $espaciado-xl $espaciado-xl $espaciado-xl 11rem;
+    }
+  }
+
+  // Óvalo irregular, no una elipse perfecta: los cuatro radios van
+  // desparejados para que la silueta se lea orgánica.
+  // Ocupa todo el ancho disponible; con un tope pequeño quedaba flotando en
+  // medio del naranja y la forma dejaba de apreciarse.
+  &__imagen {
+    width: 100%;
+    max-width: 62rem;
+    overflow: hidden;
+    // Silueta volteada en vertical: los radios de las esquinas de abajo pasan
+    // arriba y viceversa. En los ocho valores el orden es
+    // superior-izquierda, superior-derecha, inferior-derecha, inferior-izquierda,
+    // así que voltear es intercambiar el primer par con el segundo.
+    border-radius: 48% 52% 42% 38% / 56% 58% 40% 44%;
+
+    img {
+      @include imagen-cubierta;
+      // El original es 3:2 (1.5). En 16:9 (1.78) se recortaba casi un 16% de
+      // alto y se perdía media escena; 5:3 (1.67) es apaisado pero deja fuera
+      // bastante menos.
+      aspect-ratio: 5 / 3;
+      // Lo poco que sobra se quita de abajo, que es solo mesa
+      object-position: center 38%;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Introducción
+// ---------------------------------------------------------------------------
+
+.quienes-intro {
+  @include seccion;
+  position: relative;
+  background-color: $color-fondo-alt;
+  overflow: hidden;
+
+  // Mancha lila que entra por la esquina superior izquierda
+  &__blob {
+    position: absolute;
+    left: desde-contenedor(20rem);
+    top: -14rem;
+    width: 34rem;
+    height: 30rem;
+    background-color: rgba($color-morado-claro, 0.28);
+    border-radius: 48% 52% 58% 42% / 54% 46% 54% 46%;
+    pointer-events: none;
+
+    @include desktop {
+      left: desde-contenedor(24rem);
+      top: -18rem;
+      width: 46rem;
+      height: 40rem;
+    }
+  }
+
+  &__contenido {
+    position: relative;
+    z-index: $z-contenido;
+  }
+
+  p {
+    @include texto($tamano-texto-movil, $tamano-texto-grande);
+    color: $color-texto-suave;
+    max-width: 82ch;
+  }
+
+  p + p {
+    margin-top: $espaciado-xl;
+  }
+
+  strong {
+    color: $color-primario;
+    font-weight: $peso-negrita;
+  }
+
+  // El camino arranca donde acaba el texto y se va hacia la derecha
+  &__camino {
+    max-width: 34rem;
+    margin-top: $espaciado-lg;
+    margin-left: auto;
+
+    @include desktop {
+      // Más ancho y pegado al borde derecho, para llenar el hueco que deja
+      // el texto al no llegar hasta el final
+      max-width: 54rem;
+      margin-right: 0;
+      // Sube y se solapa con la altura del último párrafo
+      margin-top: -3rem;
+    }
+  }
+}
+
 .quienes-somos-partida {
   @include seccion;
   background-color: $color-fondo-alt;

@@ -1,0 +1,19 @@
+.dotted-path {
+  display: block;
+  width: 100%;
+  height: auto;
+
+  &__linea {
+    stroke: $color-secundario;
+  }
+
+  // Punto de salida
+  &__inicio {
+    fill: $color-primario;
+  }
+
+  // Punto de llegada
+  &__fin {
+    fill: $color-acento;
+  }
+}

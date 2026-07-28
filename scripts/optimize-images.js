@@ -45,7 +45,7 @@ const IMAGENES = [
   { origen: '8e56e1_0f6ff1d7540643f5bc7882f109f54b01~mv2.webp', nombre: 'inicio-juntas', tipo: 'contenido' },
 
   // --- Quiénes somos ---
-  { origen: '8e56e1_46c2b5258e0444b089bd5de1ad080c1c~mv2.webp', nombre: 'quienes-somos-hero', tipo: 'hero' },
+  { origen: 'QuienesSomosHero.webp', nombre: 'quienes-somos-hero', tipo: 'hero' },
   { origen: '8e56e1_e43c0ae193304d21932118dc2e0d9b51~mv2.webp', nombre: 'fondo-papel', tipo: 'hero' },
   { origen: '8e56e1_1776adcd9eeb4e5f932a6d424af05a46~mv2.webp', nombre: 'dimension-afectiva', tipo: 'ilustracion' },
   { origen: '8e56e1_98002548103a488bb74c6ffcd8198be6~mv2.webp', nombre: 'plan-personalizado', tipo: 'ilustracion' },
