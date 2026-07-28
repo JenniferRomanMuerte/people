@@ -145,28 +145,53 @@
       // el texto al no llegar hasta el final
       max-width: 54rem;
       margin-right: 0;
-      // Sube y se solapa con la altura del último párrafo
-      margin-top: -3rem;
+      margin-top: $espaciado-md;
     }
   }
 }
 
 .quienes-somos-partida {
   @include seccion;
-  background-color: $color-fondo-alt;
+  position: relative;
+  background-color: $color-primario;
   text-align: center;
 
+  // Corte rasgado que remata la sección de arriba, con su color.
+  // Sube por encima del borde para que el desgarro no muerda tanto el morado.
+  &__rasgado {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -1.2rem;
+    --torn-color: #{$color-fondo-alt};
+    --torn-height: 2.2rem;
+  }
+
   &__titulo {
-    @include titulo($tamano-h2-movil, $tamano-h2);
-    color: $color-primario;
+    @include titular-compacto(2.4rem, 4rem);
+    color: $color-blanco;
+    // Positivo para abrir las letras; el mixin las junta por defecto
+    letter-spacing: 0.1em;
+    // Sin tope de ancho: cabe en una sola línea
+    max-width: none;
+    text-wrap: nowrap;
+  }
+
+  // Rayita de acento bajo el titular
+  &__separador {
+    display: block;
+    width: 6rem;
+    height: 0.3rem;
+    background-color: $color-acento;
+    margin: $espaciado-lg auto 0;
   }
 
   &__texto {
-    margin-top: $espaciado-lg;
-    color: $color-texto-suave;
+    margin-top: $espaciado-xl;
+    color: rgba($color-blanco, 0.9);
 
     p {
-      @include texto($tamano-texto-movil, $tamano-texto-grande);
+      @include texto($tamano-texto-movil, $tamano-texto);
     }
 
     p + p {

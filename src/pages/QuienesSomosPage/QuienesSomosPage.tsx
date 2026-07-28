@@ -2,6 +2,7 @@ import Seo from '@/components/ui/Seo/Seo';
 import Image from '@/components/ui/Image/Image';
 import FeatureCard from '@/components/ui/FeatureCard/FeatureCard';
 import DottedPath from '@/components/ui/DottedPath/DottedPath';
+import TornEdge from '@/components/ui/TornEdge/TornEdge';
 import './QuienesSomosPage.scss';
 
 const QuienesSomosPage = () => {
@@ -54,8 +55,17 @@ const QuienesSomosPage = () => {
 
       {/* --- Punto de partida --- */}
       <section className="quienes-somos-partida">
+        {/*
+          El rasgado cierra la sección de arriba, pero se monta aquí: la de
+          arriba recorta su desbordamiento para contener la mancha lila y se
+          comería el corte.
+        */}
+        <TornEdge className="quienes-somos-partida__rasgado" layers={3} />
+
         <div className="contenedor contenedor--estrecho">
           <h2 className="quienes-somos-partida__titulo">Nuestro punto de partida</h2>
+          <span className="quienes-somos-partida__separador" aria-hidden="true" />
+
           <div className="quienes-somos-partida__texto">
             <p>Creemos en el acompañamiento como un proceso compartido.</p>
             <p>No dirigimos caminos: caminamos al lado.</p>
