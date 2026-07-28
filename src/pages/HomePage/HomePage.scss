@@ -81,6 +81,8 @@
     // Se limita el ancho para que la foto no domine sobre el titular
     max-width: 42rem;
     margin-inline: auto;
+    // En móvil el bloque baja un poco para despegarse del botón
+    top: 3rem;
 
     @include desktop {
       // En escritorio el ancho lo fija la columna del grid, no este tope
@@ -324,7 +326,7 @@
 .photo-feature.home-dia-a-dia {
   // Sin aire por abajo: enlaza directamente con la sección siguiente.
   // Arriba sí respira, y algo más que el resto de secciones.
-  padding-top: $espaciado-xxl;
+  padding-top: $espaciado-seccion;
   padding-bottom: 0;
 
   @include desktop {
@@ -350,6 +352,12 @@
 
   // Multimedia más contenido que en el bloque genérico
   .photo-feature__media {
+    // Centrado en móvil, y algo contenido para que no llegue a los bordes
+    @include hasta-tablet {
+      max-width: 36rem;
+      margin-inline: auto;
+    }
+
     @include desktop {
       max-width: 68rem;
     }
@@ -369,6 +377,11 @@
     margin-inline: auto;
     padding-top: 1rem;
 
+    // Apilado en móvil, el texto se centra bajo el vídeo
+    @include hasta-tablet {
+      text-align: center;
+    }
+
     @include desktop {
       position: relative;
       left: 4rem;
@@ -376,20 +389,27 @@
     }
   }
 
-  // Va sobre el blob, así que en blanco
+  // En móvil las columnas se apilan y el texto ya no cae sobre el blob: en
+  // blanco sobre el crema no se leería, así que ahí va en morado. Solo pasa a
+  // blanco en escritorio, que es donde la mancha queda detrás.
   .photo-feature__titulo {
     font-size: 3rem;
     max-width: 16ch;
     margin-inline: auto;
-    color: $color-blanco;
+    color: $color-primario;
 
     @include desktop {
       font-size: 4.4rem;
+      color: $color-blanco;
     }
   }
 
   .photo-feature__texto p {
-    color: rgba($color-blanco, 0.92);
+    color: $color-texto-suave;
+
+    @include desktop {
+      color: rgba($color-blanco, 0.92);
+    }
   }
 
   // Blob ancho y opaco: hace de fondo de la columna de texto.
@@ -410,7 +430,9 @@
   .photo-feature__blob {
     background-color: rgba($color-morado-oscuro, 0.92);
     right: -6rem;
-    top: 2rem;
+    // En móvil arrancaba pegado al borde superior y comía el aire de la
+    // sección: parecía que faltaba padding cuando el problema era este.
+    top: 6rem;
     bottom: auto;
     width: 46rem;
     height: auto;
@@ -450,13 +472,34 @@
     }
   }
 
+  // Apilado en móvil, el texto se centra bajo la foto
+  .photo-feature__texto {
+    @include hasta-tablet {
+      text-align: center;
+      margin-inline: auto;
+    }
+  }
+
   // Mismo tamaño que el titular de "Nuestro día a día"
   .photo-feature__titulo {
     font-size: 3rem;
     max-width: 16ch;
 
+    @include hasta-tablet {
+      // El max-width lo dejaría pegado a la izquierda si no se centra
+      margin-inline: auto;
+    }
+
     @include desktop {
       font-size: 4.4rem;
+    }
+  }
+
+  // En móvil la foto se contiene un poco, que a ancho completo pesa demasiado
+  .photo-feature__media {
+    @include hasta-tablet {
+      max-width: 30rem;
+      margin-inline: auto;
     }
   }
 

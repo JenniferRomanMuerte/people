@@ -78,6 +78,13 @@
     gap: $espaciado-xl;
     padding-block: $espaciado-xxl;
 
+    // En móvil las tres columnas se apilan y quedan centradas.
+    // No afecta a la franja del 016, que es un bloque aparte.
+    @include hasta-tablet {
+      text-align: center;
+      justify-items: center;
+    }
+
     @include tablet {
       grid-template-columns: 1fr 1fr 1fr;
       gap: $espaciado-xxl;
@@ -94,6 +101,10 @@
   &__marca {
     text-align: center;
     max-width: 24rem;
+
+    @include hasta-tablet {
+      margin-inline: auto;
+    }
   }
 
   &__logo {
