@@ -33,6 +33,14 @@
     color: $color-primario;
     // Ancho corto a propósito: parte el titular en dos líneas
     max-width: 11ch;
+
+    // Centrado solo en móvil. El margen automático hace falta además del
+    // text-align: sin él, el max-width deja la caja pegada a la izquierda y
+    // el texto se centraría dentro de ella, no dentro de la columna.
+    @include hasta-tablet {
+      margin-inline: auto;
+      text-align: center;
+    }
   }
 
   &__lema {
@@ -42,6 +50,12 @@
     color: $color-primario;
     margin-top: $espaciado-lg;
     max-width: 24ch;
+
+    // En móvil se suelta el tope de ancho para que ocupe la columna entera
+    @include hasta-tablet {
+      max-width: none;
+      text-align: center;
+    }
   }
 
   &__media {
