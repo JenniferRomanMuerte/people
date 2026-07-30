@@ -1,18 +1,33 @@
 .legal-page {
   @include seccion;
+  background-color: $color-fondo-alt;
 
   &__titulo {
     @include titulo($tamano-h1-movil, $tamano-h1);
+    // El mixin deja el peso normal; aquí el titular tiene que pesar.
+    // Zilla Slab no tiene corte de 900: el navegador resuelve al 700, que es
+    // el más pesado que cargamos.
+    font-weight: 900;
     color: $color-primario;
-    margin-bottom: $espaciado-xl;
+  }
+
+  // Rayita de acento bajo el titular, como en el resto de páginas
+  &__separador {
+    display: block;
+    width: 6rem;
+    height: 0.3rem;
+    background-color: $color-acento;
+    margin-block: $espaciado-lg $espaciado-xl;
   }
 
   &__contenido {
-    color: $color-texto-suave;
+    color: $color-texto;
+    // Columna de lectura estrecha: son textos largos y seguidos
     max-width: $ancho-texto-legible;
 
     h2 {
       @include titulo($tamano-h3-movil, $tamano-h3);
+      font-weight: $peso-negrita;
       color: $color-primario;
       margin-top: $espaciado-xl;
       margin-bottom: $espaciado-md;
@@ -37,7 +52,8 @@
       position: relative;
       padding-left: $espaciado-lg;
 
-      // Viñeta propia: la lista lleva list-style: none desde el reset
+      // Viñeta propia: la lista lleva list-style: none desde el reset.
+      // Alterna de color dentro de cada lista, de ahí el nth-child.
       &::before {
         content: '';
         position: absolute;
@@ -46,7 +62,11 @@
         width: 0.5rem;
         height: 0.5rem;
         border-radius: $radio-redondo;
-        background-color: $color-morado-claro;
+        background-color: $color-primario;
+      }
+
+      &:nth-child(even)::before {
+        background-color: $color-acento;
       }
     }
 

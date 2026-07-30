@@ -151,7 +151,7 @@ $onda-discontinua: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/200
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
+    bottom: 0;
     height: 1.6rem;
     background-color: $color-primario;
     pointer-events: none;
@@ -164,7 +164,7 @@ $onda-discontinua: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/200
     -webkit-mask-image: $onda-discontinua;
     -webkit-mask-repeat: repeat-x;
     -webkit-mask-size: 16rem 1.6rem;
-    -webkit-mask-position: top;
+    -webkit-mask-position: bottom;
   }
 
   &__rejilla {
@@ -288,36 +288,165 @@ $onda-discontinua: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/200
 
 .colabora-cierre {
   @include seccion;
+  position: relative;
   background-color: $color-primario;
+  overflow: hidden;
   text-align: center;
 
-  &__titulo {
-    @include titulo($tamano-h2-movil, $tamano-h2);
-    color: $color-blanco;
-  }
-
-  &__texto {
-    margin-top: $espaciado-xl;
-
-    p {
-      @include texto($tamano-texto-movil, $tamano-texto-grande);
-      color: rgba($color-blanco, 0.92);
-    }
-
-    p + p {
-      margin-top: $espaciado-md;
-    }
-  }
-
-  // Selector doble a propósito: hace falta más peso que el `&__texto p` de arriba
-  &__texto &__remate {
-    font-family: $fuente-titulos;
-    font-size: $tamano-h3-movil;
-    color: $color-acento;
-    margin-top: $espaciado-xl;
+  // El brote, muy diluido. Ya viene en trazo blanco sobre transparente, así
+  // que no necesita filtros.
+  //
+  // Se posiciona respecto al blob y no respecto a la sección: los porcentajes
+  // se miden sobre la caja del blob, de modo que si este cambia de ancho, de
+  // alto o de lado, el brote lo sigue sin tocar nada más.
+  &__fondo {
+    // Fuera en móvil: la ilustración es cuadrada y el blob es una franja muy
+    // achatada, así que no cabe a su lado sin invadir el badge de arriba. Es
+    // decorativa y no se pierde nada al quitarla.
+    display: none;
 
     @include desktop {
-      font-size: $tamano-h3;
+      display: block;
+      position: absolute;
+      // Centrada con el blob, a la altura que tenga
+      top: 50%;
+      transform: translateY(-55%);
+      left: 80%;
+      width: 98rem;
+      opacity: 0.42;
+      pointer-events: none;
     }
+  }
+
+  &__contenido {
+    position: relative;
+    z-index: $z-contenido;
+  }
+
+  &__titulo {
+    @include titular-compacto(2.8rem, 4.4rem);
+    color: $color-blanco;
+    // Zilla Slab no tiene corte de 900: el navegador resuelve al 700, que es
+    // el más pesado que cargamos
+    font-weight: 900;
+    // Positivo para abrir las letras; el mixin las junta por defecto
+    letter-spacing: 0.08em;
+  }
+
+  // Rayita de acento bajo el titular
+  &__separador {
+    display: block;
+    width: 6rem;
+    height: 0.3rem;
+    background-color: $color-acento;
+    margin: $espaciado-lg auto 0;
+  }
+
+  &__frase {
+    @include texto($tamano-texto-movil, $tamano-texto-grande);
+    color: rgba($color-blanco, 0.92);
+    margin-top: $espaciado-xl;
+    // Alineadas a la izquierda, al revés que el titular de la sección
+    text-align: left;
+  }
+
+  // La frase y su badge van de una pieza. Solo en escritorio: en móvil no
+  // caben de ninguna manera y forzarlo las sacaría de la pantalla.
+  &__frase--continua {
+    @include desktop {
+      white-space: nowrap;
+    }
+  }
+
+  // En línea con el texto que lo precede: es el remate de la misma frase, no
+  // un bloque aparte. Si no cabe, baja solo él.
+  &__badge {
+    display: inline-block;
+    margin-left: $espaciado-md;
+    padding: $espaciado-xs $espaciado-md;
+    background-color: $color-acento;
+    color: $color-primario;
+    font-weight: 600;
+    border-radius: 0.6rem;
+    transform: rotate(-3deg);
+  }
+
+  // Brote y mancha, uno al lado del otro; apilados en móvil
+  &__red {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    gap: $espaciado-xl;
+    margin-top: $espaciado-xxl;
+
+    @include desktop {
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    }
+  }
+
+
+  // Caja de referencia del brote: lleva el ancho y la posición del bloque, y
+  // el brote se ancla a ella
+  &__mancha {
+    position: relative;
+    width: 100%;
+    max-width: 70rem;
+    // Pegada al borde izquierdo, enfrente del brote del fondo
+    margin-right: auto;
+    margin-top: $espaciado-xl;
+  }
+
+  &__blob {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    // Más achatada: crece a lo ancho en vez de a lo alto
+    aspect-ratio: 3.6 / 1;
+    // Generoso: los radios van en porcentaje y las curvas muerden los costados
+    padding: $espaciado-lg $espaciado-lg;
+    background-color: $color-crema;
+    color: $color-primario;
+    border-radius: 38% 42% 48% 52% / 45% 58% 42% 55%;
+    font-family: $fuente-principal;
+    font-weight: 600;
+    font-size: $tamano-texto-grande-movil;
+    line-height: 1.5;
+
+    @include desktop {
+      font-size: $tamano-texto-grande;
+    }
+  }
+
+  // Cierra centrado, a caballo entre el blob de la izquierda y el brote de la
+  // derecha
+  &__remate {
+    @include manuscrita(2.8rem, 4rem);
+    color: $color-acento;
+    text-align: center;
+    margin-top: $espaciado-xl;
+    @include desktop {
+      text-align: left;
+    }
+  }
+}
+
+// Respiro de color entre el morado del cierre y el banner oscuro del 016.
+// El rasgado se monta aquí y no en la sección de arriba porque aquella recorta
+// su desbordamiento para contener el brote del fondo.
+.colabora-remate {
+  position: relative;
+  height: 3.6rem;
+  background-color: $color-fondo-alt;
+
+  &__rasgado {
+    position: absolute;
+    left: 0;
+    right: 0;
+    // Sube media baldosa: la mitad maciza queda dentro de la sección morada y
+    // los dientes caen sobre la franja crema, justo en el límite entre ambas
+    top: -1.2rem;
+    --torn-color: #{$color-primario};
+    --torn-height: 2.4rem;
   }
 }

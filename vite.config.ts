@@ -49,5 +49,9 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './src/test/setup.ts',
     css: true,
+    // Los tests del formulario escriben carácter a carácter y cada tecla
+    // repinta la página. Con las suites corriendo en paralelo, el límite por
+    // defecto de 5s se queda corto y fallan por tiempo, no por lógica.
+    testTimeout: 20000,
   },
 });

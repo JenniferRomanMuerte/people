@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import './PaperFigures.scss';
 
 /**
@@ -62,4 +63,9 @@ const PaperFigures = ({ background, className }: Props) => {
   );
 };
 
-export default PaperFigures;
+/**
+ * Memoizado porque en Contacto convive con el formulario: sin esto, cada tecla
+ * pulsada volvería a construir las cuatro figuras enteras. Sus props son
+ * cadenas, así que la comparación por defecto basta.
+ */
+export default memo(PaperFigures);

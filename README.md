@@ -52,9 +52,9 @@ scripts/
 src/
   assets/images/           imágenes optimizadas y manifest.ts (generados)
   components/
-    ui/                    Button, Input, Textarea, Checkbox, Image, Seo,
-                           Spinner, ErrorMessage, SuccessMessage, PageHero,
-                           FeatureCard, LegalPage, InstagramIcon
+    ui/                    Button, Image, Seo, ErrorMessage, SuccessMessage,
+                           FeatureCard, LegalPage, InstagramIcon, PaperFigures,
+                           DottedPath, TornEdge, StickyNote, PhotoFeatureBlock
     layout/                Header, Footer, Layout, QuickExit
   data/                    navigation.ts, siteInfo.ts
   hooks/                   useContactForm, useMobileMenu, useQuickExit,
@@ -199,8 +199,3 @@ modo RSC) que tampoco aplica aquí, y además incumple el peer de `vite-react-ss
 Se ha elegido 6.30.4 por tener el árbol de dependencias limpio. Conviene revisarlo
 cuando `vite-react-ssg` declare soporte de la 7.
 
----
-
-## Pendiente
-
-Ver [`PENDIENTE.md`](./PENDIENTE.md).

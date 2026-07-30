@@ -37,10 +37,8 @@ const ANCHOS = {
 const IMAGENES = [
   // --- Marca ---
   { origen: '8e56e1_c70090066cb744e6aba2230920039770~mv2.png', nombre: 'logo-simbolo', tipo: 'logo' },
-  { origen: '8e56e1_7a9493d72ef746b1ae62aa515543496b~mv2.png', nombre: 'logo-people', tipo: 'logo' },
 
   // --- Inicio ---
-  { origen: '8e56e1_7dffb95325c94a358491eb951caa1549~mv2.webp', nombre: 'inicio-hero', tipo: 'hero' },
   { origen: '8e56e1_e58f0c47c6ae417db3842e17f23311c4~mv2.webp', nombre: 'inicio-dia-a-dia', tipo: 'contenido' },
   { origen: '8e56e1_0f6ff1d7540643f5bc7882f109f54b01~mv2.webp', nombre: 'inicio-juntas', tipo: 'contenido' },
 
@@ -75,9 +73,6 @@ const IMAGENES = [
   { origen: 'hazte-socio.webp', nombre: 'colabora-socia', tipo: 'ilustracion' },
   { origen: 'donacion_puntual.webp', nombre: 'colabora-donacion', tipo: 'ilustracion' },
   { origen: '8e56e1_32555c8abbbd445f9a6fdaeb6513cbd2~mv2.webp', nombre: 'colabora-brote', tipo: 'ilustracion' },
-
-  // --- Contacto ---
-  { origen: '11062b_c44b7ad392bc48139ff5a2801ce4f312~mv2.jpeg', nombre: 'contacto-atardecer', tipo: 'hero' },
 ];
 
 // Iconos generados a partir del símbolo del logo

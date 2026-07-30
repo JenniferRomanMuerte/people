@@ -1,8 +1,9 @@
-import Seo from '@/components/ui/Seo/Seo';
-import Button from '@/components/ui/Button/Button';
-import Image from '@/components/ui/Image/Image';
-import { SITE_INFO } from '@/data/siteInfo';
-import './ColaboraPage.scss';
+import Seo from "@/components/ui/Seo/Seo";
+import Button from "@/components/ui/Button/Button";
+import Image from "@/components/ui/Image/Image";
+import TornEdge from "@/components/ui/TornEdge/TornEdge";
+import { SITE_INFO } from "@/data/siteInfo";
+import "./ColaboraPage.scss";
 
 const ColaboraPage = () => {
   return (
@@ -26,7 +27,8 @@ const ColaboraPage = () => {
             </h1>
 
             <p className="colabora-hero__subtitulo">
-              La violencia machista no es un problema individual, es una responsabilidad colectiva.
+              La violencia machista no es un problema individual, es una
+              responsabilidad colectiva.
             </p>
           </div>
 
@@ -40,23 +42,6 @@ const ColaboraPage = () => {
           </div>
         </div>
       </header>
-
-      {/* --- Impacto --- */}
-      <section className="colabora-impacto">
-        <div className="contenedor">
-          <h2 className="colabora-impacto__titulo">Tu apoyo se convierte en acompañamiento real</h2>
-
-          <div className="colabora-impacto__blobs">
-            <p className="colabora-impacto__blob colabora-impacto__blob--1">
-              Cada aportación, por pequeña que sea, sostiene una red de voluntarias que acompaña a
-              mujeres en procesos complejos.
-            </p>
-            <p className="colabora-impacto__blob colabora-impacto__blob--2">
-              Tu implicación no es simbólica. Tiene un impacto concreto.
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* --- Formas de colaborar --- */}
       <section className="colabora-formas">
@@ -78,8 +63,9 @@ const ColaboraPage = () => {
                 </div>
 
                 <p className="colabora-forma__texto">
-                  Con una aportación mensual, sostienes una red de acompañamiento real para mujeres
-                  que atraviesan procesos de violencia.
+                  Con una aportación mensual, sostienes una red de
+                  acompañamiento real para mujeres que atraviesan procesos de
+                  violencia.
                 </p>
               </div>
 
@@ -105,8 +91,8 @@ const ColaboraPage = () => {
                 </div>
 
                 <p className="colabora-forma__texto">
-                  Una aportación puntual puede convertirse en el impulso que haga crecer nuevas
-                  oportunidades de acompañamiento.
+                  Una aportación puntual puede convertirse en el impulso que
+                  haga crecer nuevas oportunidades de acompañamiento.
                 </p>
               </div>
 
@@ -118,23 +104,69 @@ const ColaboraPage = () => {
         </div>
       </section>
 
-      {/* --- Cierre --- */}
-      <section className="colabora-cierre">
-        <div className="contenedor contenedor--estrecho">
-          <h2 className="colabora-cierre__titulo">Salir de la violencia es un proceso complejo</h2>
-          <div className="colabora-cierre__texto">
-            <p>
-              Salir y recuperarse de una relación de violencia de género es un proceso largo,
-              difícil, solitario y lleno de obstáculos y miedos
+      {/* --- Impacto --- */}
+      <section className="colabora-impacto">
+        <div className="contenedor">
+          <h2 className="colabora-impacto__titulo">
+            Tu apoyo se convierte en acompañamiento real
+          </h2>
+
+          <div className="colabora-impacto__blobs">
+            <p className="colabora-impacto__blob colabora-impacto__blob--1">
+              Cada aportación, por pequeña que sea, sostiene una red de
+              voluntarias que acompaña a mujeres en procesos complejos.
             </p>
-            <p>Sabemos que requiere mucha valentía, determinación y fuerza…</p>
-            <p>pero se puede salir.</p>
-            <p>Por eso es importante que la sociedad se implique.</p>
-            <p>Que exista una red que sostenga, acompañe y no mire hacia otro lado.</p>
-            <p className="colabora-cierre__remate">Y tú puedes formar parte de esa red</p>
+            <p className="colabora-impacto__blob colabora-impacto__blob--2">
+              Tu implicación no es simbólica. Tiene un impacto concreto.
+            </p>
           </div>
         </div>
       </section>
+
+      {/* --- Cierre --- */}
+      <section className="colabora-cierre">
+        <div className="contenedor colabora-cierre__contenido">
+          <h2 className="colabora-cierre__titulo">
+            Salir de la violencia es un proceso complejo
+          </h2>
+          <span className="colabora-cierre__separador" aria-hidden="true" />
+
+          <p className="colabora-cierre__frase">
+            Salir y recuperarse de una relación de violencia de género es un
+            proceso largo, difícil y solitario.
+          </p>
+
+          {/* El badge remata la frase, así que va dentro del mismo párrafo */}
+          <p className="colabora-cierre__frase colabora-cierre__frase--continua">
+            Requiere mucha valentía, determinación y fuerza…
+            <span className="colabora-cierre__badge">pero se puede salir</span>
+          </p>
+
+          {/* El brote va dentro de la caja del blob, no de la sección: así se
+              posiciona respecto a él y lo acompaña si el blob se mueve */}
+          <div className="colabora-cierre__mancha">
+            <Image
+              name="colabora-brote"
+              alt=""
+              className="colabora-cierre__fondo"
+              sizes="50vw"
+            />
+
+            <p className="colabora-cierre__blob">
+              Es importante que la sociedad se implique. Que exista una red que sostenga,
+              acompañe y no mire hacia otro lado
+            </p>
+          </div>
+          <p className="colabora-cierre__remate">
+            Y tú puedes formar parte de esa red
+          </p>
+        </div>
+      </section>
+
+      {/* Respiro de color entre el morado del cierre y el banner oscuro del 016 */}
+      <div className="colabora-remate">
+        <TornEdge className="colabora-remate__rasgado" />
+      </div>
     </>
   );
 };

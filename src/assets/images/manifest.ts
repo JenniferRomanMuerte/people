@@ -4,12 +4,6 @@
 import logoSimbolo160 from './logo-simbolo-160.webp';
 import logoSimbolo320 from './logo-simbolo-320.webp';
 import logoSimbolo640 from './logo-simbolo-640.webp';
-import logoPeople160 from './logo-people-160.webp';
-import logoPeople320 from './logo-people-320.webp';
-import logoPeople640 from './logo-people-640.webp';
-import inicioHero640 from './inicio-hero-640.webp';
-import inicioHero1024 from './inicio-hero-1024.webp';
-import inicioHero1600 from './inicio-hero-1600.webp';
 import inicioDiaADia480 from './inicio-dia-a-dia-480.webp';
 import inicioDiaADia800 from './inicio-dia-a-dia-800.webp';
 import inicioDiaADia1200 from './inicio-dia-a-dia-1200.webp';
@@ -45,10 +39,6 @@ import colaboraSocia400 from './colabora-socia-400.webp';
 import colaboraDonacion400 from './colabora-donacion-400.webp';
 import colaboraBrote400 from './colabora-brote-400.webp';
 import colaboraBrote800 from './colabora-brote-800.webp';
-import contactoAtardecer640 from './contacto-atardecer-640.webp';
-import contactoAtardecer1024 from './contacto-atardecer-1024.webp';
-import contactoAtardecer1600 from './contacto-atardecer-1600.webp';
-import contactoAtardecer2000 from './contacto-atardecer-2000.webp';
 
 export interface VarianteImagen {
   url: string;
@@ -71,26 +61,6 @@ export const IMAGENES = {
     { url: logoSimbolo160, ancho: 160 },
     { url: logoSimbolo320, ancho: 320 },
     { url: logoSimbolo640, ancho: 640 }
-    ],
-  },
-  'logo-people': {
-    ancho: 640,
-    alto: 856,
-    ratio: 0.7476,
-    variantes: [
-    { url: logoPeople160, ancho: 160 },
-    { url: logoPeople320, ancho: 320 },
-    { url: logoPeople640, ancho: 640 }
-    ],
-  },
-  'inicio-hero': {
-    ancho: 1600,
-    alto: 667,
-    ratio: 2.4,
-    variantes: [
-    { url: inicioHero640, ancho: 640 },
-    { url: inicioHero1024, ancho: 1024 },
-    { url: inicioHero1600, ancho: 1600 }
     ],
   },
   'inicio-dia-a-dia': {
@@ -224,17 +194,6 @@ export const IMAGENES = {
     variantes: [
     { url: colaboraBrote400, ancho: 400 },
     { url: colaboraBrote800, ancho: 800 }
-    ],
-  },
-  'contacto-atardecer': {
-    ancho: 2000,
-    alto: 1121,
-    ratio: 1.7842,
-    variantes: [
-    { url: contactoAtardecer640, ancho: 640 },
-    { url: contactoAtardecer1024, ancho: 1024 },
-    { url: contactoAtardecer1600, ancho: 1600 },
-    { url: contactoAtardecer2000, ancho: 2000 }
     ],
   },
 } satisfies Record<string, DatosImagen>;

@@ -1,133 +1,273 @@
-.contacto {
-  @include seccion;
-  background-color: $color-fondo-alt;
+// ---------------------------------------------------------------------------
+// Contacto
+// La página se parte en dos mitades a sangre, sin contenedor común: cada
+// columna lleva su color hasta el borde de la pantalla y su propio padding.
+// ---------------------------------------------------------------------------
 
-  &__contenedor {
-    display: grid;
-    gap: $espaciado-xxl;
-    align-items: start;
+.contacto {
+  display: grid;
+
+  @include desktop {
+    // La conversación pesa más que la columna de datos
+    grid-template-columns: 55fr 45fr;
+    align-items: stretch;
+  }
+
+  // --- Columna izquierda: la conversación ---
+
+  &__conversacion {
+    background-color: $color-primario;
+    padding: $espaciado-xxl $espaciado-lg;
 
     @include desktop {
-      grid-template-columns: 1.2fr 0.8fr;
+      padding: $espaciado-seccion $espaciado-xxl;
     }
   }
 
-  // --- Formulario ---
-
-  &__formulario {
-    padding: $espaciado-lg;
-    background-color: $color-blanco;
-    border-radius: $radio-lg;
-    box-shadow: $sombra-suave;
-
-    @include tablet {
-      padding: $espaciado-xl;
-    }
+  // Limita el ancho de lectura sin recortar el color de la columna
+  &__conversacion-interior {
+    max-width: 62rem;
+    margin-inline: auto;
   }
 
   &__titulo {
-    @include titulo($tamano-h2-movil, $tamano-h2);
-    color: $color-primario;
+    @include titular-compacto(3.2rem, 5.2rem);
+    color: $color-blanco;
+    // Zilla Slab no tiene corte de 900: el navegador resuelve al 700, que es
+    // el más pesado que cargamos
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    margin-bottom: $espaciado-xxl;
   }
 
-  &__intro {
-    @include texto;
-    color: $color-texto-suave;
-    margin-top: $espaciado-md;
-  }
-
-  &__campos {
-    @include flex-columna;
-    gap: $espaciado-lg;
-    margin-top: $espaciado-xl;
-  }
-
-  &__fila {
-    display: grid;
-    gap: $espaciado-lg;
-
-    @include tablet {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  // Campo trampa: fuera de la vista y del recorrido del teclado, pero
-  // presente en el DOM para que los bots lo rellenen.
-  &__trampa {
-    position: absolute;
-    left: -9999px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-  }
-
-  // --- Columna de datos ---
-
-  &__datos {
-    @include flex-columna;
-  }
-
-  &__imagen {
-    border-radius: $radio-lg;
-    overflow: hidden;
-    margin-bottom: $espaciado-xl;
-
-    img {
-      @include imagen-cubierta;
-      aspect-ratio: 3 / 2;
-    }
-  }
-
-  &__datos-titulo {
-    @include titulo($tamano-h3-movil, $tamano-h3);
-    color: $color-primario;
-    margin-bottom: $espaciado-md;
-  }
-
-  &__lista {
-    @include flex-columna;
+  &__chat {
+    display: flex;
+    flex-direction: column;
     gap: $espaciado-md;
   }
 
-  &__dato {
-    display: flex;
-    align-items: flex-start;
-    gap: $espaciado-sm;
-    font-size: $tamano-texto-movil;
-    line-height: 1.6;
-    color: $color-texto;
+  // --- Burbujas ---
+
+  &__burbuja {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    padding: $espaciado-md $espaciado-lg;
+    @include texto($tamano-texto-movil, $tamano-texto);
+    line-height: 1.5;
   }
 
-  &__icono {
+  // Las nuestras salen por la izquierda: redondeadas menos la esquina de
+  // abajo, que es la que apunta a quien habla
+  &__burbuja--pregunta {
+    align-self: flex-start;
+    background-color: $color-naranja-claro;
+    color: $color-primario;
+    border-radius: $radio-lg $radio-lg $radio-lg 0;
+    // Es la etiqueta de su campo, así que conviene que se note pulsable
+    cursor: pointer;
+  }
+
+  // Las respuestas salen por la derecha y son campos de verdad
+  &__burbuja--respuesta {
+    width: 100%;
+    background-color: $color-fondo-alt;
+    color: $color-primario;
+    border: 0.2rem solid transparent;
+    border-radius: $radio-lg $radio-lg 0 $radio-lg;
+    font-family: $fuente-principal;
+
+    &::placeholder {
+      color: $color-texto-suave;
+      // Firefox las atenúa por su cuenta y bajaría del contraste mínimo
+      opacity: 1;
+    }
+
+    &:focus-visible {
+      outline: none;
+      border-color: $color-acento;
+    }
+
+    &[aria-invalid='true'] {
+      border-color: $color-acento;
+    }
+  }
+
+  &__burbuja--larga {
+    resize: vertical;
+    min-height: 14rem;
+  }
+
+  // Envuelve el campo y su error para poder alinear los dos a la derecha
+  &__respuesta {
+    align-self: flex-end;
+    width: 100%;
+    max-width: 42rem;
+  }
+
+  // Marca los campos obligatorios. Va oculto a los lectores de pantalla: el
+  // atributo `required` del input ya se lo anuncia.
+  &__obligatorio {
+    margin-left: 0.2em;
+    color: $color-secundario;
+  }
+
+  &__leyenda {
+    align-self: flex-start;
+    font-size: $tamano-texto-pequeno;
+    color: rgba($color-blanco, 0.75);
+  }
+
+  &__error {
+    margin-top: $espaciado-xs;
+    padding-inline: $espaciado-sm;
+    font-size: $tamano-texto-pequeno;
+    color: $color-acento;
+    text-align: right;
+  }
+
+  // Campo trampa: fuera de la vista pero al alcance de los bots
+  &__trampa {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  // --- Fila de envío ---
+
+  &__envio {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: $espaciado-md $espaciado-lg;
+    margin-top: $espaciado-lg;
+  }
+
+  &__privacidad {
+    display: flex;
+    align-items: center;
+    gap: $espaciado-sm;
+    font-size: $tamano-texto-pequeno;
+    line-height: 1.4;
+    text-align: left;
+    color: rgba($color-blanco, 0.88);
+    cursor: pointer;
+
+    a {
+      color: $color-acento;
+      text-decoration: underline;
+    }
+  }
+
+  &__casilla {
+    // Sin encoger: en una fila flexible se aplastaría contra el texto
     flex-shrink: 0;
+    width: 1.8rem;
+    height: 1.8rem;
+    accent-color: $color-acento;
+    cursor: pointer;
+  }
+
+  // Píldora de acento, la única acción de la página
+  &__enviar {
+    @include boton-base;
+    padding: $espaciado-md $espaciado-xl;
+    border-radius: $radio-redondo;
+    background-color: $color-acento;
+    border-color: $color-acento;
+    color: $color-primario;
+
+    &:hover:not(:disabled),
+    &:focus-visible {
+      background-color: $color-blanco;
+      border-color: $color-blanco;
+    }
+  }
+
+  // --- Columna derecha: los datos ---
+
+  &__lateral {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: $color-fondo-alt;
+    padding: $espaciado-xxl $espaciado-lg;
+
+    @include desktop {
+      padding: $espaciado-seccion $espaciado-xl;
+    }
+  }
+
+  &__figuras {
+    width: 100%;
+    max-width: 34rem;
+  }
+
+  &__lateral-titulo {
+    font-family: $fuente-titulos;
+    font-weight: $peso-negrita;
+    font-size: $tamano-h3-movil;
+    line-height: 1.3;
+    color: $color-primario;
+    margin-top: $espaciado-xxl;
+
+    @include desktop {
+      font-size: $tamano-h3;
+    }
+  }
+
+  &__lista {
+    @include texto($tamano-texto-movil, $tamano-texto);
+    color: $color-texto-suave;
+    margin-top: $espaciado-xl;
+
+    li + li {
+      margin-top: $espaciado-md;
+    }
   }
 
   &__enlace {
     color: $color-secundario;
     text-decoration: underline;
-    text-underline-offset: 0.3rem;
+    // Los correos son largos y no traen espacios donde partirse
     overflow-wrap: anywhere;
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       color: $color-primario;
     }
   }
 
-  &__instagram {
-    display: inline-flex;
-    align-items: center;
-    gap: $espaciado-sm;
-    margin-top: $espaciado-lg;
-    font-size: $tamano-texto-movil;
-    color: $color-secundario;
-
-    &:hover {
-      color: $color-primario;
-    }
+  // El margen automático se come el hueco libre y deja la firma pegada al
+  // fondo de la columna. Como las dos mitades tienen el mismo padding vertical
+  // y se estiran a la misma altura, acaba a la altura del botón de enviar.
+  &__firma {
+    margin-top: auto;
+    padding-top: $espaciado-xxl;
   }
 
-  &__instagram-icono {
-    width: 2rem;
-    height: 2rem;
+  &__logo {
+    width: 12.2rem;
+    height: auto;
+    margin-inline: auto;
+  }
+
+  &__firma-nombre {
+    font-family: $fuente-titulos;
+    font-weight: $peso-negrita;
+    font-size: $tamano-h2;
+    color: $color-primario;
+    margin-top: $espaciado-sm;
+  }
+
+  &__firma-nota {
+    @include texto($tamano-texto-grande-movil, $tamano-texto-grande);
+    color: $color-texto-suave;
+    margin-top: $espaciado-xxl;
   }
 }

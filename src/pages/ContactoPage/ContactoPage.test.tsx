@@ -18,6 +18,14 @@ vi.mock('vite-react-ssg', () => ({
 
 const enviarMock = vi.mocked(contactService.send);
 
+// Cada campo se identifica por la pregunta de su burbuja, que es su etiqueta
+const NOMBRE = /¿Cómo te llamas\?/;
+const APELLIDO = /¿Y tu apellido\?/;
+const EMAIL = /¿Dónde podemos escribirte\?/;
+const TELEFONO = /¿Nos dejas un teléfono\?/;
+const MENSAJE = /Cuéntanos qué necesitas/;
+const ENVIAR = /^Enviar/;
+
 const renderizarPagina = () =>
   render(
     <MemoryRouter>
@@ -32,10 +40,11 @@ const rellenarFormulario = async (
 ) => {
   const { aceptarPrivacidad = true } = opciones;
 
-  await user.type(screen.getByLabelText(/^Nombre/), 'Jennifer');
-  await user.type(screen.getByLabelText(/^Apellido/), 'Román');
-  await user.type(screen.getByLabelText(/^Email/), 'jennifer@correo.com');
-  await user.type(screen.getByLabelText(/^Mensaje/), 'Quiero información sobre el voluntariado.');
+  await user.type(screen.getByLabelText(NOMBRE), 'Jennifer');
+  await user.type(screen.getByLabelText(APELLIDO), 'Román');
+  await user.type(screen.getByLabelText(EMAIL), 'jennifer@correo.com');
+  await user.type(screen.getByLabelText(TELEFONO), '600 123 456');
+  await user.type(screen.getByLabelText(MENSAJE), 'Quiero información sobre el voluntariado.');
 
   if (aceptarPrivacidad) {
     await user.click(screen.getByRole('checkbox'));
@@ -50,20 +59,20 @@ describe('ContactoPage', () => {
   it('debe mostrar el formulario con todos sus campos', () => {
     renderizarPagina();
 
-    expect(screen.getByLabelText(/^Nombre/)).toBeInTheDocument();
-    expect(screen.getByLabelText(/^Apellido/)).toBeInTheDocument();
-    expect(screen.getByLabelText(/^Email/)).toBeInTheDocument();
-    expect(screen.getByLabelText(/^Teléfono/)).toBeInTheDocument();
-    expect(screen.getByLabelText(/^Mensaje/)).toBeInTheDocument();
+    expect(screen.getByLabelText(NOMBRE)).toBeInTheDocument();
+    expect(screen.getByLabelText(APELLIDO)).toBeInTheDocument();
+    expect(screen.getByLabelText(EMAIL)).toBeInTheDocument();
+    expect(screen.getByLabelText(TELEFONO)).toBeInTheDocument();
+    expect(screen.getByLabelText(MENSAJE)).toBeInTheDocument();
     expect(screen.getByRole('checkbox')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Enviar' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: ENVIAR })).toBeInTheDocument();
   });
 
   it('no debe enviar nada si los campos obligatorios están vacíos', async () => {
     const user = userEvent.setup();
     renderizarPagina();
 
-    await user.click(screen.getByRole('button', { name: 'Enviar' }));
+    await user.click(screen.getByRole('button', { name: ENVIAR }));
 
     expect(await screen.findByText('El nombre es obligatorio.')).toBeInTheDocument();
     expect(screen.getByText('El email es obligatorio.')).toBeInTheDocument();
@@ -75,7 +84,7 @@ describe('ContactoPage', () => {
     renderizarPagina();
 
     await rellenarFormulario(user, { aceptarPrivacidad: false });
-    await user.click(screen.getByRole('button', { name: 'Enviar' }));
+    await user.click(screen.getByRole('button', { name: ENVIAR }));
 
     expect(
       await screen.findByText('Debes aceptar la política de privacidad para enviar el formulario.')
@@ -87,11 +96,11 @@ describe('ContactoPage', () => {
     const user = userEvent.setup();
     renderizarPagina();
 
-    await user.type(screen.getByLabelText(/^Nombre/), 'Jennifer');
-    await user.type(screen.getByLabelText(/^Email/), 'esto-no-es-un-email');
-    await user.type(screen.getByLabelText(/^Mensaje/), 'Hola');
+    await user.type(screen.getByLabelText(NOMBRE), 'Jennifer');
+    await user.type(screen.getByLabelText(EMAIL), 'esto-no-es-un-email');
+    await user.type(screen.getByLabelText(MENSAJE), 'Hola');
     await user.click(screen.getByRole('checkbox'));
-    await user.click(screen.getByRole('button', { name: 'Enviar' }));
+    await user.click(screen.getByRole('button', { name: ENVIAR }));
 
     expect(
       await screen.findByText('Escribe un email válido, por ejemplo nombre@correo.com')
@@ -105,7 +114,7 @@ describe('ContactoPage', () => {
     renderizarPagina();
 
     await rellenarFormulario(user);
-    await user.click(screen.getByRole('button', { name: 'Enviar' }));
+    await user.click(screen.getByRole('button', { name: ENVIAR }));
 
     await waitFor(() => {
       expect(enviarMock).toHaveBeenCalledTimes(1);
@@ -115,7 +124,7 @@ describe('ContactoPage', () => {
       name: 'Jennifer',
       lastName: 'Román',
       email: 'jennifer@correo.com',
-      phone: '',
+      phone: '600 123 456',
       message: 'Quiero información sobre el voluntariado.',
       privacyAccepted: true,
       website: '',
@@ -128,7 +137,7 @@ describe('ContactoPage', () => {
     renderizarPagina();
 
     await rellenarFormulario(user);
-    await user.click(screen.getByRole('button', { name: 'Enviar' }));
+    await user.click(screen.getByRole('button', { name: ENVIAR }));
 
     expect(
       await screen.findByText('Hemos recibido tu mensaje. Te responderemos lo antes posible.')
@@ -141,10 +150,10 @@ describe('ContactoPage', () => {
     renderizarPagina();
 
     await rellenarFormulario(user);
-    await user.click(screen.getByRole('button', { name: 'Enviar' }));
+    await user.click(screen.getByRole('button', { name: ENVIAR }));
 
     await waitFor(() => {
-      expect(screen.getByLabelText(/^Nombre/)).toHaveValue('');
+      expect(screen.getByLabelText(NOMBRE)).toHaveValue('');
     });
     expect(screen.getByRole('checkbox')).not.toBeChecked();
   });
@@ -155,7 +164,7 @@ describe('ContactoPage', () => {
     renderizarPagina();
 
     await rellenarFormulario(user);
-    await user.click(screen.getByRole('button', { name: 'Enviar' }));
+    await user.click(screen.getByRole('button', { name: ENVIAR }));
 
     expect(await screen.findByText('No hemos podido enviar tu mensaje.')).toBeInTheDocument();
   });
@@ -167,19 +176,19 @@ describe('ContactoPage', () => {
     renderizarPagina();
 
     await rellenarFormulario(user);
-    await user.click(screen.getByRole('button', { name: 'Enviar' }));
+    await user.click(screen.getByRole('button', { name: ENVIAR }));
 
-    expect(await screen.findByRole('button', { name: 'Enviando...' })).toBeDisabled();
+    expect(await screen.findByRole('button', { name: /^Enviando/ })).toBeDisabled();
   });
 
   it('debe borrar el error de un campo en cuanto se corrige', async () => {
     const user = userEvent.setup();
     renderizarPagina();
 
-    await user.click(screen.getByRole('button', { name: 'Enviar' }));
+    await user.click(screen.getByRole('button', { name: ENVIAR }));
     expect(await screen.findByText('El nombre es obligatorio.')).toBeInTheDocument();
 
-    await user.type(screen.getByLabelText(/^Nombre/), 'J');
+    await user.type(screen.getByLabelText(NOMBRE), 'J');
 
     await waitFor(() => {
       expect(screen.queryByText('El nombre es obligatorio.')).not.toBeInTheDocument();
