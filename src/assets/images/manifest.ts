@@ -42,9 +42,7 @@ import necesitasAyudaHero2000 from './necesitas-ayuda-hero-2000.webp';
 import colaboraHero400 from './colabora-hero-400.webp';
 import colaboraHero800 from './colabora-hero-800.webp';
 import colaboraSocia400 from './colabora-socia-400.webp';
-import colaboraSocia800 from './colabora-socia-800.webp';
 import colaboraDonacion400 from './colabora-donacion-400.webp';
-import colaboraDonacion800 from './colabora-donacion-800.webp';
 import colaboraBrote400 from './colabora-brote-400.webp';
 import colaboraBrote800 from './colabora-brote-800.webp';
 import contactoAtardecer640 from './contacto-atardecer-640.webp';
@@ -204,21 +202,19 @@ export const IMAGENES = {
     ],
   },
   'colabora-socia': {
-    ancho: 800,
-    alto: 450,
-    ratio: 1.7778,
+    ancho: 400,
+    alto: 735,
+    ratio: 0.5444,
     variantes: [
-    { url: colaboraSocia400, ancho: 400 },
-    { url: colaboraSocia800, ancho: 800 }
+    { url: colaboraSocia400, ancho: 400 }
     ],
   },
   'colabora-donacion': {
-    ancho: 800,
-    alto: 450,
-    ratio: 1.7778,
+    ancho: 400,
+    alto: 771,
+    ratio: 0.5185,
     variantes: [
-    { url: colaboraDonacion400, ancho: 400 },
-    { url: colaboraDonacion800, ancho: 800 }
+    { url: colaboraDonacion400, ancho: 400 }
     ],
   },
   'colabora-brote': {

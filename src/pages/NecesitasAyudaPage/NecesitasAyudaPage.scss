@@ -124,12 +124,15 @@
 
 .ayuda-dificil {
   display: grid;
-  gap: $espaciado-xxl;
+  gap: $espaciado-xl;
   align-items: center;
 
   @include desktop {
-    // Texto a la izquierda, foto a la derecha. Apilados en móvil.
-    grid-template-columns: 1.25fr 0.85fr;
+    // Rejilla de dos por dos, en zigzag: el primer párrafo y la foto arriba,
+    // la nota y el segundo párrafo abajo. En móvil cae todo en una columna y
+    // se lee en el mismo orden.
+    grid-template-columns: 1fr 1fr;
+    gap: $espaciado-xl $espaciado-xxl;
   }
 
   &__titulo {
@@ -145,14 +148,8 @@
     }
   }
 
-  // El título ya no vive dentro de la columna, así que el primer párrafo
-  // no necesita separarse de nada
-  &__texto > :first-child {
-    margin-top: 0;
-  }
-
+  // Los huecos los pone la rejilla: los bloques no llevan márgenes propios
   &__cuerpo {
-    margin-top: $espaciado-xl;
     color: $color-texto-suave;
 
     p {
@@ -164,14 +161,22 @@
     }
   }
 
-  // La nota respira por ambos lados, entre los dos bloques de texto
-  .sticky-note {
-    margin-block: $espaciado-xl;
+  // Cierra abajo a la derecha, justo sobre la mancha decorativa de la sección.
+  // Se apoya en el z-index de `.carta__contenido`, que ya deja todo el
+  // contenido por encima de ella.
+  &__cuerpo--cierre {
+    @include desktop {
+      padding-block: $espaciado-lg;
+    }
+  }
 
+  &__nota {
     // En una sola línea: en móvil no cabría y se partiría igualmente
     @include desktop {
-      max-width: none;
-      white-space: nowrap;
+      .sticky-note {
+        max-width: none;
+        white-space: nowrap;
+      }
     }
   }
 
@@ -199,6 +204,21 @@
     // Alterna el fondo para separar visualmente los bloques de la carta
     &--destacada {
       background-color: $color-fondo-alt;
+      // Menos aire arriba que el resto de secciones: entra justo después del
+      // rasgado y con el padding completo el titular quedaba descolgado
+      padding-top: $espaciado-xl;
+
+      @include desktop {
+        padding-top: $espaciado-xxl;
+      }
+
+      // La mancha de arriba tiene que salirse por el borde superior para
+      // meterse bajo el rasgado. No vale con quitar el overflow: esa mancha
+      // arranca en negativo por la izquierda y provocaría scroll horizontal.
+      // `clip` la sigue recortando en horizontal y, a diferencia de `hidden`,
+      // deja el otro eje visible.
+      overflow-x: clip;
+      overflow-y: visible;
 
       // Mancha morada bajo la columna de la foto. Deja de ser un círculo
       // perfecto: los ocho radios van muy desparejados para que se lea como
@@ -207,7 +227,9 @@
         content: '';
         position: absolute;
         right: 6%;
-        bottom: -10rem;
+        // Sin asomar por abajo: al dejar de recortarse el eje vertical, se
+        // colaría sobre el banner del 016, que va justo después
+        bottom: 0;
         width: 20rem;
         height: 16rem;
         background-color: $color-secundario;
@@ -223,7 +245,8 @@
         }
       }
 
-      // Segunda mancha, arriba a la izquierda
+      // Segunda mancha, arriba a la izquierda. Sube por encima del borde de la
+      // sección para pasar por debajo del rasgado.
       &::after {
         content: '';
         position: absolute;
@@ -231,9 +254,12 @@
         top: -7rem;
         width: 26rem;
         height: 19rem;
-        background-color: $color-morado-claro;
+        // Morado casi disuelto, que lee como gris: el mismo tratamiento que la
+        // mancha de "Juntas contra la violencia machista" en Inicio. La
+        // transparencia va en el color y no en `opacity` para no arrastrar
+        // consigo nada más.
+        background-color: rgba($color-morado-oscuro, 0.12);
         border-radius: 34% 66% 60% 40% / 58% 36% 64% 42%;
-        opacity: 0.22;
         pointer-events: none;
 
         @include desktop {
@@ -405,6 +431,11 @@
     // Sube media baldosa: la mitad maciza queda dentro de la sección morada y
     // los dientes caen sobre la franja crema, justo en el límite entre ambas
     top: -1.2rem;
+    // Por encima de la mancha de la sección siguiente, que asoma hacia arriba.
+    // El z-index va aquí y no en `.ayuda-remate`: si lo llevara el contenedor
+    // crearía un contexto de apilamiento y su fondo taparía también la mancha,
+    // en vez de dejarla pasar por debajo solo del desgarro.
+    z-index: 3;
     --torn-color: #{$color-primario};
     --torn-height: 2.4rem;
   }

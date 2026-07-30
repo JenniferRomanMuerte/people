@@ -61,9 +61,19 @@ const IMAGENES = [
   { origen: '8e56e1_9507d179ebc24e6bb9139588b907e6ac~mv2.jpg', nombre: 'necesitas-ayuda-hero', tipo: 'hero' },
 
   // --- Colabora ---
-  { origen: '8e56e1_ff48051940f947e2abb5999b12da0a2f~mv2.webp', nombre: 'colabora-hero', tipo: 'ilustracion' },
-  { origen: '8e56e1_3dda4b9c27bd44cd9b94348311962667~mv2.webp', nombre: 'colabora-socia', tipo: 'ilustracion' },
-  { origen: '8e56e1_d0a8cfefb12e4137b71e87056a5061fe~mv2.webp', nombre: 'colabora-donacion', tipo: 'ilustracion' },
+  // Va sobre el morado de la portada: trazo en blanco y monedas en el naranja
+  // de acento. Los hexadecimales son los de $color-blanco y $color-acento.
+  {
+    origen: '8e56e1_ff48051940f947e2abb5999b12da0a2f~mv2.webp',
+    nombre: 'colabora-hero',
+    tipo: 'ilustracion',
+    recolorear: { trazo: '#ffffff', color: '#ff9e45' },
+  },
+  // Recortadas a mano sobre los originales de Wix, que traían mucho margen en
+  // blanco y hacían que el dibujo se viera pequeño dentro de su hueco.
+  // Sin recolorear: van sobre tarjeta blanca y sus colores originales valen.
+  { origen: 'hazte-socio.webp', nombre: 'colabora-socia', tipo: 'ilustracion' },
+  { origen: 'donacion_puntual.webp', nombre: 'colabora-donacion', tipo: 'ilustracion' },
   { origen: '8e56e1_32555c8abbbd445f9a6fdaeb6513cbd2~mv2.webp', nombre: 'colabora-brote', tipo: 'ilustracion' },
 
   // --- Contacto ---
@@ -80,7 +90,63 @@ const FAVICONS = [
 
 const formatearPeso = (bytes) => `${(bytes / 1024).toFixed(0)} KB`;
 
-const generarImagen = async ({ origen, nombre, tipo, recortar = false }) => {
+const aRgb = (hex) => {
+  const n = parseInt(hex.slice(1), 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+};
+
+// Por debajo de este croma un píxel se considera trazo; por encima, relleno.
+// Entre ambos valores se mezclan los dos colores.
+const CROMA_TRAZO = 20;
+const CROMA_RELLENO = 60;
+
+/**
+ * Repinta una ilustración de línea con dos colores de la paleta: uno para el
+ * trazo y otro para las zonas de color.
+ *
+ * Hace falta porque estas ilustraciones vienen en trazo oscuro sobre
+ * transparente y hay que llevarlas a fondos oscuros. Invertirlas por CSS
+ * pone el trazo en blanco, pero gira también el relleno hacia su color
+ * complementario, que rara vez es el que toca.
+ *
+ * La clasificación va por croma —la distancia entre el canal más alto y el más
+ * bajo— y no por luminosidad: el trazo es prácticamente gris y el relleno
+ * tiene color, mientras que ambos pueden ser igual de oscuros.
+ *
+ * El canal alfa no se toca: es el que lleva el suavizado del dibujo.
+ */
+const recolorearTrazo = async (entrada, { trazo, color }) => {
+  const [tr, tg, tb] = aRgb(trazo);
+  const [cr, cg, cb] = aRgb(color);
+
+  const { data, info } = await sharp(entrada)
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  for (let i = 0; i < data.length; i += 4) {
+    if (data[i + 3] === 0) continue;
+
+    const r = data[i];
+    const g = data[i + 1];
+    const b = data[i + 2];
+    const croma = Math.max(r, g, b) - Math.min(r, g, b);
+
+    // Mezcla progresiva en vez de un corte seco: así los píxeles del borde
+    // entre el relleno y su contorno no salen dentados
+    const t = Math.min(1, Math.max(0, (croma - CROMA_TRAZO) / (CROMA_RELLENO - CROMA_TRAZO)));
+
+    data[i] = Math.round(tr + (cr - tr) * t);
+    data[i + 1] = Math.round(tg + (cg - tg) * t);
+    data[i + 2] = Math.round(tb + (cb - tb) * t);
+  }
+
+  return sharp(data, { raw: { width: info.width, height: info.height, channels: 4 } })
+    .png()
+    .toBuffer();
+};
+
+const generarImagen = async ({ origen, nombre, tipo, recortar = false, recolorear = null }) => {
   const rutaOrigen = path.join(ORIGEN, origen);
 
   // `recortar` elimina el marco liso que rodea al dibujo. Varias ilustraciones
@@ -89,7 +155,10 @@ const generarImagen = async ({ origen, nombre, tipo, recortar = false }) => {
   const base = recortar ? sharp(rutaOrigen).trim({ threshold: 12 }) : sharp(rutaOrigen);
 
   // Se materializa el recorte para poder medir el resultado real
-  const bufferBase = recortar ? await base.toBuffer() : rutaOrigen;
+  let bufferBase = recortar ? await base.toBuffer() : rutaOrigen;
+
+  if (recolorear) bufferBase = await recolorearTrazo(bufferBase, recolorear);
+
   const original = sharp(bufferBase);
   const meta = await original.metadata();
 
