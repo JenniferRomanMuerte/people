@@ -1,82 +1,639 @@
-.voluntariado-llamada {
-  @include seccion;
-  background-color: $color-fondo-alt;
-  text-align: center;
+.voluntariado-hero {
+  display: flex;
+  flex-direction: column;
+  // El naranja queda de base y encima va un velo morado que se abre hacia
+  // fuera: así los bordes se oscurecen sin ensuciar el centro. Va en dos
+  // propiedades para que, si el degradado no se pinta, el fondo siga siendo
+  // el naranja de siempre.
+  background-color: $color-acento;
+  background-image: radial-gradient(
+    ellipse 90% 90% at 50% 52%,
+    transparent 0%,
+    transparent 65%,
+    rgba($color-morado, 0.9) 100%
+  );
+  // Referencia para el camino, que en escritorio se sale de su columna
+  position: relative;
+  // En móvil no tenía ninguno: el titular quedaba pegado a la cabecera
+  padding: $espaciado-xxl $espaciado-lg $espaciado-seccion-movil;
+
+  @include desktop {
+    flex-direction: row;
+    padding: $espaciado-xxl $espaciado-lg;
+    justify-content: space-around;
+    // Texto y figuras a la misma altura
+    align-items: center;
+  }
+
+  // A partir de aquí `space-around` reparte demasiado y los bloques se van a
+  // los extremos: se juntan en el centro con un hueco fijo
+  @include grande {
+    justify-content: center;
+    gap: $espaciado-seccion;
+  }
+
+  &__texto {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+
+    @include desktop {
+      text-align: start;
+    }
+  }
 
   &__titulo {
-    @include titulo($tamano-h2-movil, $tamano-h2);
+    @include titular-compacto(4rem, 6.4rem);
     color: $color-primario;
+  }
+
+  &__lema {
+    @include manuscrita(2.2rem, 3rem);
+    // Morado oscuro: el claro sobre el naranja se quedaba en 1,4:1 de
+    // contraste y la frase no se leía
+    color: $color-primario;
+    margin-top: $espaciado-lg;
+  }
+
+  // --- Adornos ---
+
+  // Separación entre las figuras y el camino de puntos
+  &__adornos {
+    @include flex-columna;
+    align-items: center;
+    // Hueco corto en móvil: acerca el camino a las figuras
+    gap: $espaciado-sm;
+
+    @include desktop {
+      gap: $espaciado-lg;
+    }
+  }
+
+  &__figuras {
+    width: 24rem;
+
+    @include desktop {
+      width: 32rem;
+    }
+  }
+
+  // Arco por encima de las cabezas. Mismo ancho que las figuras, para que
+  // arranque en la primera y termine en la última.
+  &__camino {
+    --camino-linea: #{$color-primario};
+    --camino-inicio: #{$color-verde-grisaceo};
+    --camino-fin: #{$color-morado-claro};
+
+    width: 24rem;
+    // Se acerca a las cabezas: el arco deja aire por abajo en su propio lienzo
+    margin-bottom: -1.5rem;
+
+    @include desktop {
+      width: 32rem;
+      margin-bottom: -2rem;
+    }
+  }
+}
+
+
+// ---------------------------------------------------------------------------
+// Introducción
+// ---------------------------------------------------------------------------
+
+.voluntariado-intro {
+  @include seccion;
+  background-color: $color-fondo-alt;
+
+  // Foto a la izquierda, cita y texto a la derecha
+  &__destacado {
+    @include flex-columna;
+    gap: $espaciado-xxl;
+
+    // Apilado en móvil, todo centrado
+    @include hasta-tablet {
+      align-items: center;
+      text-align: center;
+    }
+
+    @include tablet {
+      flex-direction: row;
+      align-items: center;
+      gap: $espaciado-xxl;
+    }
+  }
+
+  &__imagen {
+    position: relative;
+    flex-shrink: 0;
+    width: 22rem;
+    // Sitio para el recuadro girado, que asoma por fuera de la foto
+    margin: $espaciado-md;
+
+    @include tablet {
+      width: 30rem;
+    }
+
+    // Recuadro de color girado al revés que la foto, asomando por detrás
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -1.6rem;
+      background-color: $color-morado-claro;
+      border-radius: $radio-md;
+      transform: rotate(-3deg);
+      box-shadow: 0.5rem 1.4rem 5.2rem rgba($color-morado-oscuro, 0.85);
+    }
+
+    img {
+      // Por encima del recuadro de detrás
+      position: relative;
+      @include imagen-cubierta;
+      aspect-ratio: 1;
+      border-radius: $radio-md;
+      transform: rotate(2deg);
+    }
+  }
+
+  &__cita {
+    @include manuscrita(3rem, 4.4rem);
+    color: $color-primario;
+
+    // Las comillas las pone el CSS, para no ensuciar el texto de la cita
+    &::before {
+      content: '\201C';
+    }
+
+    &::after {
+      content: '\201D';
+    }
+  }
+
+  &__texto {
+    margin-top: $espaciado-lg;
+    color: $color-texto-suave;
+
+    p {
+      @include texto($tamano-texto-movil, $tamano-texto);
+    }
+
+    p+p {
+      margin-top: $espaciado-md;
+    }
+  }
+}
+
+.voluntariado-llamada {
+  @include seccion;
+  background-color: $color-primario;
+
+  // Texto a la izquierda, ilustración a la derecha; apilados en móvil
+  &__contenido {
+    display: grid;
+    gap: $espaciado-xxl;
+    align-items: center;
+
+    @include desktop {
+      grid-template-columns: 1fr 0.85fr;
+    }
+  }
+
+  // En móvil se centra todo el bloque: titular, texto y botón
+  &__texto-bloque {
+    @include hasta-tablet {
+      text-align: center;
+    }
+  }
+
+  &__titulo {
+    @include titular-compacto($tamano-h2-movil, 4.8rem);
+    color: $color-acento;
+    // Positivo para abrir las letras; el mixin las junta por defecto
+    letter-spacing: 0.06em;
+    // En escritorio solo se centra el titular; el texto de abajo va a la izquierda
+    text-align: center;
   }
 
   &__texto {
     margin-block: $espaciado-lg $espaciado-xl;
-    color: $color-texto-suave;
+    color: $color-fondo-alt;
 
     p {
       @include texto($tamano-texto-movil, $tamano-texto-grande);
     }
 
-    p + p {
+    p+p {
       margin-top: $espaciado-md;
+    }
+  }
+
+  &__ilustracion {
+    @include flex-center;
+
+    img {
+      max-width: 28rem;
+      // La ilustración es trazo negro sobre fondo transparente: invertir el
+      // color lo vuelve blanco. La transparencia no se ve afectada, así que
+      // el fondo morado sigue viéndose a través.
+      filter: invert(1);
+
+      @include desktop {
+        max-width: 44rem;
+      }
     }
   }
 }
 
 .voluntariado-organizacion {
   @include seccion;
+  position: relative;
+  background-color: $color-fondo-alt;
+  // Recorta los trazos que asoman por los bordes
+  overflow: hidden;
 
   &__titulo {
-    @include titulo($tamano-h2-movil, $tamano-h2);
+    @include titular-compacto($tamano-h2-movil, 4.8rem);
     color: $color-primario;
     text-align: center;
-    margin-bottom: $espaciado-xl;
+    letter-spacing: 0.04em;
+    margin-bottom: $espaciado-xxl;
   }
 
-  &__rejilla {
-    @include rejilla(2, 2, $espaciado-lg);
+  // --- Fondo decorativo ---
 
-    @include grande {
-      grid-template-columns: repeat(4, 1fr);
+  // Contenedor de referencia para el camino que serpentea entre las tarjetas
+  &__lienzo {
+    position: relative;
+  }
+
+  &__camino {
+    position: absolute;
+    inset: 0;
+    // Se estira hasta cubrir la rejilla completa
+    width: 100%;
+    height: 100%;
+    opacity: 0.42;
+    pointer-events: none;
+
+    // El trazado se dibujó para una rejilla de dos filas: en móvil, con las
+    // tarjetas en una sola columna, no conecta nada y solo estorba
+    @include hasta-tablet {
+      display: none;
     }
+  }
+
+  // Trazos sueltos repartidos por las esquinas
+  &__traza {
+    position: absolute;
+    width: 14rem;
+    opacity: 0.42;
+    pointer-events: none;
+
+    @include desktop {
+      width: 20rem;
+    }
+
+    &--1 {
+      --camino-linea: #{$color-morado-claro};
+      --camino-fin: #{$color-morado-claro};
+      top: 4rem;
+      left: -3rem;
+      transform: rotate(-12deg);
+    }
+
+    &--2 {
+      --camino-linea: #{$color-acento};
+      --camino-fin: #{$color-acento};
+      top: 8rem;
+      right: -4rem;
+      transform: rotate(14deg);
+    }
+
+    &--3 {
+      --camino-linea: #{$color-morado-claro};
+      --camino-fin: #{$color-morado-claro};
+      bottom: 6rem;
+      right: -2rem;
+      transform: rotate(-8deg);
+    }
+
+    &--4 {
+      --camino-linea: #{$color-acento};
+      --camino-fin: #{$color-acento};
+      bottom: 3rem;
+      left: -4rem;
+      transform: rotate(10deg);
+    }
+  }
+
+  // --- Tarjetas ---
+
+  &__rejilla {
+    position: relative;
+    z-index: $z-contenido;
+    @include rejilla(2, 2, $espaciado-xl);
+  }
+
+  // El número y el título comparten la primera fila; lo demás va debajo a
+  // todo el ancho. El título está anidado dentro de la tarjeta, así que los
+  // contenedores intermedios se vuelven transparentes para el reparto y sus
+  // piezas pasan a colocarse por nombre en esta rejilla.
+  .feature-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      'numero titulo'
+      'subtitulo subtitulo'
+      'texto texto';
+    column-gap: $espaciado-md;
+    row-gap: $espaciado-sm;
+    align-items: center;
+    border-width: 0.2rem;
+    border-style: dashed;
+  }
+
+  .feature-card__cuerpo,
+  .feature-card__contenido {
+    display: contents;
+  }
+
+  .feature-card__numero {
+    grid-area: numero;
+    // La separación la pone el gap de la rejilla
+    margin-bottom: 0;
+    width: 4.8rem;
+    height: 4.8rem;
+    font-size: 2.2rem;
+
+    @include desktop {
+      width: 5.6rem;
+      height: 5.6rem;
+      font-size: 2.6rem;
+    }
+  }
+
+  .feature-card__titulo {
+    grid-area: titulo;
+    font-family: $fuente-titulos;
+    font-weight: $peso-negrita;
+    font-size: 2.4rem;
+
+    @include desktop {
+      font-size: 3rem;
+    }
+  }
+
+  .feature-card__subtitulo {
+    grid-area: subtitulo;
+  }
+
+  .feature-card__texto {
+    grid-area: texto;
+    margin-top: $espaciado-sm;
+  }
+
+  // Un color por tarjeta, en el borde y en su número
+  .feature-card:nth-child(1) {
+    --numero-fondo: #{$color-primario};
+    border-color: $color-primario;
+    transform: rotate(-1deg);
+  }
+
+  .feature-card:nth-child(2) {
+    --numero-fondo: #{$color-acento};
+    border-color: $color-acento;
+    transform: rotate(1deg);
+  }
+
+  .feature-card:nth-child(3) {
+    --numero-fondo: #{$color-morado-claro};
+    border-color: $color-morado-claro;
+    transform: rotate(1deg);
+  }
+
+  .feature-card:nth-child(4) {
+    --numero-fondo: #{$color-morado-medio};
+    border-color: $color-morado-medio;
+    transform: rotate(-1deg);
   }
 }
 
 .voluntariado-actividades {
   @include seccion;
-  background-color: $color-crema;
+  position: relative;
+  background-color: $color-lila-suave;
+  border-top: 0.2rem dashed $color-secundario;
+  // Recorta las manchas contra el borde de la sección
+  overflow: hidden;
 
-  &__contenido {
-    display: grid;
-    gap: $espaciado-xl;
-    align-items: center;
+  // --- Manchas de fondo ---
+
+  &__fondo {
+    position: absolute;
+    background-color: $color-fondo-alt;
+    opacity: 0.48;
+    pointer-events: none;
+  }
+
+  // Grande, arriba a la derecha
+  &__fondo--1 {
+    top: -14rem;
+    right: desde-contenedor(14rem);
+    width: 44rem;
+    height: 38rem;
+    border-radius: 56% 44% 48% 52% / 52% 46% 54% 48%;
 
     @include desktop {
-      grid-template-columns: 1fr 1fr;
+      top: -18rem;
+      right: desde-contenedor(18rem);
+      width: 62rem;
+      height: 54rem;
+    }
+  }
+
+  // Más pequeña, abajo a la izquierda
+  &__fondo--2 {
+    bottom: -12rem;
+    left: desde-contenedor(12rem);
+    width: 30rem;
+    height: 26rem;
+    border-radius: 46% 54% 58% 42% / 48% 56% 44% 52%;
+
+    @include desktop {
+      bottom: -14rem;
+      left: desde-contenedor(15rem);
+      width: 42rem;
+      height: 36rem;
+    }
+  }
+
+  // Todo el contenido por delante de las manchas
+  &__contenido {
+    position: relative;
+    z-index: $z-contenido;
+  }
+
+  // --- Vídeo y título ---
+
+  &__destacado {
+    display: grid;
+    justify-items: center;
+    gap: $espaciado-xxl;
+
+    @include desktop {
+      // Vídeo a la izquierda; a la derecha el título con las formas debajo
+      grid-template-columns: auto minmax(0, 1fr);
+      justify-content: center;
+      align-items: center;
       gap: $espaciado-xxl;
     }
   }
 
-  &__titulo {
-    @include titulo($tamano-h2-movil, $tamano-h2);
-    color: $color-primario;
-    font-style: italic;
-    font-weight: $peso-negrita;
-    margin-bottom: $espaciado-lg;
+  // Columna derecha
+  &__lado {
+    @include flex-columna;
+    align-items: center;
+    gap: $espaciado-xl;
   }
 
-  &__texto {
-    p {
-      @include texto($tamano-texto-movil, $tamano-texto-grande);
-      color: $color-texto-suave;
+  &__media {
+    position: relative;
+    // El vídeo es vertical (9:16), así que el bloque es estrecho y alto
+    width: 24rem;
+    // Sitio para el respaldo girado, que asoma por fuera
+    margin: $espaciado-lg;
+
+    @include desktop {
+      width: 30rem;
+      // Se desplaza a la derecha para encontrarse con la elipse
+      left: 10rem;
+      z-index: 2;
     }
   }
 
-  &__imagen {
-    @include flex-center;
+  &__respaldo {
+    position: absolute;
+    inset: -1.6rem;
+    background-color: $color-acento;
+    border-radius: $radio-md;
+    transform: rotate(4deg);
+  }
 
-    img {
-      max-width: 42rem;
-      mix-blend-mode: multiply;
+  &__video {
+    position: relative;
+    border-radius: $radio-md;
+    overflow: hidden;
+    box-shadow: $sombra-fuerte;
+    // Girado al revés que el respaldo
+    transform: rotate(-2deg);
+
+    video {
+      display: block;
+      width: 100%;
+      height: auto;
+      // Proporción real del archivo, para que no salte al cargar
+      aspect-ratio: 640 / 1136;
+      object-fit: cover;
+    }
+  }
+
+  // Elipse irregular con el título dentro
+  &__elipse {
+    @include flex-center;
+    // Por encima de las formas, que se le meten por debajo
+    position: relative;
+    z-index: $z-contenido;
+    width: 100%;
+    // Ancha para que el título entre en una línea. La proporción sube a la
+    // vez, así el alto no crece con el ancho.
+    max-width: 58rem;
+    aspect-ratio: 2.4;
+    padding: $espaciado-lg $espaciado-xl;
+
+    // Se corre hacia el vídeo y le monta encima por su lado derecho.
+    // `left` solo desplaza en pantalla: la rejilla no se descoloca.
+    @include desktop {
+      left: -5rem;
+    }
+
+    background-color: $color-primario;
+    // Los cuatro radios desparejados: elipse orgánica, no un óvalo perfecto
+    border-radius: 54% 46% 42% 58% / 48% 56% 44% 52%;
+  }
+
+  &__titulo {
+    font-family: $fuente-titulos;
+    font-weight: $peso-negrita;
+    font-size: 2rem;
+    line-height: 1.3;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    color: $color-blanco;
+
+    @include desktop {
+      font-size: 2.8rem;
+      // Una sola línea: la elipse está dimensionada para que quepa
+      white-space: nowrap;
+    }
+  }
+
+  // --- Formas sueltas ---
+
+  &__blobs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    // Hueco vertical mayor que el horizontal: al girar y desplazarse, lo que
+    // se acercan las formas es sobre todo cuando quedan una encima de otra
+    gap: $espaciado-xxl $espaciado-xl;
+  }
+
+  &__blob {
+    // Sin ancho fijo: cada forma se ajusta a lo que ocupa su texto
+    @include flex-center;
+    max-width: 22rem;
+    padding: $espaciado-xl $espaciado-lg;
+    font-family: $fuente-principal;
+    font-weight: $peso-medio;
+    font-size: $tamano-texto-movil;
+    line-height: 1.4;
+    text-align: center;
+
+    // Cada una con su giro y su altura, para que la fila no salga a escuadra.
+    // Los desplazamientos son pequeños y el hueco entre formas los absorbe
+    // de sobra, así que no llegan a tocarse ni siquiera al apilarse.
+    &--1 {
+      background-color: $color-verde-grisaceo;
+      // Morado sobre el verde: el blanco se queda corto de contraste
+      color: $color-primario;
+      border-radius: 58% 42% 46% 54% / 52% 48% 52% 48%;
+      transform: rotate(-3deg) translateY(-1.2rem);
+    }
+
+    &--2 {
+      background-color: $color-acento;
+      color: $color-primario;
+      border-radius: 46% 54% 58% 42% / 56% 44% 56% 44%;
+      transform: rotate(2.5deg) translateY(1.6rem);
+    }
+
+    &--3 {
+      background-color: $color-morado-claro;
+      color: $color-primario;
+      border-radius: 52% 48% 40% 60% / 44% 58% 42% 56%;
+      transform: rotate(-2deg) translateY(-0.8rem);
+    }
+
+    &--4 {
+      background-color: $color-morado-medio;
+      color: $color-blanco;
+      border-radius: 44% 56% 54% 46% / 58% 42% 58% 42%;
+      transform: rotate(3.5deg) translateY(-0.4rem);
+      // Es el texto más largo: sin soltarle el tope se partía en dos líneas
+      max-width: none;
+      white-space: nowrap;
     }
   }
 }

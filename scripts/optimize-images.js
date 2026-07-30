@@ -53,7 +53,9 @@ const IMAGENES = [
 
   // --- Voluntariado ---
   { origen: '8e56e1_071ddd1fdeef4d819c5351d744b635ba~mv2.webp', nombre: 'voluntariado-hero', tipo: 'hero' },
-  { origen: '8e56e1_272864480d25445c9c20efea17f5df8f~mv2.webp', nombre: 'voluntariado-actividades', tipo: 'ilustracion' },
+  // Misma ilustración que traía la web original, pero con el fondo ya
+  // transparente: permite recolorear el trazo desde CSS sobre cualquier fondo
+  { origen: 'IlustracionVoluntariado.webp', nombre: 'voluntariado-ilustracion', tipo: 'ilustracion', recortar: true },
 
   // --- Necesitas ayuda ---
   { origen: '8e56e1_9507d179ebc24e6bb9139588b907e6ac~mv2.jpg', nombre: 'necesitas-ayuda-hero', tipo: 'hero' },

@@ -34,8 +34,7 @@ import voluntariadoHero640 from './voluntariado-hero-640.webp';
 import voluntariadoHero1024 from './voluntariado-hero-1024.webp';
 import voluntariadoHero1600 from './voluntariado-hero-1600.webp';
 import voluntariadoHero2000 from './voluntariado-hero-2000.webp';
-import voluntariadoActividades400 from './voluntariado-actividades-400.webp';
-import voluntariadoActividades800 from './voluntariado-actividades-800.webp';
+import voluntariadoIlustracion400 from './voluntariado-ilustracion-400.webp';
 import necesitasAyudaHero640 from './necesitas-ayuda-hero-640.webp';
 import necesitasAyudaHero1024 from './necesitas-ayuda-hero-1024.webp';
 import necesitasAyudaHero1600 from './necesitas-ayuda-hero-1600.webp';
@@ -176,13 +175,12 @@ export const IMAGENES = {
     { url: voluntariadoHero2000, ancho: 2000 }
     ],
   },
-  'voluntariado-actividades': {
-    ancho: 800,
-    alto: 761,
-    ratio: 1.0516,
+  'voluntariado-ilustracion': {
+    ancho: 400,
+    alto: 403,
+    ratio: 0.9932,
     variantes: [
-    { url: voluntariadoActividades400, ancho: 400 },
-    { url: voluntariadoActividades800, ancho: 800 }
+    { url: voluntariadoIlustracion400, ancho: 400 }
     ],
   },
   'necesitas-ayuda-hero': {

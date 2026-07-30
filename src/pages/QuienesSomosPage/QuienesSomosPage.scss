@@ -186,16 +186,80 @@
     margin: $espaciado-lg auto 0;
   }
 
-  &__texto {
-    margin-top: $espaciado-xl;
-    color: rgba($color-blanco, 0.9);
+  // Las tres frases, cada una en su etiqueta de color.
+  // No van en fila: la primera ocupa el ancho arriba y las otras dos caen
+  // debajo, una a cada lado y a distinta altura, como pegatinas sueltas.
+  &__badges {
+    display: flex;
+    // Apiladas en móvil: en escalera se apretarían y las rotaciones se rozarían
+    flex-direction: column;
+    align-items: center;
+    // Hueco amplio a propósito: cada etiqueta gira y sus esquinas sobresalen
+    // de la caja, así que sin este aire las de arriba y abajo se tocarían
+    gap: $espaciado-xxl;
+    margin-top: $espaciado-xxl;
 
-    p {
-      @include texto($tamano-texto-movil, $tamano-texto);
+    @include desktop {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: $espaciado-xl;
+      row-gap: $espaciado-xl;
+      align-items: start;
+    }
+  }
+
+  &__badge {
+    max-width: 32rem;
+    padding: $espaciado-lg $espaciado-xl;
+    font-family: $fuente-principal;
+    font-weight: 600;
+    font-size: $tamano-texto-movil;
+    line-height: 1.5;
+    text-align: center;
+    color: $color-primario;
+    border-radius: 0.6rem;
+
+    @include desktop {
+      // Sin tope: cada una mide lo que ocupa su frase y cabe en una línea
+      max-width: none;
+      width: fit-content;
+      font-size: $tamano-texto;
+      text-align: start;
     }
 
-    p + p {
-      margin-top: $espaciado-sm;
+    // Cada una con su color y su giro
+    &--1 {
+      background-color: $color-acento;
+      transform: rotate(-1.5deg);
+
+      @include desktop {
+        // Ocupa el ancho completo arriba, algo escorada a la derecha
+        grid-column: 1 / -1;
+        justify-self: center;
+        transform: rotate(-1.5deg) translateX(3rem);
+      }
+    }
+
+    &--2 {
+      background-color: $color-morado-claro;
+      transform: rotate(3deg);
+
+      @include desktop {
+        grid-column: 1;
+        justify-self: start;
+      }
+    }
+
+    &--3 {
+      background-color: $color-fondo-alt;
+      transform: rotate(-2deg);
+
+      @include desktop {
+        grid-column: 2;
+        justify-self: end;
+        // Cae un poco más que la de su izquierda
+        transform: rotate(-2deg) translateY(1.6rem);
+      }
     }
   }
 }

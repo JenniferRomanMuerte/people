@@ -62,15 +62,21 @@ const QuienesSomosPage = () => {
         */}
         <TornEdge className="quienes-somos-partida__rasgado" layers={3} />
 
-        <div className="contenedor contenedor--estrecho">
+        <div className="contenedor">
           <h2 className="quienes-somos-partida__titulo">Nuestro punto de partida</h2>
           <span className="quienes-somos-partida__separador" aria-hidden="true" />
 
-          <div className="quienes-somos-partida__texto">
-            <p>Creemos en el acompañamiento como un proceso compartido.</p>
-            <p>No dirigimos caminos: caminamos al lado.</p>
-            <p>Cada historia es única, cada ritmo es distinto.</p>
-          </div>
+          <ul className="quienes-somos-partida__badges">
+            <li className="quienes-somos-partida__badge quienes-somos-partida__badge--1">
+              Creemos en el acompañamiento como un proceso compartido
+            </li>
+            <li className="quienes-somos-partida__badge quienes-somos-partida__badge--2">
+              No dirigimos caminos: caminamos al lado
+            </li>
+            <li className="quienes-somos-partida__badge quienes-somos-partida__badge--3">
+              Cada historia es única, cada ritmo es distinto
+            </li>
+          </ul>
         </div>
       </section>
 

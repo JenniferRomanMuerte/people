@@ -1,6 +1,6 @@
 .paper-figures {
   // Los colores viven aquí, no en el TSX, para no duplicar la paleta.
-  // Se pueden sobrescribir desde donde se use el componente.
+  // Cada variante solo cambia la figura que se pierde contra su fondo.
   --figura-1: #{$color-morado-oscuro};
   --figura-2: #{$color-naranja};
   --figura-3: #{$color-morado-claro};
@@ -15,6 +15,23 @@
   // Sombra suave bajo las figuras. drop-shadow sigue la silueta recortada,
   // a diferencia de box-shadow, que dibujaría el rectángulo del SVG.
   filter: drop-shadow(0 0.3rem 0.4rem rgba($color-morado-oscuro, 0.22));
+
+  // Sobre crema o blanco, la figura blanca desaparece
+  &--sobre-claro {
+    --figura-4: #{$color-verde-grisaceo};
+  }
+
+  // Sobre naranja se pierde la naranja, que pasa a blanca; el verde toma
+  // el sitio de la blanca para que la cadena no quede con dos claras seguidas
+  &--sobre-naranja {
+    --figura-2: #{$color-blanco};
+    --figura-4: #{$color-verde-grisaceo};
+  }
+
+  // Sobre morado se pierde la oscura
+  &--sobre-oscuro {
+    --figura-1: #{$color-verde-grisaceo};
+  }
 
   &__figura--1 {
     fill: var(--figura-1);

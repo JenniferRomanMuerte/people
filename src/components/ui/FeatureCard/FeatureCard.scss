@@ -14,6 +14,21 @@
     padding: $espaciado-xl;
   }
 
+  // Distintivo numerado. El color lo pone quien usa la tarjeta.
+  &__numero {
+    @include flex-center;
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: $espaciado-md;
+    font-family: $fuente-titulos;
+    font-size: 1.8rem;
+    font-weight: $peso-negrita;
+    line-height: 1;
+    color: $color-blanco;
+    background-color: var(--numero-fondo, #{$color-primario});
+    border-radius: $radio-redondo;
+  }
+
   // --- Fila de ilustración y contenido ---
 
   // La rejilla coloca las tres piezas por nombre. En móvil la ilustración y el

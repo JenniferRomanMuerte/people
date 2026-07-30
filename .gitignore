@@ -33,3 +33,6 @@ yarn-error.log*
 # No entran en el repositorio: GitHub rechaza archivos de más de 100 MB.
 # Los que sirve la web viven en public/videos/ y sí se versionan.
 assets-source/videos/
+
+# Ajustes locales del asistente de código, no forman parte del proyecto
+.claude/

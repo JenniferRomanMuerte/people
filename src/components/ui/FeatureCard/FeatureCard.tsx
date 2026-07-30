@@ -10,13 +10,29 @@ interface Props {
   paragraphs: string[];
   image?: NombreImagen;
   imageAlt?: string;
+  /** Número de orden. Se pinta como distintivo y no como texto de lectura. */
+  number?: number;
 }
 
-const FeatureCard = ({ title, subtitle, paragraphs, image, imageAlt = '' }: Props) => {
+const FeatureCard = ({
+  title,
+  subtitle,
+  paragraphs,
+  image,
+  imageAlt = '',
+  number,
+}: Props) => {
   return (
     // Sin ilustración el reparto en rejilla no aporta nada, así que la tarjeta
     // se marca para que su contenido fluya en bloque
     <article className={`feature-card${image ? '' : ' feature-card--sin-ilustracion'}`}>
+      {/* Decorativo: el orden ya lo transmite la posición en la lista */}
+      {number !== undefined && (
+        <span className="feature-card__numero" aria-hidden="true">
+          {number}
+        </span>
+      )}
+
       {/* Ilustración a la izquierda; título y texto a la derecha.
           En pantallas estrechas se apilan. */}
       <div className="feature-card__cuerpo">

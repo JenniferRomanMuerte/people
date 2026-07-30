@@ -1,19 +1,38 @@
 .dotted-path {
+  // Los colores salen por custom properties para poder cambiarlos desde donde
+  // se use, sin tener que añadir una variante nueva por cada combinación.
+  --camino-linea: #{$color-secundario};
+  --camino-inicio: #{$color-primario};
+  --camino-fin: #{$color-acento};
+
   display: block;
   width: 100%;
   height: auto;
 
   &__linea {
-    stroke: $color-secundario;
+    stroke: var(--camino-linea);
   }
 
   // Punto de salida
   &__inicio {
-    fill: $color-primario;
+    fill: var(--camino-inicio);
   }
 
   // Punto de llegada
   &__fin {
-    fill: $color-acento;
+    fill: var(--camino-fin);
+  }
+
+  // Sobre naranja el punto de llegada desaparece: pasa a morado, y el de
+  // salida a verde para que los dos extremos se distingan entre sí
+  &--sobre-naranja {
+    --camino-inicio: #{$color-verde-grisaceo};
+    --camino-fin: #{$color-primario};
+  }
+
+  // Sobre morado se pierde el punto de salida
+  &--sobre-oscuro {
+    --camino-linea: #{$color-morado-claro};
+    --camino-inicio: #{$color-verde-grisaceo};
   }
 }

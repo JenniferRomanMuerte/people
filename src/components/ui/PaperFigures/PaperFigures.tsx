@@ -1,6 +1,14 @@
 import './PaperFigures.scss';
 
+/**
+ * Fondo sobre el que se coloca la cadena. Cada valor sustituye el color de la
+ * figura que quedaría invisible contra ese fondo.
+ */
+type Fondo = 'claro' | 'naranja' | 'oscuro';
+
 interface Props {
+  /** Ajusta los colores al fondo. Sin indicar nada usa la combinación base. */
+  background?: Fondo;
   className?: string;
 }
 
@@ -13,14 +21,20 @@ interface Props {
  *
  * Va marcado como decorativo, así que los lectores de pantalla lo ignoran.
  */
-const PaperFigures = ({ className }: Props) => {
+const PaperFigures = ({ background, className }: Props) => {
   // Centros de cada figura. La separación coincide con el alcance de los
   // brazos (50), de modo que las manos de figuras contiguas se tocan.
   const centros = [50, 150, 250, 350];
 
   return (
     <svg
-      className={['paper-figures', className].filter(Boolean).join(' ')}
+      className={[
+        'paper-figures',
+        background ? `paper-figures--sobre-${background}` : '',
+        className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
       viewBox="0 0 400 180"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"

@@ -58,7 +58,7 @@ const HomePage = () => {
           <div className="home-presentacion__encabezado">
             {/* Columna izquierda: figuras con la nota debajo */}
             <div className="home-presentacion__marca">
-              <PaperFigures className="home-presentacion__figuras" />
+              <PaperFigures background="claro" className="home-presentacion__figuras" />
               <StickyNote tone="naranja" rotation={-2}>
                 no camináis solas
               </StickyNote>
