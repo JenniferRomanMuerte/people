@@ -1,3 +1,195 @@
+// ---------------------------------------------------------------------------
+// Portada
+// ---------------------------------------------------------------------------
+
+.ayuda-hero {
+  @include seccion;
+  background-color: $color-primario;
+  text-align: center;
+  // Menos aire arriba que el resto de secciones: acerca la mancha a la cabecera
+  padding-top: $espaciado-xl;
+
+  @include desktop {
+    padding-top: $espaciado-xxl;
+  }
+
+  // Mancha panorámica que sostiene el texto. Los ocho radios van desparejados
+  // para que el contorno sea irregular y no un óvalo ni un rectángulo
+  // redondeado. El padding es amplio a propósito: las curvas se comen las
+  // esquinas y el texto tiene que quedar lejos de ellas.
+  &__blob {
+    max-width: 92rem;
+    margin-inline: auto;
+    padding: $espaciado-xxl $espaciado-xl;
+    background-color: $color-fondo-alt;
+    border-radius: 42% 58% 46% 54% / 58% 44% 56% 42%;
+
+    @include desktop {
+      padding: $espaciado-xxl;
+    }
+  }
+
+  &__titulo {
+    font-family: $fuente-titulos;
+    font-weight: $peso-negrita;
+    font-size: 2.2rem;
+    line-height: 1.3;
+    color: $color-primario;
+
+    @include desktop {
+      font-size: 4.8rem;
+    }
+  }
+
+  &__lema {
+    @include manuscrita(2.2rem, 3.8rem);
+    color: $color-acento;
+    margin-top: $espaciado-lg;
+
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Carta de bienvenida
+// Sin adornos del sistema a propósito: tiene que leerse como una carta, no
+// como una sección más de la web.
+// ---------------------------------------------------------------------------
+
+.ayuda-carta {
+  @include seccion;
+  position: relative;
+  background-color: $color-fondo-alt;
+  overflow: hidden;
+
+  // La textura va en su propia capa para poder bajarle la opacidad sin
+  // afectar al texto de encima
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('../../assets/images/fondo-papel-1600.webp');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.46;
+    pointer-events: none;
+  }
+
+  // Columna estrecha y centrada: una carta no se lee a todo lo ancho
+  &__hoja {
+    position: relative;
+    z-index: $z-contenido;
+    max-width: 86rem;
+    margin-inline: auto;
+  }
+
+  &__encabezado {
+    font-family: $fuente-titulos;
+    font-weight: $peso-negrita;
+    font-size: 2rem;
+    line-height: 1.3;
+    color: $color-primario;
+    margin-bottom: $espaciado-xl;
+
+    @include desktop {
+      font-size: 2.4rem;
+    }
+  }
+
+  &__cuerpo {
+    color: $color-texto-suave;
+
+    p {
+      @include texto($tamano-texto-movil, $tamano-texto);
+      // Interlineado más suelto que el del resto del sitio: son párrafos
+      // largos y seguidos, y así cuesta menos seguirlos
+      line-height: 2;
+    }
+
+    p + p {
+      margin-top: $espaciado-lg;
+    }
+  }
+
+  &__firma {
+    @include manuscrita(2.4rem, 3rem);
+    color: $color-primario;
+    text-align: right;
+    margin-top: $espaciado-xxl;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Sabemos que no es fácil
+// ---------------------------------------------------------------------------
+
+.ayuda-dificil {
+  display: grid;
+  gap: $espaciado-xxl;
+  align-items: center;
+
+  @include desktop {
+    // Texto a la izquierda, foto a la derecha. Apilados en móvil.
+    grid-template-columns: 1.25fr 0.85fr;
+  }
+
+  &__titulo {
+    @include titular-compacto(3rem, 5.2rem);
+    color: $color-primario;
+    text-align: center;
+
+    @include desktop {
+      // Ocupa la fila entera por encima de las dos columnas
+      grid-column: 1 / -1;
+      // En móvil no cabría de una pieza, así que solo se fuerza aquí
+      white-space: nowrap;
+    }
+  }
+
+  // El título ya no vive dentro de la columna, así que el primer párrafo
+  // no necesita separarse de nada
+  &__texto > :first-child {
+    margin-top: 0;
+  }
+
+  &__cuerpo {
+    margin-top: $espaciado-xl;
+    color: $color-texto-suave;
+
+    p {
+      @include texto($tamano-texto-movil, $tamano-texto);
+    }
+
+    p + p {
+      margin-top: $espaciado-lg;
+    }
+  }
+
+  // La nota respira por ambos lados, entre los dos bloques de texto
+  .sticky-note {
+    margin-block: $espaciado-xl;
+
+    // En una sola línea: en móvil no cabría y se partiría igualmente
+    @include desktop {
+      max-width: none;
+      white-space: nowrap;
+    }
+  }
+
+  // Foto recortada en mancha orgánica, como el resto de fotos del sitio
+  &__imagen {
+    overflow: hidden;
+    // Radios muy desparejados: cuanto más se separan del 50% más irregular
+    // queda la silueta y menos se parece a una elipse
+    border-radius: 66% 34% 52% 48% / 40% 62% 38% 60%;
+
+    img {
+      @include imagen-cubierta;
+      // Apaisada en vez de vertical: más ancha y menos alta
+      aspect-ratio: 16 / 9;
+    }
+  }
+}
+
 .carta {
   &__seccion {
     @include seccion;
@@ -8,17 +200,47 @@
     &--destacada {
       background-color: $color-fondo-alt;
 
-      // Círculo morado asomando por la derecha
+      // Mancha morada bajo la columna de la foto. Deja de ser un círculo
+      // perfecto: los ocho radios van muy desparejados para que se lea como
+      // una forma irregular y no como una pastilla.
       &::before {
-        @include circulo(20rem, $color-secundario);
-        right: -11rem;
-        top: 12%;
+        content: '';
+        position: absolute;
+        right: 6%;
+        bottom: -10rem;
+        width: 20rem;
+        height: 16rem;
+        background-color: $color-secundario;
+        border-radius: 68% 32% 46% 54% / 28% 64% 36% 62%;
         opacity: 0.16;
+        pointer-events: none;
 
         @include desktop {
-          width: 32rem;
-          height: 32rem;
-          right: -15rem;
+          width: 42rem;
+          height: 35rem;
+          right: -5%;
+          bottom: 2rem;
+        }
+      }
+
+      // Segunda mancha, arriba a la izquierda
+      &::after {
+        content: '';
+        position: absolute;
+        left: -8rem;
+        top: -7rem;
+        width: 26rem;
+        height: 19rem;
+        background-color: $color-morado-claro;
+        border-radius: 34% 66% 60% 40% / 58% 36% 64% 42%;
+        opacity: 0.22;
+        pointer-events: none;
+
+        @include desktop {
+          left: -11rem;
+          top: -10rem;
+          width: 38rem;
+          height: 28rem;
         }
       }
     }
@@ -43,7 +265,7 @@
       @include texto($tamano-texto-movil, $tamano-texto-grande);
     }
 
-    p + p {
+    p+p {
       margin-top: $espaciado-lg;
     }
   }
@@ -53,51 +275,137 @@
     margin-block: $espaciado-xl;
   }
 
-  // --- Bloque de cierre ---
+}
 
-  &__cierre {
-    @include seccion;
-    position: relative;
-    background-color: $color-fondo-oscuro;
-    overflow: hidden;
+// ---------------------------------------------------------------------------
+// No estás sola — cierre de la página
+// ---------------------------------------------------------------------------
 
-    // Círculo de acento superpuesto, la firma que cierra la página
-    &::before {
-      @include circulo(26rem, $color-acento);
-      right: -13rem;
-      bottom: -14rem;
-      opacity: 0.9;
+.ayuda-cierre {
+  @include seccion;
+  position: relative;
+  background-color: $color-primario;
+  overflow: hidden;
+  text-align: center;
 
-      @include desktop {
-        width: 40rem;
-        height: 40rem;
-        right: -18rem;
-        bottom: -20rem;
-      }
-    }
-  }
-
-  &__cierre-contenido {
+  &__contenido {
     position: relative;
     z-index: $z-contenido;
   }
 
-  &__cierre-titulo {
+  &__titulo {
     @include titular-compacto(3.6rem, 7.2rem);
     color: $color-blanco;
+    // Zilla Slab no tiene corte de 900: el navegador resuelve al 700, que es
+    // el más pesado cargado. Se deja declarado por si algún día se añade.
+    font-weight: 900;
   }
 
-  &__cierre-texto {
-    margin-top: $espaciado-xl;
-    max-width: 46ch;
+  // Rayita de acento bajo el titular, igual que en "Nuestro punto de partida"
+  &__separador {
+    display: block;
+    width: 6rem;
+    height: 0.3rem;
+    background-color: $color-acento;
+    margin: $espaciado-lg auto 0;
+  }
 
-    p {
-      @include texto($tamano-texto-movil, $tamano-texto-grande);
-      color: rgba($color-blanco, 0.85);
-    }
+  // Las tres frases, cada una en su etiqueta de color, como pegatinas sueltas
+  &__badges {
+    display: flex;
+    // Apiladas en móvil: en fila las frases quedarían en columnas de dos
+    // palabras y las rotaciones se rozarían
+    flex-direction: column;
+    align-items: center;
+    gap: $espaciado-xl;
+    margin-top: $espaciado-xxl;
 
-    p + p {
-      margin-top: $espaciado-md;
+    @include desktop {
+      flex-direction: row;
+      // Arriba y no centradas: así el desplazamiento vertical de cada una
+      // se nota en vez de repartirse a partes iguales
+      align-items: flex-start;
+      justify-content: center;
+      gap: $espaciado-xl;
     }
+  }
+
+  &__badge {
+    max-width: 34rem;
+    padding: $espaciado-lg $espaciado-xl;
+    font-family: $fuente-principal;
+    font-weight: 600;
+    font-size: $tamano-texto-movil;
+    line-height: 1.5;
+    text-align: center;
+    color: $color-primario;
+    border-radius: 0.6rem;
+
+    @include desktop {
+      // Reparto a partes iguales: las tres frases tienen largos muy distintos
+      // y sin esto la del medio se comería la fila
+      flex: 1 1 0;
+      max-width: 36rem;
+      font-size: $tamano-texto;
+    }
+  }
+
+  // Cada una con su color, su giro y su altura. Los desplazamientos verticales
+  // solo se aplican en escritorio: en la columna de móvil descuadrarían el
+  // hueco entre etiquetas.
+  &__badge--1 {
+    background-color: $color-verde-grisaceo;
+    transform: rotate(-3deg);
+
+    @include desktop {
+      transform: rotate(-3deg) translateY(1.8rem);
+    }
+  }
+
+  &__badge--2 {
+    background-color: $color-morado-claro;
+    transform: rotate(2deg);
+
+    @include desktop {
+      transform: rotate(2deg) translateY(-1.4rem);
+    }
+  }
+
+  &__badge--3 {
+    background-color: $color-fondo-alt;
+    transform: rotate(-1.5deg);
+
+    @include desktop {
+      transform: rotate(-1.5deg) translateY(1.2rem);
+    }
+  }
+
+  &__accion {
+    // Hueco de sobra: la etiqueta más baja cae 1.8rem por debajo de su caja
+    margin-top: $espaciado-xxl;
+
+    // El texto del botón va en morado oscuro, no en el morado noche que trae
+    // la variante por defecto
+    .button--acento {
+      color: $color-primario;
+    }
+  }
+}
+
+// Respiro de color entre el morado del cierre y el banner oscuro del 016.
+.ayuda-remate {
+  position: relative;
+  height: 3.6rem;
+  background-color: $color-fondo-alt;
+
+  &__rasgado {
+    position: absolute;
+    left: 0;
+    right: 0;
+    // Sube media baldosa: la mitad maciza queda dentro de la sección morada y
+    // los dientes caen sobre la franja crema, justo en el límite entre ambas
+    top: -1.2rem;
+    --torn-color: #{$color-primario};
+    --torn-height: 2.4rem;
   }
 }
