@@ -19,10 +19,31 @@ npm run dev             # http://localhost:5173
 | Comando | Qué hace |
 |---|---|
 | `npm run dev` | Servidor de desarrollo |
+| `npm run dev:api` | Igual, más el formulario de contacto funcionando |
 | `npm run build` | Genera `dist/` con las 9 páginas en HTML estático + sitemap |
 | `npm run preview` | Sirve el resultado del build |
 | `npm test` | Ejecuta los tests |
 | `npm run images` | Regenera las imágenes optimizadas y los iconos |
+
+### Probar el formulario en local
+
+`npm run dev` levanta solo Vite, que no sabe nada de `api/`: ahí el formulario
+responde 404. Para probarlo de verdad hace falta el CLI de Vercel, que ejecuta
+la función además de servir la web:
+
+```bash
+npm run dev:api         # http://localhost:3000
+```
+
+Tres detalles que cuestan de adivinar:
+
+- **Se entra por el 3000**, no por el 5173. El 5173 sigue existiendo porque es
+  el Vite que Vercel arranca por dentro, pero no sirve la función.
+- **Las variables se leen de `.env`**, no de `.env.local`. Con las claves solo
+  en el segundo, la función arranca sin ellas y devuelve un 500.
+- **Resend, hasta que el dominio esté verificado**, solo permite enviar desde
+  `onboarding@resend.dev` y hacia la dirección de la cuenta. Cualquier otra
+  combinación devuelve 403.
 
 ---
 

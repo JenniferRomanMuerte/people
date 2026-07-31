@@ -27,7 +27,11 @@ export default defineConfig({
   },
 
   server: {
-    port: 5173,
+    // `vercel dev` levanta este servidor por dentro, le asigna un puerto por la
+    // variable PORT y le reenvía las peticiones ahí. Si lo ignorásemos, Vercel
+    // hablaría a un puerto vacío y respondería 500 a todo. `npm run dev` no
+    // define PORT, así que se queda en el 5173 de siempre.
+    port: Number(process.env.PORT) || 5173,
     // Falla en vez de saltar a otro puerto: así la URL siempre es la misma
     strictPort: true,
     // Solo escucha en local a propósito. Con `host: true` Vite se abre en

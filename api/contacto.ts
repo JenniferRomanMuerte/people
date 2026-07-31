@@ -1,6 +1,10 @@
 import type { VercelRequest, VercelResponse } from './_types';
 import { Resend } from 'resend';
-import { hasErrors, validateContactForm } from '../src/utils/validateContactForm';
+// La extensión es obligatoria: el paquete declara `"type": "module"` y Vercel
+// compila esta función a ESM sin empaquetarla, de modo que Node resuelve el
+// import tal cual y sin ella lanza ERR_MODULE_NOT_FOUND al cargar el módulo.
+// TypeScript la mapea al archivo .ts, y Vite y Vitest también.
+import { hasErrors, validateContactForm } from '../src/utils/validateContactForm.js';
 import type { ContactMessage } from '../src/types/ContactMessage';
 
 /**
