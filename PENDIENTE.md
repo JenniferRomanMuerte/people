@@ -124,12 +124,6 @@ se ve nítido en cualquier pantalla y hereda el color del texto.
 
 ## 6. Sin confirmar
 
-- **Dos direcciones distintas.** El pie dice *C/ Nicolás Usera, 27 · Espacio
-  Oculto (Madrid)* y los textos legales dan como domicilio social *Calle Menorca
-  7, 2º, 28009 Madrid*. Se han dejado las dos tal cual, a la espera de
-  confirmación.
-- **Foto de `/contacto`.** Es una imagen de stock de Wix (atardecer sobre el mar).
-  Se mantiene de momento.
 - **Ilustración de `/voluntariado`.** La de la sección "Actividades de las
   personas voluntarias" lleva la firma **@renkarem**. Conviene comprobar que hay
   permiso de uso, ya que el aviso legal afirma que todo el material es propio o
@@ -154,6 +148,11 @@ Se anotan sin implementar, para no añadir contenido que no estaba en el origina
 
 ## 8. Verificado
 
+- **Las dos direcciones son correctas y distintas a propósito.** *C/ Nicolás
+  Usera, 27 · Espacio Oculto (Madrid)* es la sede donde se acompaña, y va en el
+  pie y en Contacto. *Calle Menorca 7, 2º, 28009 Madrid* es el domicilio social
+  a efectos legales, y va en el aviso legal y en la política de privacidad. No
+  hay que unificarlas.
 - 42 tests en verde (validación, formulario y endpoint)
 - Las 9 rutas responden con su propio HTML prerenderizado
 - Título, descripción, canónica y `og:` únicos por página
