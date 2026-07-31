@@ -188,7 +188,7 @@
     letter-spacing: 0.1em;
     // Sin tope de ancho: cabe en una sola línea
     max-width: none;
-    text-wrap: nowrap;
+    text-wrap: wrap;
   }
 
   // Rayita de acento bajo el titular

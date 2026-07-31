@@ -475,25 +475,21 @@
 
   // --- Vídeo y título ---
 
+  // En móvil manda el orden del marcado: título, vídeo y formas, cada uno en
+  // su fila. En escritorio se colocan a mano, porque el vídeo pasa a la
+  // izquierda ocupando las dos filas.
   &__destacado {
     display: grid;
     justify-items: center;
-    gap: $espaciado-xxl;
+    gap: $espaciado-xl;
 
     @include desktop {
-      // Vídeo a la izquierda; a la derecha el título con las formas debajo
       grid-template-columns: auto minmax(0, 1fr);
+      grid-template-rows: auto auto;
       justify-content: center;
       align-items: center;
-      gap: $espaciado-xxl;
+      gap: $espaciado-xl $espaciado-xxl;
     }
-  }
-
-  // Columna derecha
-  &__lado {
-    @include flex-columna;
-    align-items: center;
-    gap: $espaciado-xl;
   }
 
   &__media {
@@ -504,6 +500,9 @@
     margin: $espaciado-lg;
 
     @include desktop {
+      // A la izquierda y a la altura de las dos filas de la derecha
+      grid-column: 1;
+      grid-row: 1 / -1;
       width: 30rem;
       // Se desplaza a la derecha para encontrarse con la elipse
       left: 10rem;
@@ -553,6 +552,8 @@
     // Se corre hacia el vídeo y le monta encima por su lado derecho.
     // `left` solo desplaza en pantalla: la rejilla no se descoloca.
     @include desktop {
+      grid-column: 2;
+      grid-row: 1;
       left: -5rem;
     }
 
@@ -588,6 +589,12 @@
     // Hueco vertical mayor que el horizontal: al girar y desplazarse, lo que
     // se acercan las formas es sobre todo cuando quedan una encima de otra
     gap: $espaciado-xxl $espaciado-xl;
+
+    @include desktop {
+      // Bajo el título, en la misma columna
+      grid-column: 2;
+      grid-row: 2;
+    }
   }
 
   &__blob {

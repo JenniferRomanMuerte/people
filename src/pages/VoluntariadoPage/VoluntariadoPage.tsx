@@ -167,7 +167,15 @@ const VoluntariadoPage = () => {
         <span className="voluntariado-actividades__fondo voluntariado-actividades__fondo--2" aria-hidden="true" />
 
         <div className="contenedor voluntariado-actividades__contenido">
+          {/*
+            El orden del marcado es el de móvil: título, vídeo y formas. En
+            escritorio la rejilla recoloca el vídeo a la izquierda.
+          */}
           <div className="voluntariado-actividades__destacado">
+            <div className="voluntariado-actividades__elipse">
+              <h2 className="voluntariado-actividades__titulo">Lo que hacemos juntas</h2>
+            </div>
+
             <div className="voluntariado-actividades__media">
               {/* Rectángulo de color girado, sobre el que se apoya el vídeo */}
               <span className="voluntariado-actividades__respaldo" aria-hidden="true" />
@@ -183,27 +191,20 @@ const VoluntariadoPage = () => {
               </div>
             </div>
 
-            {/* Título arriba y las cuatro formas debajo, en la misma columna */}
-            <div className="voluntariado-actividades__lado">
-              <div className="voluntariado-actividades__elipse">
-                <h2 className="voluntariado-actividades__titulo">Lo que hacemos juntas</h2>
-              </div>
-
-              <ul className="voluntariado-actividades__blobs">
-                <li className="voluntariado-actividades__blob voluntariado-actividades__blob--1">
-                  Espacios compartidos
-                </li>
-                <li className="voluntariado-actividades__blob voluntariado-actividades__blob--2">
-                  Formación
-                </li>
-                <li className="voluntariado-actividades__blob voluntariado-actividades__blob--3">
-                  Coordinación
-                </li>
-                <li className="voluntariado-actividades__blob voluntariado-actividades__blob--4">
-                  Acompañamiento diario
-                </li>
-              </ul>
-            </div>
+            <ul className="voluntariado-actividades__blobs">
+              <li className="voluntariado-actividades__blob voluntariado-actividades__blob--1">
+                Espacios compartidos
+              </li>
+              <li className="voluntariado-actividades__blob voluntariado-actividades__blob--2">
+                Formación
+              </li>
+              <li className="voluntariado-actividades__blob voluntariado-actividades__blob--3">
+                Coordinación
+              </li>
+              <li className="voluntariado-actividades__blob voluntariado-actividades__blob--4">
+                Acompañamiento diario
+              </li>
+            </ul>
           </div>
         </div>
       </section>
