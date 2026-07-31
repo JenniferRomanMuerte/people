@@ -58,6 +58,10 @@
   @include seccion;
   background-color: $color-fondo-alt;
   text-align: center;
+  // Las manchas van giradas y sus esquinas sobresalen de la caja. `clip` las
+  // recorta en horizontal sin provocar scroll y, a diferencia de `hidden`,
+  // deja el eje vertical visible.
+  overflow-x: clip;
   // Menos aire arriba que el resto de secciones: Caveat deja mucho hueco sobre
   // sus mayúsculas y con el padding completo el titular quedaba descolgado
   padding-top: $espaciado-xl;
@@ -101,30 +105,50 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    // Más holgado por los lados que por arriba: los radios van en porcentaje,
-    // así que en una forma ancha las curvas muerden sobre todo los costados
-    padding: $espaciado-xl $espaciado-xxl;
+    // En móvil el padding lateral se queda en `lg`: con `xxl` se comía casi el
+    // 40% del ancho de la pantalla y el texto no cabía dentro de la forma.
+    padding: $espaciado-lg;
+
+    @include desktop {
+      // Más holgado por los lados que por arriba: los radios van en porcentaje,
+      // así que en una forma ancha las curvas muerden sobre todo los costados
+      padding: $espaciado-xl $espaciado-xxl;
+    }
   }
 
   // Cada mancha lleva sus propios ocho radios, su proporción y su giro: ni la
   // misma silueta ni una el reflejo de la otra.
+  //
+  // Las proporciones apaisadas van solo en escritorio. En móvil el ancho es
+  // fijo, así que la proporción decide el alto: con 1.7 la forma salía más
+  // baja de lo que pide el texto y este se desbordaba. Aquí el alto lo marca
+  // el contenido y `min-height` evita que quede aplastada cuando es corto.
   &__blob--1 {
-    max-width: 48rem;
-    // Apaisadas: crecen a lo ancho y no a lo alto
-    aspect-ratio: 1.7 / 1;
+    min-height: 22rem;
     background-color: $color-acento;
     color: $color-primario;
     border-radius: 62% 38% 46% 54% / 55% 62% 38% 45%;
     transform: rotate(-3deg);
+
+    @include desktop {
+      max-width: 48rem;
+      min-height: 0;
+      aspect-ratio: 1.7 / 1;
+    }
   }
 
   &__blob--2 {
-    max-width: 44rem;
-    aspect-ratio: 2 / 1;
+    min-height: 18rem;
     background-color: $color-primario;
     color: $color-blanco;
     border-radius: 34% 66% 58% 42% / 40% 35% 65% 60%;
     transform: rotate(4deg);
+
+    @include desktop {
+      max-width: 44rem;
+      min-height: 0;
+      aspect-ratio: 2 / 1;
+    }
   }
 }
 
@@ -405,7 +429,7 @@ $onda-discontinua: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/200
     // Más achatada: crece a lo ancho en vez de a lo alto
     aspect-ratio: 3.6 / 1;
     // Generoso: los radios van en porcentaje y las curvas muerden los costados
-    padding: $espaciado-lg $espaciado-lg;
+    padding: $espaciado-lg $espaciado-xl;
     background-color: $color-crema;
     color: $color-primario;
     border-radius: 38% 60% 58% 52% / 45% 58% 42% 55%;
