@@ -314,136 +314,104 @@
 
 // ---------------------------------------------------------------------------
 // Nuestro día a día
-// Ajustes propios sobre PhotoFeatureBlock, para que no salga igual que
-// "Juntas contra la violencia machista".
+// Titular y entradilla a todo el ancho, y debajo dos manchas superpuestas.
+// Ya no usa PhotoFeatureBlock: no queda ni foto ni vídeo que encajar.
 // ---------------------------------------------------------------------------
 
-// Selector doble a propósito. `.photo-feature` fija su padding dentro de un
-// @include desktop, y con un solo nombre de clase ambas reglas empatan en
-// especificidad: gana la que aparezca después en el CSS final, que no se
-// controla desde aquí. Con `.photo-feature.home-dia-a-dia` la sobrescritura
-// siempre pesa más.
-.photo-feature.home-dia-a-dia {
-  // Sin aire por abajo: enlaza directamente con la sección siguiente.
-  // Arriba sí respira, y algo más que el resto de secciones.
-  padding-top: $espaciado-seccion;
+.home-dia-a-dia {
+  @include seccion;
+  background-color: $color-fondo-alt;
+  // Sin aire por abajo: enlaza directamente con la sección siguiente
   padding-bottom: 0;
+  // Al solaparse, las manchas se salen de su caja. `clip` recorta ese sobrante
+  // en horizontal sin provocar scroll y deja el eje vertical visible.
+  overflow-x: clip;
 
   @include desktop {
     padding-top: 14rem;
     padding-bottom: 0;
   }
 
-  // Formato panorámico, que es como está grabado el vídeo
-  .photo-feature__imagen video,
-  .photo-feature__imagen img {
-    aspect-ratio: 16 / 9;
-  }
-
-  // El texto arranca arriba en lugar de centrarse con la foto
-  .photo-feature__contenido {
-    align-items: start;
-
-    @include desktop {
-      // Las dos columnas a partes iguales: aquí el multimedia no domina
-      grid-template-columns: 1.2fr 0.8fr;
-    }
-  }
-
-  // Multimedia más contenido que en el bloque genérico
-  .photo-feature__media {
-    // Centrado en móvil, y algo contenido para que no llegue a los bordes
-    @include hasta-tablet {
-      max-width: 36rem;
-      margin-inline: auto;
-    }
-
-    @include desktop {
-      max-width: 68rem;
-    }
-  }
-
-  // El multimedia va recto; el rectángulo naranja de detrás mantiene su giro
-  .photo-feature__imagen {
-    transform: none;
-  }
-
-  // El texto va centrado sobre el blob y algo desplazado a la derecha,
-  // para quedar alineado con el centro de la mancha y no con su columna
-  // El texto baja respecto al vídeo. Si se cambia este valor hay que mover
-  // el `top` del blob la misma cantidad, o el texto se saldrá de la mancha.
-  .photo-feature__texto {
-    text-align: start;
-    margin-inline: auto;
-    padding-top: 1rem;
-
-    // Apilado en móvil, el texto se centra bajo el vídeo
-    @include hasta-tablet {
-      text-align: center;
-    }
-
-    @include desktop {
-      position: relative;
-      left: 4rem;
-      padding-top: 8rem;
-    }
-  }
-
-  // En móvil las columnas se apilan y el texto ya no cae sobre el blob: en
-  // blanco sobre el crema no se leería, así que ahí va en morado. Solo pasa a
-  // blanco en escritorio, que es donde la mancha queda detrás.
-  .photo-feature__titulo {
-    font-size: 3rem;
-    max-width: 16ch;
-    margin-inline: auto;
+  &__titulo {
+    @include titular-compacto(3rem, 5.2rem);
     color: $color-primario;
+    text-align: center;
+  }
+
+  // Banner de acento: la entradilla deja de ser un párrafo suelto y pasa a ser
+  // una franja de color que separa el titular de las manchas.
+  //
+  // `fit-content` la ajusta a su línea más larga en vez de estirarla a todo el
+  // contenedor, y el margen automático la centra. El tope del 100% evita que
+  // se salga cuando la frase no cabe.
+  &__subtitulo {
+    @include texto($tamano-texto-grande-movil, $tamano-texto-grande);
+    width: fit-content;
+    max-width: 100%;
+    margin-top: $espaciado-xl;
+    margin-inline: auto;
+    padding: $espaciado-lg;
+    background-color: $color-acento;
+    color: $color-primario;
+    border-radius: $radio-md;
+    text-align: center;
 
     @include desktop {
-      font-size: 4.4rem;
-      color: $color-blanco;
+      padding: $espaciado-lg $espaciado-xxl;
     }
   }
 
-  .photo-feature__texto p {
-    color: $color-texto-suave;
+  // Cada frase ocupa su línea. En bloque y no con <br>, así en pantallas
+  // estrechas cada una puede partirse por su cuenta sin descolocar la otra.
+  &__linea {
+    display: block;
+  }
+
+  &__manchas {
+    display: grid;
+    gap: $espaciado-sm;
+    margin-top: $espaciado-sm;
 
     @include desktop {
-      color: rgba($color-blanco, 0.92);
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+     gap: $espaciado-xxl;
     }
   }
 
-  // Blob ancho y opaco: hace de fondo de la columna de texto.
-  //
-  // La proporción va fijada con aspect-ratio y no con top + bottom. Atado a
-  // los dos bordes, su alto dependía de lo que midiera la sección: al crecer
-  // el vídeo o el padding se estiraba, los porcentajes del border-radius se
-  // repartían sobre otra proporción y la silueta se deformaba. Así la forma
-  // es siempre la misma y solo cambia de tamaño.
-  //
-  // Se ancla arriba para quedar detrás de todo el texto: si el título asomara
-  // por encima, saldría en blanco sobre crema y no se leería. Lo que sobresale
-  // por abajo lo recorta el overflow de la sección.
-  // Cuanto más grande es, más silueta queda fuera del área visible y menos
-  // se aprecia la forma: acaba leyéndose como un rectángulo con una esquina
-  // curva. Se dimensiona para que quepan dentro al menos el lado izquierdo y
-  // el inferior, que son los que dan a entender que es una mancha.
-  .photo-feature__blob {
-    background-color: rgba($color-morado-oscuro, 0.92);
-    right: desde-contenedor(6rem);
-    // En móvil arrancaba pegado al borde superior y comía el aire de la
-    // sección: parecía que faltaba padding cuando el problema era este.
-    top: 6rem;
-    bottom: auto;
-    width: 46rem;
-    height: auto;
-    // Más de 1 = más ancho que alto. Subirlo lo achata más.
-    aspect-ratio: 1.9;
+  &__blob {
+    @include texto($tamano-texto-movil, $tamano-texto);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // Generoso: los radios van en porcentaje y las curvas muerden los costados
+    padding: $espaciado-xxl $espaciado-xl;
+    text-align: center;
 
     @include desktop {
-      right: desde-contenedor(7rem);
-      // Acompaña al padding-top del texto: los dos bajan a la vez
-      top: 10rem;
-      width: 72rem;
+      padding: $espaciado-xxl $espaciado-seccion;
+    }
+  }
+
+  &__blob--lila {
+    position: relative;
+    // Por delante de la morada
+    z-index: 2;
+    background-color: $color-lila-suave;
+    color: $color-primario;
+    border-radius: 58% 42% 46% 54% / 52% 58% 42% 48%;
+  }
+
+  &__blob--morado {
+    position: relative;
+    z-index: 1;
+    background-color: $color-primario;
+    color: $color-blanco;
+    border-radius: 42% 58% 54% 46% / 46% 44% 56% 54%;
+
+    @include desktop {
+      // Se mete por debajo de la naranja
+      margin-left: -8rem;
     }
   }
 }

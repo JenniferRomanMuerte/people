@@ -69,7 +69,7 @@ const HomePage = () => {
 
           <div className="home-presentacion__texto">
             <p>
-              En People Asociación creemos que, muchas veces, lo único que se necesita para empezar
+              En la asociación People creemos que, muchas veces, lo único que se necesita para empezar
               a cambiar una vida es apoyo.
             </p>
             <p>
@@ -107,20 +107,32 @@ const HomePage = () => {
       </section>
 
       {/* --- Nuestro día a día --- */}
-      {/* El vídeo está sin comprimir (114 MB) y por eso queda fuera del
-          repositorio. Hasta que se comprima, esta sección solo funciona en
-          local: en el sitio publicado se verá la imagen de espera. */}
-      <PhotoFeatureBlock
-        className="home-dia-a-dia"
-        videoSrc="/videos/NuestroDia.mp4"
-        videoPoster="/videos/NuestroDia-poster.webp"
-        title="Nuestro día a día"
-        image="inicio-dia-a-dia"
-        imageAlt="Dos mujeres abrazadas de espaldas contemplando los tejados de Madrid"
-        paragraphs={[
-          'Acompañamos a mujeres en su proceso, creando espacios seguros de escucha, apoyo y confianza.',
-        ]}
-      />
+      <section className="home-dia-a-dia">
+        <div className="contenedor">
+          <h2 className="home-dia-a-dia__titulo">Nuestro día a día</h2>
+          {/* Cada frase en su línea. El salto es intencionado, no depende del ancho. */}
+          <p className="home-dia-a-dia__subtitulo">
+            <span className="home-dia-a-dia__linea">Acompañamos a mujeres en su proceso,</span>
+            <span className="home-dia-a-dia__linea">
+              creando espacios seguros de escucha, apoyo y confianza.
+            </span>
+          </p>
+
+          {/* Las dos manchas se montan una sobre otra: la naranja por delante */}
+          <div className="home-dia-a-dia__manchas">
+            <p className="home-dia-a-dia__blob home-dia-a-dia__blob--lila">
+              Funcionamos gracias al trabajo y entrega de voluntarias formadas y preparadas, que
+              dedican su tiempo a la búsqueda de una sociedad libre de violencia de género
+            </p>
+
+            <p className="home-dia-a-dia__blob home-dia-a-dia__blob--morado">
+              Creemos firmemente que la lucha contra la violencia de género es un problema de toda
+              la sociedad que requiere de un esfuerzo conjunto y coordinado entre diferentes
+              actores, profesionales, instituciones, organizaciones y sociedad civil.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* --- Juntas contra la violencia machista --- */}
       <PhotoFeatureBlock

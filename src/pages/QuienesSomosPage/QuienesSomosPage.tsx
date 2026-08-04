@@ -108,7 +108,9 @@ const QuienesSomosPage = () => {
               image="acompanamiento-coordinado"
               imageAlt="Ilustración de una mano señalando un punto en un mapa desplegado con el logotipo de People"
               paragraphs={[
-                'People siempre informará a las personas acompañadas sobre toda la red de recursos existente, hará de puente entre los diferentes servicios que reclamen las personas acompañadas para informarlas y apoyarlas en cada paso que quieran dar, respetando así sus tiempos y decisiones.',
+                'Sabemos de la importancia de recibir el apoyo profesional necesario en cada momento del proceso de superación.',
+                "People colabora activamente con las/os profesionales de las instituciones, entidades gubernamentales, ONG, servicios de salud, centros educativos, policía, entre otros, para promover una respuesta integral y efectiva contra la violencia de género. ",
+                'No pretendemos duplicar servicios o entidades existentes, sino ser un puente entre ellas para que las víctimas tengan a su disposición el máximo de recursos e información profesional.'
               ]}
             />
           </div>

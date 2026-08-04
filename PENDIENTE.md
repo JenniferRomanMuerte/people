@@ -68,14 +68,17 @@ usuarias como algo que elimina el rastro.
 
 ## 4. Vídeos
 
-El vídeo de «Nuestro día a día» llegó en 1080p y 114 MB. Se comprimió a 720p,
-**7,1 MB**, con el índice al principio del archivo para que empiece a
-reproducirse sin esperar a la descarga completa. En la página se ve a unos
-440px de ancho, así que 720p va sobrado.
+Los originales llegaron en 1080p y pesando mucho —el de «Nuestro día a día»,
+114 MB—. Se comprimieron a 720p con el índice al principio del archivo, para
+que empiecen a reproducirse sin esperar a la descarga completa.
 
-- Servido: `public/videos/NuestroDia.mp4` — este sí va al repositorio
-- Original: `assets-source/videos/` — fuera del repositorio, GitHub rechaza
+- Servido: `public/videos/Actividades.mp4` — este sí va al repositorio
+- Originales: `assets-source/videos/` — fuera del repositorio, GitHub rechaza
   archivos de más de 100 MB
+
+**«Nuestro día a día» ya no lleva vídeo.** Al rediseñar la sección se sustituyó
+por dos manchas de texto, así que el archivo servido se ha borrado. El original
+sigue en `assets-source/videos/NuestroDia-original.mp4` por si se recupera.
 
 Para comprimir otro vídeo, con `ffmpeg-static` ya instalado:
 
