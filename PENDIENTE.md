@@ -54,10 +54,8 @@ automáticamente. Eso es lo que respalda la frase sobre "garantías adecuadas" d
 apartado 5. La versión ejecutada se puede descargar desde el panel de Resend;
 conviene guardarla por si algún día hay que acreditar la relación.
 
-Queda una incoherencia menor mientras dure la transición: el correo de
-voluntariado sigue siendo `peoplevoluntariado@gmail.com`, así que Gmail sigue
-interviniendo en esa vía aunque el texto ya no lo nombre. Se resuelve solo
-cuando esa cuenta pase también al dominio.
+Las dos cuentas están ya en el dominio —`info@` y `voluntarias@`—, así que
+Gmail ha dejado de intervenir y el apartado 5 se corresponde con la realidad.
 
 ---
 

@@ -14,7 +14,7 @@ export const SITE_INFO = {
 
   // Contacto
   email: 'info@peopleasociacion.com',
-  volunteerEmail: 'peoplevoluntariado@gmail.com',
+  volunteerEmail: 'voluntarias@peopleasociacion.com',
 
   // Dirección del espacio donde se acompaña (la que aparece en el pie)
   address: 'C/ Nicolás Usera, 27 · Espacio Oculto (Madrid)',
