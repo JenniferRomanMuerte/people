@@ -79,7 +79,12 @@ const PoliticaPrivacidadPage = () => {
         </p>
 
         <h2>5. Destinatarios</h2>
-        <p>Los datos no serán cedidos a terceros.</p>
+        <p>
+          Los datos no serán cedidos ni comunicados a terceros, salvo obligación legal. Esto no
+          incluye a los proveedores que actúan como encargados del tratamiento por cuenta de la
+          asociación, que se detallan a continuación y que únicamente tratan los datos siguiendo sus
+          instrucciones.
+        </p>
         <p>
           El tratamiento se realiza a través del servicio de correo electrónico contratado con
           Dinahosting, S.L., proveedor establecido en España, que actúa como encargado del
@@ -111,10 +116,15 @@ const PoliticaPrivacidadPage = () => {
           <li>Derecho de oposición</li>
           <li>Derecho a la limitación del tratamiento</li>
           <li>Derecho a la portabilidad de los datos</li>
+          <li>Derecho a retirar el consentimiento en cualquier momento</li>
         </ul>
         <p>
-          Para ejercer estos derechos, se podrá enviar una solicitud junto con copia de documento
-          identificativo al correo electrónico:{' '}
+          La retirada del consentimiento no afecta a la licitud del tratamiento realizado con
+          anterioridad.
+        </p>
+        <p>
+          Para ejercer estos derechos, se podrá enviar una solicitud acreditando la identidad de la
+          persona solicitante al correo electrónico:{' '}
           <a href={`mailto:${SITE_INFO.email}`}>{SITE_INFO.email}</a>
         </p>
         <p>

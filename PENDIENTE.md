@@ -35,6 +35,23 @@ que colgaba de Google. Como **Resend, Inc. sí está fuera del Espacio Económic
 Europeo**, esa advertencia se ha trasladado al párrafo de Resend en lugar de
 perderla. **Debe validarlo la persona responsable antes de publicar.**
 
+Se han corregido además tres puntos del mismo documento:
+
+- El apartado 5 abría con "Los datos no serán cedidos a terceros" y a continuación
+  describía dos proveedores. No es contradictorio en términos legales —un
+  encargado del tratamiento no es una cesión— pero se leía como tal. Ahora lo
+  distingue de forma expresa.
+- Faltaba el **derecho a retirar el consentimiento**, que el RGPD exige informar
+  cuando el consentimiento es la base legal del tratamiento, como es el caso.
+- Para ejercer los derechos se exigía "copia de documento identificativo". La
+  AEPD desaconseja pedirla de forma sistemática, así que ahora se pide acreditar
+  la identidad sin imponer un medio concreto.
+
+**Acción pendiente en Resend:** aceptar su Acuerdo de Encargado del Tratamiento
+(DPA), en el panel de Resend dentro de los ajustes legales. Es lo que sostiene la
+frase sobre "garantías adecuadas" del apartado 5. Sin él, esa afirmación se
+queda sin respaldo documental.
+
 Queda una incoherencia menor mientras dure la transición: el correo de
 voluntariado sigue siendo `peoplevoluntariado@gmail.com`, así que Gmail sigue
 interviniendo en esa vía aunque el texto ya no lo nombre. Se resuelve solo
