@@ -22,10 +22,23 @@ van autoalojadas). Mantener el texto anterior sería declarar algo que no ocurre
 así que se ha reescrito para que se corresponda con la realidad. **Debe validarlo
 la persona responsable antes de publicar.**
 
-**Política de privacidad — resuelto.** El apartado 5 ("Destinatarios") ya
-incorpora a Resend como encargado del tratamiento, junto a Gmail. El párrafo lo
-facilitó y aprobó la persona responsable de la asociación, y enumera los cinco
-campos que recoge el formulario: nombre, apellido, email, teléfono y mensaje.
+**Política de privacidad — apartado 5 modificado, pendiente de validar.** El
+párrafo original lo facilitó y aprobó la persona responsable, y sigue enumerando
+los cinco campos del formulario: nombre, apellido, email, teléfono y mensaje.
+Pero declaraba que el correo se gestionaba con **Gmail (Google LLC)**, y la
+cuenta principal ha pasado a `info@peopleasociacion.com`, alojada en
+**Dinahosting, S.L.**, proveedor establecido en España. El texto se ha
+actualizado para nombrar al proveedor real.
+
+Con ese cambio desaparecía la mención a transferencias internacionales de datos,
+que colgaba de Google. Como **Resend, Inc. sí está fuera del Espacio Económico
+Europeo**, esa advertencia se ha trasladado al párrafo de Resend en lugar de
+perderla. **Debe validarlo la persona responsable antes de publicar.**
+
+Queda una incoherencia menor mientras dure la transición: el correo de
+voluntariado sigue siendo `peoplevoluntariado@gmail.com`, así que Gmail sigue
+interviniendo en esa vía aunque el texto ya no lo nombre. Se resuelve solo
+cuando esa cuenta pase también al dominio.
 
 ---
 

@@ -106,7 +106,7 @@ dentro de Sass, no pasan por Vite, y sí tienen que importar los abstracts a man
 ## Formulario de contacto
 
 ```
-Navegador  →  POST /api/contacto  →  Resend  →  peopleasociacion@gmail.com
+Navegador  →  POST /api/contacto  →  Resend  →  info@peopleasociacion.com
 ```
 
 La clave de la API vive únicamente en el servidor. El bundle que descarga el

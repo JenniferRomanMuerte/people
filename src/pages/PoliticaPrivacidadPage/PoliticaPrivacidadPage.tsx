@@ -81,9 +81,9 @@ const PoliticaPrivacidadPage = () => {
         <h2>5. Destinatarios</h2>
         <p>Los datos no serán cedidos a terceros.</p>
         <p>
-          El tratamiento se realiza a través del servicio de correo electrónico Gmail, propiedad de
-          Google LLC, que puede implicar transferencias internacionales de datos conforme a las
-          garantías adecuadas previstas en la normativa vigente.
+          El tratamiento se realiza a través del servicio de correo electrónico contratado con
+          Dinahosting, S.L., proveedor establecido en España, que actúa como encargado del
+          tratamiento.
         </p>
         <p>
           Además, para la gestión del formulario de contacto, esta web utiliza los servicios de
@@ -97,7 +97,9 @@ const PoliticaPrivacidadPage = () => {
           <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">
             https://resend.com/legal/privacy-policy
           </a>
-          .
+          . Resend, Inc. está establecida fuera del Espacio Económico Europeo, por lo que este envío
+          puede implicar una transferencia internacional de datos, realizada conforme a las
+          garantías adecuadas previstas en la normativa vigente.
         </p>
 
         <h2>6. Derechos de las personas usuarias</h2>

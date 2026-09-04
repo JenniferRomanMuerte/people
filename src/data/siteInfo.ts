@@ -13,7 +13,7 @@ export const SITE_INFO = {
   madridRegistry: '4314',
 
   // Contacto
-  email: 'peopleasociacion@gmail.com',
+  email: 'info@peopleasociacion.com',
   volunteerEmail: 'peoplevoluntariado@gmail.com',
 
   // Dirección del espacio donde se acompaña (la que aparece en el pie)

@@ -62,7 +62,7 @@ describe('POST /api/contacto', () => {
     vi.clearAllMocks();
     vi.stubEnv('RESEND_API_KEY', 're_clave_de_prueba');
     vi.stubEnv('CONTACT_FROM_EMAIL', 'web@peopleasociacion.com');
-    vi.stubEnv('CONTACT_TO_EMAIL', 'peopleasociacion@gmail.com');
+    vi.stubEnv('CONTACT_TO_EMAIL', 'info@peopleasociacion.com');
     enviarMock.mockResolvedValue({ data: { id: 'msg_1' }, error: null });
   });
 
@@ -86,7 +86,7 @@ describe('POST /api/contacto', () => {
 
       expect(enviarMock).toHaveBeenCalledWith(
         expect.objectContaining({
-          to: ['peopleasociacion@gmail.com'],
+          to: ['info@peopleasociacion.com'],
           replyTo: 'jennifer@correo.com',
         })
       );
