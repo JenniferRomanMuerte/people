@@ -47,10 +47,12 @@ Se han corregido además tres puntos del mismo documento:
   AEPD desaconseja pedirla de forma sistemática, así que ahora se pide acreditar
   la identidad sin imponer un medio concreto.
 
-**Acción pendiente en Resend:** aceptar su Acuerdo de Encargado del Tratamiento
-(DPA), en el panel de Resend dentro de los ajustes legales. Es lo que sostiene la
-frase sobre "garantías adecuadas" del apartado 5. Sin él, esa afirmación se
-queda sin respaldo documental.
+**Sobre el encargado del tratamiento de Resend.** No hay nada que firmar: su
+Acuerdo de Encargado del Tratamiento queda vinculado al aceptar las condiciones
+del servicio, y las Cláusulas Contractuales Tipo de la UE se incorporan
+automáticamente. Eso es lo que respalda la frase sobre "garantías adecuadas" del
+apartado 5. La versión ejecutada se puede descargar desde el panel de Resend;
+conviene guardarla por si algún día hay que acreditar la relación.
 
 Queda una incoherencia menor mientras dure la transición: el correo de
 voluntariado sigue siendo `peoplevoluntariado@gmail.com`, así que Gmail sigue
